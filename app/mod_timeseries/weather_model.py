@@ -2,8 +2,10 @@ import fjd
 
 # from app.mod_timeseries.weather_training import *
 # from app.mod_timeseries.file_transfer import *
-from pandas import np
+import numpy as np
 import pandas as pd
+import statsmodels.api as sm
+import matplotlib.pyplot as plt
 import app.mod_timeseries.file_transfer as ft
 
 class ProcessData:
@@ -15,12 +17,12 @@ class ProcessData:
         # 要处理的数据类型(最高温度，最低温度等)
         self.data_type = data_type
 
-    def process_minmax(self, sm=None, plt=None):
+    def process_minmax(self):
         if self.data_type == 'max':
             max_data = self.data['tmax']
         elif self.data_type == 'min':
             max_data = self.data['tmin']
-        data_year = self.data['data']
+        data_year = self.data['date']
         begin_year = data_year[0:1].dt.year
         end_year = data_year[-1:].dt.year
         predict_month = data_year[0:1].dt.month
@@ -29,13 +31,13 @@ class ProcessData:
 
         #  转换为一维数组
         max_data = pd.Series(max_data)
-        max_data.index = pd.Index(sm.tsa.datetools.dates_from_range(str(begin_year.value[0]), str(end_year.value[0])))
+        max_data.index = pd.Index(sm.tsa.datetools.dates_from_range(str(begin_year.values[0]), str(end_year.values[0])))
 
         arma_mod76 = sm.tsa.ARMA(max_data, (7, 6)).fit()
         predict_end_year = end_year.values[0] + self.predict_year
-        predict_dta = arma_mod76.predict(str(end_year.values[0]), str(predict_end_year, dynamic=True))
+        predict_dta = arma_mod76.predict(str(end_year.values[0]), str(predict_end_year), dynamic=True)
         print(predict_dta)
-        predict_dta.to_json(self.data_type + '.json', data_format='iso')
+        predict_dta.to_json(self.data_type + '.json',  data_format='iso')
         json_data = fjd.format_json(self.data_type + '.json', str(predict_month.values[0]), str(predict_day.values[0]))
         print(json_data)
         fig, ax = plt.subplots(figsize=(12, 8))

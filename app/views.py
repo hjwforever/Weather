@@ -28,6 +28,7 @@ def index(request):
 
 def get_test(request):
     data_set = pd.read_csv("app/static/DataResult.csv")
+    p = wm.ProcessData("app/static/DataResult.csv", 10, 'min')
     data = data_set.values[:, :]
     test_data = []
     for row in data:
