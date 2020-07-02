@@ -11,6 +11,8 @@
 <a href="{{ index }}">Index</a><br \>
 <a href="{% url 'login' %}">Login</a><br \>
 <a href="{% url 'home' %}">Home</a><br \>
+<a href="{% url 'show' %}">get_testShow</a><br \>
+<a href="{% url 'get_test' %}">Show</a><br \>
 
 <form action="/app" method="post">
     {% csrf_token %}
