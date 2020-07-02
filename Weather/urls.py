@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from app import views as app_view
+from django.conf.urls.static import static
+from . import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,6 +29,7 @@ urlpatterns = [
     # path('index', app_view.index, name='index'),
     # path('login', app_view.login, name='login'),
 ]
+urlpatterns += static('/appfile/', appfile_root=settings.APPFILE_ROOT)
 
 # from django.conf.urls import include, url
 # from django.contrib import admin

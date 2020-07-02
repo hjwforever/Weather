@@ -24,4 +24,4 @@ data = data[(data['date'] >= datetime(1980,1, 1)) & (data['date'] <= datetime(20
 data.query("date.dt.day == 1 & date.dt.month == 7", inplace=True)
 
 #写入新csv文件
-data.to_csv('DataResult.csv',index=None)
+data.to_csv('DataResulta121.csv',index=None)

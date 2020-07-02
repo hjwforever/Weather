@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MonkeyTest</title>
+</head>
+<body>
+    <form method="post" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h1>第三小组数据展示</h1><br>
+        <img src="https://www.z4a.net/images/2020/04/04/dargon.th.jpg" alt="图片无法显示"/><br>
+
+        预测年数：<input type="text" name="predict_year"><br>
+        处理类型(max/min)：<input type="text" name="data_type"><br>
+{#        请上传文件<input type="file" name="files"><br>#}
+        <input type="submit" value="展示">
+        <br>
+        <b><small>结果：</small></b><hr>
+    </form>
+    <table border="1">
+        <thead>
+            <tr>
+{#                <td>ID</td>#}
+                <td>日期</td>
+                <td>最高温度</td>
+                <td>最低温度</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in data %}
+     <tr>
+{#         <td>{{ result.id}}</td>#}
+         <td>{{ result.date }}</td>
+         <td>{{ result.tmax }}</td>
+         <td>{{ result.tmin}}</td>
+     </tr>
+{% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>show_excel.html</title>
+</head>
+<body>
+<table border="1">
+<img src="https://www.z4a.net/images/2020/04/04/dargon.th.jpg" alt="图片无法显示"/><br>
+    <caption>第三小组数据展示</caption>
+        <thead>
+            <tr>
+{#                <td>ID</td>#}
+                <td>日期</td>
+                <td>最高温度</td>
+                <td>最低温度</td>
+            </tr>
+        </thead>
+    {% for row in test_data %}
+    <tr>
+        {% for i in row %}
+            <td>{{ i }}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

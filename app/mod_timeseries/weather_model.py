@@ -1,8 +1,10 @@
 import fjd
 
-from app.mod_timeseries.weather_training import *
-from app.mod_timeseries.file_transfer import *
-
+# from app.mod_timeseries.weather_training import *
+# from app.mod_timeseries.file_transfer import *
+from pandas import np
+import pandas as pd
+import app.mod_timeseries.file_transfer as ft
 
 class ProcessData:
     def __init__(self, data, predict_year, data_type):
@@ -46,5 +48,5 @@ class ProcessData:
         plt.savefig(self.data_type + '.png', dpi=100)
 
         # send file
-        send = SendFile(fileName=self.data_type + '.png')
+        send = ft.SendFile(fileName=self.data_type + '.png')
         send.send()

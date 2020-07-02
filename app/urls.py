@@ -8,6 +8,10 @@ urlpatterns = [
     path('home/', views.home, name='home'),
     path('index/', views.index, name='index'),
     path('login/', views.login, name='login'),
+    # path('show/', views.show_data, name='show_data'),
+    path('upload/', views.upload_file, name='upload_file'),
+    path('show/', views.get_test, name='get_test'),
+
 ]
 
 # from django.conf.urls import include, url

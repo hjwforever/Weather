@@ -6,6 +6,8 @@
 </head>
 <body>
 第三小组测试-app主页面<br \>
+<a herf="{% url "get_test" %}">导入数据</a><br \>
+
 {% if request.user.is_authenticated %}
     {{ request.user.username }}，您好！
 {% else %}

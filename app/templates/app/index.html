@@ -12,7 +12,7 @@
 <a href="{% url 'login' %}">Login</a><br \>
 <a href="{% url 'home' %}">Home</a><br \>
 
-<form action="/app/" method="post">
+<form action="/app" method="post">
     {% csrf_token %}
 
     <input type="submit" name="进入">进入</input>
