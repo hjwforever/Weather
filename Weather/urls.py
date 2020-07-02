@@ -19,13 +19,13 @@ from app import views as app_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('app/', include('app.urls')),
-    path('app/', app_view.login, name='login'),
-    path('app/home/', app_view.home, name='home'),
+    path('app/', include('app.urls')),
     path('', app_view.index, name='index'),
-    path('home', app_view.home, name='home'),
-    path('index', app_view.index, name='index'),
-    path('login', app_view.login, name='login'),
+    # path('app/', app_view.login, name='login'),
+    # path('app/home/', app_view.home, name='home'),
+    # path('home', app_view.home, name='home'),
+    # path('index', app_view.index, name='index'),
+    # path('login', app_view.login, name='login'),
 ]
 
 # from django.conf.urls import include, url
