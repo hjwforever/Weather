@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+第三小组测试-app主页面<br \>
+{% if request.user.is_authenticated %}
+    {{ request.user.username }}，您好！
+{% else %}
+    <a href="{{ request.path }}?{{ request.GET.urlencode }}&num=1">参数 num</a><br \>
+{% endif %}
+</body>
+</html>

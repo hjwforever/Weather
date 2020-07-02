@@ -1,0 +1,21 @@
+{% url 'index'  as index %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+第三小组测试-Index<br \>
+{{ string }}<br \>
+<a href="{{ index }}">Index</a><br \>
+<a href="{% url 'login' %}">Login</a><br \>
+<a href="{% url 'home' %}">Home</a><br \>
+
+<form action="/app/" method="post">
+    {% csrf_token %}
+
+    <input type="submit" name="Enter"/>
+</form>
+</body>
+</html>

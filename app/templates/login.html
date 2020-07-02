@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+第三小组测试登录
+<form action="/app/home/" method="post">
+    {% csrf_token %}
+    用户名:</t> <input type="text" name="username"/><br />
+    密 码:</t><input type="password" name="password"/><br />
+    <input type="submit" name="提交"/>
+</form>
+</body>
+</html>
