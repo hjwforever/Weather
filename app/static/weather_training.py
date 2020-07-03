@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import statsmodels.api as sm
 from statsmodels.graphics.api import qqplot
 
-data = pd.read_csv('DataResult.csv', parse_dates=['date'])
+data = pd.read_csv('app/static/DataResult.csv', parse_dates=['date'])
 dta = data['tmin']
 dta_year = data['date']
 

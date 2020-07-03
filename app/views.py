@@ -10,13 +10,18 @@ import pandas as pd
 from app.num_count import _out_log
 import app.mod_timeseries.weather_model as wm
 from Weather import settings
+from app.static.weather_training import predict_dta as pdata
 
 class EventsForm(object):
     pass
 
 
 def home(request):
-     return render(request, 'app/home.html')
+    l = pdata.values
+    l2 = ['{:.2f}'.format(i) for i in l]
+    dta = zip(pdata.keys(), l2)
+    print(dta)
+    return render(request, 'app/home.html', {'pdata': dta})
 
 
 def login(request):

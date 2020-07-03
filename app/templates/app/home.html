@@ -13,5 +13,23 @@
 {#{% else %}#}
 {#    <a href="{{ request.path }}?{{ request.GET.urlencode }}&num=1">参数 num</a><br \>#}
 {#{% endif %}#}
+    <table border="1">
+        <thead>
+            <tr>
+{#                <td>ID</td>#}
+                <td>日期</td>
+                <td>最低温度</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for k,v in pdata %}
+     <tr>
+{#         <td>{{ result.id}}</td>#}
+         <td>{{ k }}</td>
+         <td>{{ v }}</td>
+     </tr>
+{% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>
