@@ -6,11 +6,11 @@
     <title>Home</title>
     <!--引入echarts.js-->
     <script src="{% static 'echarts.min.js' %}"></script>
-    <link REL="SHORTCUT ICON" HREF="{% static "images/favicon.con" %}"/>
+    <link REL="SHORTCUT ICON" HREF="{% static "images/favicon.ico" %}"/>
 </head>
-<body>
+<body style="background-image: url({% static 'image/1.jpg' %})">
 <!--为ECharts准备一个具备大小的Dom-->
-<div id="main" style="width: 600px;height: 400px;"></div>
+<div id="main" style="width: 800px;height: 600px;"></div>
 <script type="text/javascript">
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('main'));
@@ -36,7 +36,7 @@
         },
         title: {
             left: 'center',
-            text: '大数据量面积图',
+            text: '历史平均气温变化图',
         },
         toolbox: {
             feature: {
@@ -75,7 +75,7 @@
         }],
         series: [
             {
-                name: '模拟数据',
+                name: '平均气温',
                 type: 'line',
                 smooth: true,
                 symbol: 'none',
