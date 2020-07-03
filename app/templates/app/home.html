@@ -1,35 +1,66 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+    <!--引入echarts.js-->
+    <script src="{% static 'echarts.min.js' %}"></script>
+    <link REL="SHORTCUT ICON" HREF="{% static "images/favicon.con" %}"/>
 </head>
 <body>
+<!--为ECharts准备一个具备大小的Dom-->
+<div id="main" style="width: 600px;height: 400px;"></div>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+    // 指定图表的配置项和数据
+    var option = {
+        title: {
+            text: 'ECharts 入门示例'
+        },
+        tooltip: {},
+        legend: {
+            data: ['销量']
+        },
+        xAxis: {
+            data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+        },
+        yAxis: {},
+        series: [{
+            name: '销量',
+            type: 'bar',
+            data: [5, 20, 36, 10, 10, 20]
+        }]
+    };
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
 第三小组测试-app主页面<br \>
 {#<a herf="{% url "show" %}" >导入数据</a><br \>#}
-<a href="{% url 'history' %}"  role="button">历史天气数据</a><br \>
+<a href="{% url 'history' %}" role="button">历史天气数据</a><br \>
 {#{% if request.user.is_authenticated %}#}
 {#    {{ request.user.username }}，您好！#}
 {#{% else %}#}
 {#    <a href="{{ request.path }}?{{ request.GET.urlencode }}&num=1">参数 num</a><br \>#}
 {#{% endif %}#}
-    <table border="1">
-        <thead>
-            <tr>
-{#                <td>ID</td>#}
-                <td>日期</td>
-                <td>最低温度</td>
-            </tr>
-        </thead>
-        <tbody>
-            {% for k,v in pdata %}
-     <tr>
-{#         <td>{{ result.id}}</td>#}
-         <td>{{ k }}</td>
-         <td>{{ v }}</td>
-     </tr>
-{% endfor %}
-        </tbody>
-    </table>
+<table border="1">
+    <thead>
+    <tr>
+        {#                <td>ID</td>#}
+        <td>日期</td>
+        <td>最低温度</td>
+    </tr>
+    </thead>
+    <tbody>
+    {% for k,v in pdata %}
+        <tr>
+            {#         <td>{{ result.id}}</td>#}
+            <td>{{ k }}</td>
+            <td>{{ v }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
 </body>
 </html>

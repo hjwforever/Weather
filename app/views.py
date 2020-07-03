@@ -17,6 +17,7 @@ import app.mod_timeseries.weather_model as wm
 from Weather import settings
 from app.static.weather_training import predict_dta as pdata
 
+
 class EventsForm(object):
     pass
 
@@ -36,8 +37,8 @@ def login(request):
 def index(request):
     string = u"hhhhhhhhhhh"
     if not request.session.get('is_login', None):
-        return redirect('/app/login/')
-    return render(request, 'app/index.html', {'string': string})
+        return redirect('/app/home/')
+    return render(request, 'app/home.html', {'string': string})
 
 
 def get_test(request):
@@ -54,7 +55,6 @@ def get_test(request):
 
 
 def show_data(request):
-
     data = pd.read_csv('app/static/DataResult.csv', 'app/static/DataResult.csv')
     predict_year = request.GET.get('predict_year', 10)
     data_type = request.GET.get('data_type', 'min')
@@ -165,6 +165,7 @@ def send_email(email, code):
     msg.attach_alternative(html_content, "text/html")
     msg.send()
 
+
 def login(request):
     print('进入login视图函数')
     if request.session.get('is_login', None):
@@ -200,6 +201,7 @@ def login(request):
     login_form = forms.UserForm()
     return render(request, 'app/login.html', locals())
 
+
 def register(request):
     if request.session.get('is_login', None):
         return redirect('/index/')
@@ -215,8 +217,8 @@ def register(request):
             sex = register_form.cleaned_data.get('sex')
 
             if password1 != password2:
-                    message = "两次输入的密码不同!"
-                    return render(request, 'app/register.html', locals())
+                message = "两次输入的密码不同!"
+                return render(request, 'app/register.html', locals())
             else:
                 same_name_user = models.User.objects.filter(name=username)
                 if same_name_user:
@@ -243,12 +245,14 @@ def register(request):
     register_form = forms.RegisterForm()
     return render(request, 'app/register.html', locals())
 
+
 def logout(request):
     print('登出函数')
     if not request.session.get('is_login', None):
         return redirect('/app/login/')
     request.session.flush()
     return redirect('/app/login/')
+
 
 def user_confirm(request):
     code = request.GET.get('code', None)
