@@ -122,5 +122,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 # STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
 
+
 APPFILE_PATH = '/appfile/'
 APPFILE_ROOT = os.path.join(BASE_DIR, 'app/upload_file')

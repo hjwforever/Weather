@@ -11,7 +11,7 @@ urlpatterns = [
     # path('show/', views.show_data, name='show_data'),
     path('upload/', views.upload_file, name='upload_file'),
     path('show/', views.get_test, name='get_test'),
-
+    path('history/', views.history_page, name='history'),
 ]
 
 # from django.conf.urls import include, url

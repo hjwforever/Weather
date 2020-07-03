@@ -6,12 +6,12 @@
 </head>
 <body>
 第三小组测试-app主页面<br \>
-<a herf="{% url "get_test" %}">导入数据</a><br \>
-
-{% if request.user.is_authenticated %}
-    {{ request.user.username }}，您好！
-{% else %}
-    <a href="{{ request.path }}?{{ request.GET.urlencode }}&num=1">参数 num</a><br \>
-{% endif %}
+{#<a herf="{% url "show" %}" >导入数据</a><br \>#}
+<a href="{% url 'history' %}"  role="button">历史天气数据</a><br \>
+{#{% if request.user.is_authenticated %}#}
+{#    {{ request.user.username }}，您好！#}
+{#{% else %}#}
+{#    <a href="{{ request.path }}?{{ request.GET.urlencode }}&num=1">参数 num</a><br \>#}
+{#{% endif %}#}
 </body>
 </html>

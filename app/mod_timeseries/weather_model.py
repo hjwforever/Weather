@@ -36,6 +36,8 @@ class ProcessData:
         predict_day = data_year[0:1].dt.day
         max_data = np.array(max_data, dtype=np.float)
 
+        print('KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK')
+
         #  转换为一维数组
         max_data = pd.Series(max_data)
         max_data.index = pd.Index(sm.tsa.datetools.dates_from_range(str(begin_year.values[0]), str(end_year.values[0])))
@@ -45,13 +47,14 @@ class ProcessData:
         predict_dta = arma_mod76.predict(str(end_year.values[0]), str(predict_end_year), dynamic=True)
         print(predict_dta)
         predict_dta.to_json(self.data_type + '.json',  data_format='iso')
-        json_data = fjd.format_json(self.data_type + '.json', str(predict_month.values[0]), str(predict_day.values[0]))
-        print(json_data)
+        #json_data = fjd.format_json(self.data_type + '.json', str(predict_month.values[0]), str(predict_day.values[0]))
+        #print(json_data)
         fig, ax = plt.subplots(figsize=(12, 8))
         ax = max_data.ix[str(begin_year.values[0]):].plot(ax=ax)
         arma_mod76.plot_predict(str(end_year.values[0]), str(predict_end_year), dynamic=True, ax=ax,
                                 plot_insample=False)
 
+        print('HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH')
         # fig = plt.gcf()
         # plt.show()
         savename = os.path.join("app\static",self.data_type+'.png')

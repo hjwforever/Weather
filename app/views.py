@@ -102,3 +102,16 @@ def upload_file(request):
             # return render(request, "upload_file.html", {"data": ProcessData(request, File, predict_year, data_type).all()})
     else:
         return render(request, "app/upload_file.html")
+
+
+def history_page(request):
+    data_set = pd.read_csv("app/static/DataResult.csv")
+    p = wm.ProcessData("app/static/DataResult.csv", 10, 'min')
+    data = data_set.values[:, :]
+    test_data = []
+    for row in data:
+        ls = []
+        for j in row:
+            ls.append(j)
+        test_data.append(ls)
+    return render(request, 'app/history_data.html', {'test_data': test_data})
