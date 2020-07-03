@@ -1,6 +1,6 @@
 from django.urls import path
-
-from . import views
+from app import views
+from django.urls import include
 
 urlpatterns = [
     # path('', views.login, name='login'),
@@ -12,6 +12,11 @@ urlpatterns = [
     path('upload/', views.upload_file, name='upload_file'),
     path('show/', views.get_test, name='get_test'),
     path('history/', views.history_page, name='history'),
+    path('login/', views.login),
+    path('register/', views.register),
+    path('logout/', views.logout),
+    path('captcha/', include('captcha.urls')),
+    path('confirm/', views.user_confirm),
 ]
 
 # from django.conf.urls import include, url

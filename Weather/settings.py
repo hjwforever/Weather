@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app.apps.AppConfig',
+    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -120,6 +121,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+# email设置
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.qq.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'ddll841022@qq.com'
+EMAIL_HOST_PASSWORD = 'zbklhohrzrrhbjcf'
+
+# 注册有效期天数
+CONFIRM_DAYS = 7
 # STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
 
 
