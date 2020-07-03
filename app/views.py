@@ -39,9 +39,10 @@ def get_test(request):
     return render(request, 'app/show_excel.html', {'test_data': test_data})
 
 def show_data(request):
-    data = pd.read_csv('app/static/DataResult.csv', parse_dates=['date'])
-    predict_year = request.GET.get('predict_year', None)
-    data_type = request.GET.get('data_type', None)
+
+    data = pd.read_csv('app/static/DataResult.csv', 'app/static/DataResult.csv')
+    predict_year = request.GET.get('predict_year', 10)
+    data_type = request.GET.get('data_type', 'min')
     return render(request, "show_data.htm", {"data": wm.ProcessData(request, data, predict_year, data_type).all()})
 
 def upload_file(request):

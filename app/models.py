@@ -10,5 +10,7 @@ class Person(models.Model):
 
 class Weather(models.Model):
     name = models.CharField(max_length=30)
-    age = models.IntegerField()
+    tmax = models.FloatField()
+    tmin = models.FloatField()
+    tavg = models.FloatField()
 
