@@ -1,11 +1,16 @@
+import os, django
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Weather.settings")# project_name 项目名称
+django.setup()
+
 import warnings
 import itertools
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import statsmodels.api as sm
-from pandas import DataFrame
+from pandas import DataFrame, Series
 from app.mod_timeseries.dataClean import DataClean
+from app import models
 
 class ArimaMethod:
     def __init__(self):
@@ -32,7 +37,7 @@ class ArimaMethod:
         plt.style.use('ggplot')
 
         # Load the data
-        data = pd.read_csv('DataResult.csv', engine='python', skipfooter=3, usecols=['date', dataType])
+        data = pd.read_csv('trainData.csv', engine='python', skipfooter=3, usecols=['date', dataType])
         i = 0
         for ch in data['date'].values:
             data['date'].values[i]=ch[:-3]
@@ -118,7 +123,32 @@ class ArimaMethod:
         pred2 = results.get_forecast(endTime)
         pred2_ci = pred2.conf_int()
         print(pred2.predicted_mean[startTime:endTime])
-        # data2= pred2.predicted_mean[startTime:endTime]
+        data2= pred2.predicted_mean[startTime:endTime]
+
+        print(isinstance(data2, DataFrame))
+        print(isinstance(data2, Series))
+        # for row in data2.itertuples():
+        for date, value in data2.iteritems():
+            # print(getattr(row, 'c1'), getattr(row, 'c2'))  # 输出每一行
+            # models.HistoryData.objects.
+            if models.PredictData.objects.get(date=date):
+                if dataType=='tmin':
+                    models.PredictData.objects.filter(date=date).update(tmin=value)
+                elif dataType=='tmax':
+                    models.PredictData.objects.filter(date=date).update(tmax=value)
+                elif dataType=='tavg':
+                    models.PredictData.objects.filter(date=date).update(tavg=value)
+                elif dataType=='prcp':
+                    models.PredictData.objects.filter(date=date).update(prcp=value)
+            else:
+                if dataType=='tmin':
+                    models.PredictData.objects.create(date=date, tmin=value)
+                elif dataType=='tmax':
+                    models.PredictData.objects.create(date=date, tmax=value)
+                elif dataType=='tavg':
+                    models.PredictData.objects.create(date=date, tavg=value)
+                elif dataType=='prcp':
+                    models.PredictData.objects.create(date=date, prcp=value)
 
         ax = data.plot(figsize=(20, 16))
         pred2.predicted_mean.plot(ax=ax, label='Dynamic Forecast (get_forecast)')

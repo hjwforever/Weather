@@ -49,3 +49,23 @@ class ConfirmString(models.Model):
         ordering = ["-c_time"]
         verbose_name = "确认码"
         verbose_name_plural = "确认码"
+
+class HistoryData(models.Model):
+    date = models.DateField(primary_key=True)
+    tmin = models.FloatField()
+    tmax = models.FloatField()
+    tavg = models.FloatField()
+    prcp = models.FloatField()
+
+    def __str__(self):
+        return str(self.date)
+
+class PredictData(models.Model):
+    date = models.DateField(primary_key=True)
+    tmin = models.FloatField()
+    tmax = models.FloatField()
+    tavg = models.FloatField()
+    prcp = models.FloatField()
+
+    def __str__(self):
+        return str(self.date)
