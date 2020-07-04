@@ -5,8 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import statsmodels.api as sm
 from pandas import DataFrame
-from dataClean import DataClean
-
+from app.mod_timeseries.dataClean import DataClean
 
 class ArimaMethod:
     def __init__(self):
@@ -23,8 +22,9 @@ class ArimaMethod:
         print(trainStartTime)
         print(trainEndTime)
 
-        cld = DataClean()
-        cld.cleanData(startTime=str(trainStartTime), endTime=startTime, day=preDay)
+        cld= DataClean()
+        cld.cleanData(startTime=str(trainStartTime), endTime=str(startTime), day=preDay)
+
 
         # Defaults
         plt.rcParams['figure.figsize'] = (20.0, 10.0)
@@ -35,10 +35,10 @@ class ArimaMethod:
         data = pd.read_csv('DataResult.csv', engine='python', skipfooter=3, usecols=['date', dataType])
         i = 0
         for ch in data['date'].values:
-            data['date'].values[i] = ch[:-3]
-            i = i + 1
+            data['date'].values[i]=ch[:-3]
+            i=i+1
 
-        # print(data['date'].values)
+        #print(data['date'].values)
         # print(isinstance(data['date'], DataFrame))
         # print(data['date'])
 
@@ -48,9 +48,10 @@ class ArimaMethod:
 
         print(data)
 
+
         # Plot the data
         data.plot()
-        plt.ylabel('history_' + dataType)
+        plt.ylabel('history_'+dataType)
         plt.xlabel('date')
         plt.show()
 
@@ -71,8 +72,9 @@ class ArimaMethod:
         print('SARIMAX: {} x {}'.format(pdq[2], seasonal_pdq[3]))
         print('SARIMAX: {} x {}'.format(pdq[2], seasonal_pdq[4]))
 
+
         train_data = data[trainStartTime:trainEndTime]
-        # train_data = data['2002-01-01':'2011-12-31']
+        #train_data = data['2002-01-01':'2011-12-31']
         test_data = data[startTime:endTime]
 
         warnings.filterwarnings("ignore")  # specify to ignore warning messages
@@ -121,7 +123,7 @@ class ArimaMethod:
         ax = data.plot(figsize=(20, 16))
         pred2.predicted_mean.plot(ax=ax, label='Dynamic Forecast (get_forecast)')
         ax.fill_between(pred2_ci.index, pred2_ci.iloc[:, 0], pred2_ci.iloc[:, 1], color='k', alpha=.1)
-        plt.ylabel('history_' + dataType)
+        plt.ylabel('history_'+dataType)
         plt.xlabel('Date')
         plt.legend()
         plt.show()
