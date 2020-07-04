@@ -6,19 +6,19 @@
     <title>Index</title>
 </head>
 <body>
-第三小组测试-Index<br \>
-{{ string }}<br \>
-<a href="{{ index }}">Index</a><br \>
-<a href="{% url 'html' %}">Login</a><br \>
-<a href="{% url 'home' %}">Home</a><br \>
-<a href="{% url 'get_test' %}">Show</a><br \>
+第三小组测试-Index<br>
+{{ string }}<br>
+<a href="{{ index }}">Index</a><br>
+<a href="{% url 'html' %}">Login</a><br>
+<a href="{% url 'home' %}">Home</a><br>
+<a href="{% url 'get_test' %}">Show</a><br>
 
 {#<a href="{% url 'show_data' %}">Show</a><br \>#}
 
 <form action="/app" method="post">
     {% csrf_token %}
 
-    <input type="submit" name="进入">进入</input>
+    <input type="submit" name="进入">进入
 </form>
 </body>
 </html>

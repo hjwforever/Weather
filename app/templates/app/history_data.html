@@ -16,18 +16,12 @@
 <div id="main" style="width: 800px;height: 600px;"></div>
 <script type="text/javascript">
     // 基于准备好的dom，初始化echarts实例
-    var date = []
-    var tmax = []
-    var tmin = []
-    {% for a in date_list %}
-        date.push(a)
-    {% endfor %}
-    {% for b in tmax_list %}
-        tmax.push(b)
-    {% endfor %}
-    {% for c in tmin_list %}
-        tmin.push(c)
-    {% endfor %}
+    var date =
+    {{ date_list }}
+    var tmax =
+    {{ tmax_list }}
+    var tmin =
+    {{ tmin_list }}
     var myChart = echarts.init(document.getElementById('main'));
     // 指定图表的配置项和数据
     var option = {
