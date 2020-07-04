@@ -17,7 +17,8 @@ urlpatterns = [
     path('logout/', views.logout),
     path('captcha/', include('captcha.urls')),
     path('confirm/', views.user_confirm),
-    path('bar/', views.ChartView.as_view(), name='demo'),
+    path('line/', views.ChartView.as_view(), name='line'),
+    path('bar/', views.ChartView.as_view(), name='bar'),
 ]
 
 # from django.conf.urls import include, url
