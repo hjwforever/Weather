@@ -10,18 +10,21 @@
 </head>
 
 <body>
-<h1 align="center">第三小组测试-app主页面</h1><br>
-</body>
-{#背景#}
-{#<body style="background-images: url({% static 'images/1.jpg' %})">#}
+<h1 align="center">第三小组测试-app主页面</h1>
+<br>
 <!--为ECharts准备一个具备大小的Dom-->
 <div id="main" style="width: 800px;height: 600px;"></div>
 <script type="text/javascript">
-
     // 基于准备好的dom，初始化echarts实例
+    var date =
+    {{ date_list }}
+    var tmax =
+    {{ tmax_list }}
+    var tmin =
+    {{ tmin_list }}
     var myChart = echarts.init(document.getElementById('main'));
     // 指定图表的配置项和数据
-    option = {
+    var option = {
         title: {
             text: '历史天气数据'
         },
@@ -63,10 +66,15 @@
                 stack: '总量',
                 data: tmin
             }
+        ]
     };
     // 使用刚指定的配置项和数据显示图表。
     myChart.setOption(option);
 </script>
+</body>
+{#背景#}
+{#<body style="background-images: url({% static 'images/1.jpg' %})">#}
+
 {#<a herf="{% url "show" %}" >导入数据</a><br \>#}
 {#<a href="{% url 'history' %}" role="button">历史天气数据</a><br \>#}
 {#{% if request.user.is_authenticated %}#}

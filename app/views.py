@@ -13,6 +13,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 import pandas as pd
 import app.mod_timeseries.weather_model as wm
+import numpy as np
 from Weather import settings
 from app.static.weather_training import predict_dta as pdata
 import json
@@ -20,7 +21,11 @@ from random import randrange
 from rest_framework.views import APIView
 from pyecharts.charts import Bar, Line
 from pyecharts import options as opts
+from app.models import Weather
+import os, django
 
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Weather.settings")
+django.setup()
 
 class EventsForm(object):
     pass
@@ -140,7 +145,7 @@ def get_test(request):
         date.append(row[0])
         tmax.append(row[1])
         tmin.append(row[2])
-    return render(request, 'app/show_excel.html', {'test_data': test_data, 'date':date, 'tmax':tmax, 'tmin':tmin})
+    return render(request, 'app/show_excel.html', {'test_data': test_data, 'date': date, 'tmax': tmax, 'tmin': tmin})
 
 
 def show_data(request):
@@ -214,19 +219,22 @@ def history_page(request):
     p = wm.ProcessData("app/static/DataResult.csv", 10, 'min')
     data = data_set.values[:, :]
     test_data = []
+    date = []
+    tmax = []
+    tmin = []
     for row in data:
         ls = []
         for j in row:
             ls.append(j)
         test_data.append(ls)
-    date = []
-    tmax = []
-    tmin = []
-    for row in data:
         date.append(row[0])
         tmax.append(row[1])
         tmin.append(row[2])
-    return render(request, 'app/history_data.html', {'test_data': test_data, 'date':date, 'tmax':tmax, 'tmin':tmin})
+
+    # weathers = Weather.objects.all()
+    # print(weathers)
+    return render(request, 'app/history_data.html',
+                  {'test_data': test_data, 'date_list': date, 'tmax_list': tmax, 'tmin_list': tmin})
 
 
 def hash_code(s, salt=settings.SECRET_KEY):
