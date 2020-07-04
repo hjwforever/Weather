@@ -84,10 +84,14 @@ predict_end_year = end_year.values[0] + predict_year
 predict_dta = arma_mod76.predict(str(end_year.values[0]), str(predict_end_year), dynamic=True)
 print(predict_dta)
 
-# #print(predict_dta isinstance())
-# l= predict_dta.values.tolist()
-# for hhh in l:
-#     for kkk in hhh:
-#         print(kkk)
 
+print(isinstance(predict_dta, set))
+print(predict_dta.keys())
+l= predict_dta.values
+
+l2= ['{:.0f}'.format(i) for i in l]
+print(l2)
+
+predict_dta.to_csv('predict_result.csv', index=None)
+predict_dta.keys().to_csv('predict_result.csv', index=None)
 
