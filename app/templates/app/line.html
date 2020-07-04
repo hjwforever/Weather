@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,27 +9,27 @@
     <script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
 </head>
 <body>
-    <div id="line" style="width:1000px; height:600px;"></div>
-    <script>
-        var chart = echarts.init(document.getElementById('line'), 'white', {renderer: 'canvas'});
+<div id="line" style="width:1000px; height:600px;"></div>
+<script>
+    var chart = echarts.init(document.getElementById('line'), 'white', {renderer: 'canvas'});
 
-        $(
-            function () {
-                fetchData(chart);
-            }
-        );
-
-        function fetchData() {
-            $.ajax({
-                type: "GET",
-                url: "http://127.0.0.1:8000/app/line",
-                dataType: 'json',
-                success: function (result) {
-                    chart.setOption(result.data);
-                }
-            });
+    $(
+        function () {
+            fetchData(chart);
         }
-    </script>
+    );
+
+    function fetchData() {
+        $.ajax({
+            type: "GET",
+            url: "http://127.0.0.1:8000/app/line",
+            dataType: 'json',
+            success: function (result) {
+                chart.setOption(result.data);
+            }
+        });
+    }
+</script>
 
 
 </body>
