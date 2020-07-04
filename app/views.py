@@ -12,21 +12,19 @@ from Weather import settings
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 import pandas as pd
-
 import app.mod_timeseries.weather_model as wm
 from Weather import settings
 from app.static.weather_training import predict_dta as pdata
+import json
+from random import randrange
+from rest_framework.views import APIView
+from pyecharts.charts import Bar, Line
+from pyecharts import options as opts
 
 
 class EventsForm(object):
     pass
 
-import json
-from random import randrange
-from rest_framework.views import APIView
-
-from pyecharts.charts import Bar,Line
-from pyecharts import options as opts
 
 def response_as_json(data):
     json_str = json.dumps(data)
@@ -36,7 +34,6 @@ def response_as_json(data):
     )
     response["Access-Control-Allow-Origin"] = "*"
     return response
-
 
 
 def home_index(request):
@@ -69,22 +66,23 @@ JsonError = json_error
 def bar_base() -> Bar:
     c = (
         Bar()
-        .add_xaxis(["周一", "周二", "周三", "周四", "周五", "周六", "周日"])
-        .add_yaxis("最高温", [randrange(50, 100) for _ in range(7)])
-        .add_yaxis("最低温", [randrange(0, 50) for _ in range(7)])
-        .set_global_opts(title_opts=opts.TitleOpts(title="Bar", subtitle="by第三小组"))
-        .dump_options_with_quotes()
+            .add_xaxis(["周一", "周二", "周三", "周四", "周五", "周六", "周日"])
+            .add_yaxis("最高温", [randrange(50, 100) for _ in range(7)])
+            .add_yaxis("最低温", [randrange(0, 50) for _ in range(7)])
+            .set_global_opts(title_opts=opts.TitleOpts(title="Bar", subtitle="by第三小组"))
+            .dump_options_with_quotes()
     )
     return c
+
 
 def line_base() -> Line:
     c = (
         Line()
-        .add_xaxis(["周一", "周二", "周三", "周四", "周五", "周六", "周日"])
-        .add_yaxis("最高温", [randrange(50, 100) for _ in range(7)])
-        .add_yaxis("最低温", [randrange(0, 50) for _ in range(7)])
-        .set_global_opts(title_opts=opts.TitleOpts(title="Line", subtitle="by第三小组"))
-        .dump_options_with_quotes()
+            .add_xaxis(["周一", "周二", "周三", "周四", "周五", "周六", "周日"])
+            .add_yaxis("最高温", [randrange(50, 100) for _ in range(7)])
+            .add_yaxis("最低温", [randrange(0, 50) for _ in range(7)])
+            .set_global_opts(title_opts=opts.TitleOpts(title="Line", subtitle="by第三小组"))
+            .dump_options_with_quotes()
     )
     return c
 
@@ -99,18 +97,12 @@ class IndexView(APIView):
         return HttpResponse(content=open("app/templates/app/line.html").read())
 
 
-
-
 def home(request):
     l = pdata.values
     l2 = ['{:.2f}'.format(i) for i in l]
     dta = zip(pdata.keys(), l2)
     print(dta)
     return render(request, 'app/home.html', {'pdata': dta})
-
-
-def login(request):
-    return render(request, 'app/login.html')
 
 
 def index(request):
@@ -137,7 +129,7 @@ def show_data(request):
     data = pd.read_csv('app/static/DataResult.csv', 'app/static/DataResult.csv')
     predict_year = request.GET.get('predict_year', 10)
     data_type = request.GET.get('data_type', 'min')
-    return render(request, "show_data.htm", {"data": wm.ProcessData(request, data, predict_year, data_type).all()})
+    return render(request, "app/show_data.html", {"data": wm.ProcessData(request, data, predict_year, data_type).all()})
 
 
 def upload_file(request):
@@ -209,7 +201,12 @@ def history_page(request):
         for j in row:
             ls.append(j)
         test_data.append(ls)
-    return render(request, 'app/history_data.html', {'test_data': test_data})
+    date = data[:,0]
+    # print('test_data :')
+    # print(test_data)
+    # print('date :')
+    # print(date)
+    return render(request, 'app/history_data.html', {'test_data': test_data, 'date': date})
 
 
 def hash_code(s, salt=settings.SECRET_KEY):

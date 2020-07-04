@@ -1,87 +1,88 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zxx">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>History data</title>
+    <link REL="SHORTCUT ICON" HREF="{% static 'html/images/favicon.ico' %}"/>
     <!--引入echarts.js-->
-{#    <script src="{% static 'echarts.min.js' %}">#}
     <script src="{% static 'echarts.min.js' %}"></script>
-    <link REL="SHORTCUT ICON" HREF="{% static "images/favicon.ico" %}"/>
 </head>
+
 <body>
-<h1 align="center">第三小组测试-app主页面</h1><br \>
+<h1 align="center">第三小组测试-app主页面</h1><br>
 </body>
 {#背景#}
 {#<body style="background-images: url({% static 'images/1.jpg' %})">#}
 <!--为ECharts准备一个具备大小的Dom-->
 <div id="main" style="width: 800px;height: 600px;"></div>
 <script type="text/javascript">
+
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('main'));
     // 指定图表的配置项和数据
     option = {
-    title: {
-        text: '历史天气数据'
-    },
-    tooltip: {
-        trigger: 'axis'
-    },
-    legend: {
-        data: ['最高温', '最低温']
-    },
-    grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-    },
-    toolbox: {
-        feature: {
-            saveAsImage: {}
-        }
-    },
-    xAxis: {
-        type: 'category',
-        boundaryGap: false,
-        data: ['高温', '周二', '周三', '周四', '周五', '周六', '周日']
-    },
-    yAxis: {
-        type: 'value'
-    },
-    series: [
-        {
-            name: '最高温',
-            type: 'line',
-            stack: '总量',
-            data: [120, 132, 101, 134, 90, 230, 210]
+        title: {
+            text: '历史天气数据'
         },
-        {
-            name: '最低温',
-            type: 'line',
-            stack: '总量',
-            data: [220, 182, 191, 234, 290, 330, 310]
+        tooltip: {
+            trigger: 'axis'
         },
-        {
-            name: '视频广告',
-            type: 'line',
-            stack: '总量',
-            data: [150, 232, 201, 154, 190, 330, 410]
+        legend: {
+            data: ['最高温', '最低温']
         },
-        {
-            name: '直接访问',
-            type: 'line',
-            stack: '总量',
-            data: [320, 332, 301, 334, 390, 330, 320]
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
         },
-        {
-            name: '搜索引擎',
-            type: 'line',
-            stack: '总量',
-            data: [820, 932, 901, 934, 1290, 1330, 1320]
-        }
-    ]
-};
+        toolbox: {
+            feature: {
+                saveAsImage: {}
+            }
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: date
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [
+            {
+                name: '最高温',
+                type: 'line',
+                stack: '总量',
+                data: [120, 132, 101, 134, 90, 230, 210]
+            },
+            {
+                name: '最低温',
+                type: 'line',
+                stack: '总量',
+                data: [220, 182, 191, 234, 290, 330, 310]
+            },
+            {
+                name: '视频广告',
+                type: 'line',
+                stack: '总量',
+                data: [150, 232, 201, 154, 190, 330, 410]
+            },
+            {
+                name: '直接访问',
+                type: 'line',
+                stack: '总量',
+                data: [320, 332, 301, 334, 390, 330, 320]
+            },
+            {
+                name: '搜索引擎',
+                type: 'line',
+                stack: '总量',
+                data: [820, 932, 901, 934, 1290, 1330, 1320]
+            }
+        ]
+    };
     // 使用刚指定的配置项和数据显示图表。
     myChart.setOption(option);
 </script>
@@ -93,7 +94,7 @@
 {#    <a href="{{ request.path }}?{{ request.GET.urlencode }}&num=1">参数 num</a><br \>#}
 {#{% endif %}#}
 <body>
-<a href="{% url 'home' %}" role="button" >home</a><br \>
+<a href="{% url 'home' %}" role="button">home</a><br>
 <table border="1" align="center">
     <div align="center">
         <img src="{% static "test1.jpg" %}" alt="历史数据" width="45%"/>
@@ -109,7 +110,6 @@
     <caption>第三小组数据展示</caption>
     <thead>
     <tr>
-                        <td>ID</td>
         <td>日期</td>
         <td>最高温度</td>
         <td>最低温度</td>
@@ -118,7 +118,6 @@
         <td>风力</td>
         <td>降水量</td>
         <td>天气</td>
-
     </tr>
     </thead>
     {% for row in test_data %}
