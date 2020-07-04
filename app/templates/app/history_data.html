@@ -19,14 +19,14 @@
     var date = []
     var tmax = []
     var tmin = []
-    {% for i in date_list %}
-        date.push(i)
+    {% for a in date_list %}
+        date.push(a)
     {% endfor %}
-    {% for i in tmax_list %}
-        tmax.push(i)
+    {% for b in tmax_list %}
+        tmax.push(b)
     {% endfor %}
-    {% for i in tmin_list %}
-        tmin.push(i)
+    {% for c in tmin_list %}
+        tmin.push(c)
     {% endfor %}
     var myChart = echarts.init(document.getElementById('main'));
     // 指定图表的配置项和数据
