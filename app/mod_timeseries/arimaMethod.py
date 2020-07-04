@@ -128,10 +128,11 @@ class ArimaMethod:
         print(isinstance(data2, DataFrame))
         print(isinstance(data2, Series))
         # for row in data2.itertuples():
+
         for date, value in data2.iteritems():
             # print(getattr(row, 'c1'), getattr(row, 'c2'))  # 输出每一行
             # models.HistoryData.objects.
-            if models.PredictData.objects.get(date=date):
+            if models.PredictData.objects.filter(date=date):
                 if dataType=='tmin':
                     models.PredictData.objects.filter(date=date).update(tmin=value)
                 elif dataType=='tmax':
@@ -142,13 +143,13 @@ class ArimaMethod:
                     models.PredictData.objects.filter(date=date).update(prcp=value)
             else:
                 if dataType=='tmin':
-                    models.PredictData.objects.create(date=date, tmin=value)
+                    models.PredictData.objects.create(date=date, tmin=value)#, tmax=0, tavg=0, prcp=0)
                 elif dataType=='tmax':
-                    models.PredictData.objects.create(date=date, tmax=value)
+                    models.PredictData.objects.create(date=date, tmax=value)#,  tmin=0, tavg=0, prcp=0)
                 elif dataType=='tavg':
-                    models.PredictData.objects.create(date=date, tavg=value)
+                    models.PredictData.objects.create(date=date, tavg=value)#, tmin=0, tmax=0, prcp=0)
                 elif dataType=='prcp':
-                    models.PredictData.objects.create(date=date, prcp=value)
+                    models.PredictData.objects.create(date=date, prcp=value)#, tmin=0, tmax=0, tavg=0)
 
         ax = data.plot(figsize=(20, 16))
         pred2.predicted_mean.plot(ax=ax, label='Dynamic Forecast (get_forecast)')

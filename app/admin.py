@@ -6,7 +6,7 @@ from app.models import *
 
 # admin.site.register(models.User)
 # admin.site.register(models.ConfirmString)
-admin.site.register(models.HistoryData)
-admin.site.register(models.PredictData)
+admin.site.register(HistoryData)
+admin.site.register(PredictData)
 admin.site.register(Weather)
 admin.site.register(User)

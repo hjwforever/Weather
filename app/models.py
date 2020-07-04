@@ -64,10 +64,10 @@ class HistoryData(models.Model):
 
 class PredictData(models.Model):
     date = models.DateField(primary_key=True)
-    tmin = models.FloatField()
-    tmax = models.FloatField()
-    tavg = models.FloatField()
-    prcp = models.FloatField()
+    tmin = models.FloatField(null=True)
+    tmax = models.FloatField(null=True)
+    tavg = models.FloatField(null=True)
+    prcp = models.FloatField(null=True)
 
     def __str__(self):
         return str(self.date)
