@@ -76,11 +76,22 @@ def bar_base() -> Bar:
 
 
 def line_base() -> Line:
+    data_set = pd.read_csv("app/static/DataResult.csv")
+    # p = wm.ProcessData("app/static/DataResult.csv", 10, 'min')
+    data = data_set.values[:, :]
+    date = []
+    tmax = []
+    tmin = []
+    for row in data:
+        date.append(row[0])
+        tmax.append(row[1])
+        tmin.append(row[2])
+
     c = (
         Line()
-            .add_xaxis(["周一", "周二", "周三", "周四", "周五", "周六", "周日"])
-            .add_yaxis("最高温", [randrange(50, 100) for _ in range(7)])
-            .add_yaxis("最低温", [randrange(0, 50) for _ in range(7)])
+            .add_xaxis(date)
+            .add_yaxis("最高温", tmax)
+            .add_yaxis("最低温", tmin)
             .set_global_opts(title_opts=opts.TitleOpts(title="Line", subtitle="by第三小组"))
             .dump_options_with_quotes()
     )
@@ -122,7 +133,14 @@ def get_test(request):
         for j in row:
             ls.append(j)
         test_data.append(ls)
-    return render(request, 'app/show_excel.html', {'test_data': test_data})
+    date = []
+    tmax = []
+    tmin = []
+    for row in data:
+        date.append(row[0])
+        tmax.append(row[1])
+        tmin.append(row[2])
+    return render(request, 'app/show_excel.html', {'test_data': test_data, 'date':date, 'tmax':tmax, 'tmin':tmin})
 
 
 def show_data(request):
@@ -193,7 +211,7 @@ def upload_file(request):
 
 def history_page(request):
     data_set = pd.read_csv("app/static/DataResult.csv")
-    # p = wm.ProcessData("app/static/DataResult.csv", 10, 'min')
+    p = wm.ProcessData("app/static/DataResult.csv", 10, 'min')
     data = data_set.values[:, :]
     test_data = []
     for row in data:
@@ -201,12 +219,14 @@ def history_page(request):
         for j in row:
             ls.append(j)
         test_data.append(ls)
-    date = data[:,0]
-    # print('test_data :')
-    # print(test_data)
-    # print('date :')
-    # print(date)
-    return render(request, 'app/history_data.html', {'test_data': test_data, 'date': date})
+    date = []
+    tmax = []
+    tmin = []
+    for row in data:
+        date.append(row[0])
+        tmax.append(row[1])
+        tmin.append(row[2])
+    return render(request, 'app/history_data.html', {'test_data': test_data, 'date':date, 'tmax':tmax, 'tmin':tmin})
 
 
 def hash_code(s, salt=settings.SECRET_KEY):
