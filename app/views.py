@@ -21,7 +21,11 @@ from random import randrange
 from rest_framework.views import APIView
 from pyecharts.charts import Bar, Line
 from pyecharts import options as opts
+from app.models import Weather
+import os, django
 
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Weather.settings")
+django.setup()
 
 class EventsForm(object):
     pass
@@ -226,6 +230,9 @@ def history_page(request):
         date.append(row[0])
         tmax.append(row[1])
         tmin.append(row[2])
+
+    weathers = Weather.objects.all()
+    print(weathers)
     return render(request, 'app/history_data.html',
                   {'test_data': test_data, 'date_list': date, 'tmax_list': tmax, 'tmin_list': tmin})
 

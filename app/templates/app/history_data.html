@@ -22,6 +22,8 @@
     {% for i in date_list %}
         date.push(i)
     {% endfor %}
+          msg = "<p>查询记录条数: " + date+{{ test_data }}+ "</p>";
+      document.querySelector('#status').innerHTML +=  msg;
     {% for i in tmax_list %}
         tmax.push(i)
     {% endfor %}
