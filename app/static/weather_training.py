@@ -23,7 +23,7 @@ dta.index = pd.Index(sm.tsa.datetools.dates_from_range(str(begin_year.values[0])
 dta.plot(figsize=(10, 6))
 
 plt.savefig('test1.jpg')
-plt.show()
+# plt.show()
 
 # 一阶差分
 fig = plt.figure(figsize=(6, 8))
@@ -45,7 +45,7 @@ diff3 = dta.diff(3)
 diff3.plot(ax=ax3)
 
 plt.savefig('test2.jpg')
-plt.show()
+# plt.show()
 
 # ARIMA
 diff1 = dta.diff(1)
@@ -56,7 +56,7 @@ ax2 = fig.add_subplot(212)
 fig = sm.graphics.tsa.plot_pacf(dta, lags=30, ax=ax2)
 
 plt.savefig('test3.jpg')
-plt.show()
+# plt.show()
 
 arma_mod76 = sm.tsa.ARMA(dta, (7, 6)).fit()
 print(arma_mod76.aic, arma_mod76.bic, arma_mod76.hqic)
@@ -75,7 +75,7 @@ ax = fig.add_subplot(111)
 fig = qqplot(resid, line='q', ax=ax, fit=True)
 
 plt.savefig('test4.jpg')
-plt.show()
+# plt.show()
 
 # 生成预测数据
 # 未来10年同一天的预测数据
