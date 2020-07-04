@@ -6,7 +6,7 @@ urlpatterns = [
     # path('', views.login, name='login'),
     path('', views.index, name='index'),
     path('home/', views.home, name='home'),
-    path('index/', views.index, name='index'),
+    path('index/', views.IndexView.as_view(), name='demo'),
     path('login/', views.login, name='login'),
     # path('show/', views.show_data, name='show_data'),
     path('upload/', views.upload_file, name='upload_file'),
@@ -17,6 +17,7 @@ urlpatterns = [
     path('logout/', views.logout),
     path('captcha/', include('captcha.urls')),
     path('confirm/', views.user_confirm),
+    path('bar/', views.ChartView.as_view(), name='demo'),
 ]
 
 # from django.conf.urls import include, url
