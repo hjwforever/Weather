@@ -12,7 +12,7 @@ from Weather import settings
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 import pandas as pd
-from app.num_count import _out_log
+
 import app.mod_timeseries.weather_model as wm
 from Weather import settings
 from app.static.weather_training import predict_dta as pdata
@@ -122,7 +122,7 @@ def upload_file(request):
 
 def history_page(request):
     data_set = pd.read_csv("app/static/DataResult.csv")
-    p = wm.ProcessData("app/static/DataResult.csv", 10, 'min')
+    # p = wm.ProcessData("app/static/DataResult.csv", 10, 'min')
     data = data_set.values[:, :]
     test_data = []
     for row in data:
