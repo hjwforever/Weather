@@ -7,7 +7,7 @@
     <script src="{% static 'echarts.min.js' %}"></script>
     <link REL="SHORTCUT ICON" HREF="{% static "images/favicon.ico" %}"/>
 </head>
-<body style="background-image: url({% static 'image/1.jpg' %})">
+<body style="background-image: url({% static 'image/../../static/html/images/1.jpg' %})">
     <div id="bar" style="width:1000px; height:600px;"></div>
     <script>
         var chart = echarts.init(document.getElementById('bar'), 'white', {renderer: 'canvas'});

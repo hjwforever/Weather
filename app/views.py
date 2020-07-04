@@ -38,6 +38,11 @@ def response_as_json(data):
     return response
 
 
+
+def home_index(request):
+    return render(request, 'app/home-index.html')
+
+
 def json_response(data, code=200):
     data = {
         "code": code,
@@ -313,7 +318,7 @@ def register(request):
                 code = make_confirm_string(new_user)
                 send_email(email, code)
 
-                return redirect('/app/login/')
+                return redirect('/app/html/')
         else:
             return render(request, 'app/register.html', locals())
     register_form = forms.RegisterForm()
@@ -323,9 +328,9 @@ def register(request):
 def logout(request):
     print('登出函数')
     if not request.session.get('is_login', None):
-        return redirect('/app/login/')
+        return redirect('/app/html/')
     request.session.flush()
-    return redirect('/app/login/')
+    return redirect('/app/html/')
 
 
 def user_confirm(request):

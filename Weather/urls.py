@@ -24,11 +24,11 @@ urlpatterns = [
     path('app/', include('app.urls')),
     path('index/', include('app.urls')),
     path('', app_view.index, name='index'),
-    # path('app/', app_view.login, name='login'),
+    # path('app/', app_view.html, name='html'),
     # path('app/home/', app_view.home, name='home'),
     # path('home', app_view.home, name='home'),
     # path('index', app_view.index, name='index'),
-    # path('login', app_view.login, name='login'),
+    # path('html', app_view.html, name='html'),
 ]
 urlpatterns += static('/appfile/', appfile_root=settings.APPFILE_ROOT)
 
