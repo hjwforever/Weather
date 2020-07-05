@@ -33,6 +33,9 @@ from app.models import Weather
 class EventsForm(object):
     pass
 
+def ds_test(request):
+    return render(request, 'app/search-history.html')
+
 
 def response_as_json(data):
     json_str = json.dumps(data)
@@ -46,6 +49,9 @@ def response_as_json(data):
 
 def home_index(request):
     return render(request, 'app/home-index.html')
+
+def beijingweather(request):
+    return render(request, 'app/beijingweather.html')
 
 
 def json_response(data, code=200):
@@ -120,7 +126,7 @@ def home(request):
     l = pdata.values
     l2 = ['{:.2f}'.format(i) for i in l]
     dta = zip(pdata.keys(), l2)
-    print(dta)
+    # print(dta)
     return render(request, 'app/home.html', {'pdata': dta})
 
 

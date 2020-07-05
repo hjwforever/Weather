@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--[if lt IE 7]>
+    <html id="ie6" class="ie6"><![endif]-->
+    <!--[if IE 7]>
+    <html id="ie7" class="ie7"><![endif]-->
+    <!--[if IE 8]>
+    <html id="ie8" class="ie8"><![endif]-->
+    <!--[if gte IE 9]>
+    <html id="ie9" class="ie9"><![endif]-->
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="applicable-device" content="pc">
+    <title>北京历史天气查询_历史天气预报查询</title>
+    <meta name="Keywords" content="北京历史天气，北京历史天气查询，北京历史天气预报"/>
+    <meta name="Description" content="快速查询北京历史天气预报查询，北京天气预报还提供北京各区县的生活指数、健康指数、交通指数、旅游指数，及时发布北京气象预报、各类气象资讯。"/>
+    <link rel="shortcut icon" href="//tianqi.2345.com/tianqiimg/theme4/images/favicon.ico" type="image/x-icon"/>
+    <meta http-equiv='mobile-agent' content='format=xhtml;url=http://waptianqi.2345.com/wea_history/54511.htm'>
+    <link rel='canonical' href='http://tianqi.2345.com/wea_history/54511.htm'>
+    <link href="//tianqi.2345.com/tianqiimg/theme4/css/global.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="//tianqi.2345.com/tianqiimg/theme4/js/jquery-1.8.3.min.js"></script>
+    <!-- 多条广告如下脚本只需引入一次 -->
+    <script type="text/javascript" src="//cpro.baidustatic.com/cpro/ui/cm.js" async="async" defer="defer"></script>
+    <script type="text/javascript" src="//tianqi.2345.com/tianqiimg/theme4/js/jquery.cookie.min.js?v=-23d8344"></script>
+    <script type="text/javascript" src="//tianqi.2345.com/tianqiimg/theme4/js/citySelectData2.js"></script>
+    <!-- 服务端脚本 -->
+    <script type="text/javascript" src="//tianqi.2345.com/tianqiimg/theme4/js2/common.js"></script>
+
+    <link href="//tianqi.2345.com/tianqiimg/theme4/css/wea-history.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="//tianqi.2345.com/tianqiimg/theme4/js/citySelectData2.js"></script>
+    <script type="text/javascript">
+        var pageInfo = {
+            'areaId': 54511,
+            'areaType': 2,
+            "cookie": {
+                "lastCountyId": "54511",
+                "lastCountyPinyin": "beijing",
+                "lastProvinceId": "12",
+                "lastCityId": "54511"
+            },
+            'year': 2020,
+            'month': 7,
+            'name': '历史天气',
+            'viewPage': true,
+            mobile_url: 'http://waptianqi.2345.com/wea_history/54511.htm'
+        }
+    </script>
+
+</head>
+<body>
+
+<script>
+    var browser = navigator.userAgent.toLowerCase()
+    var isTurn = /vmod=pc/.test(window.location.href)
+    try {
+        if (pageInfo && pageInfo.mobile_url && (/(iphone|ipod|android|nokia|sony|ericsson|mot|htc|samsung|sgh|lg|philips|lenovo|ucweb|opera mobi|windows mobile|blackberry)/i.test(browser) || !browser)) {
+            if (!isTurn) {
+                window.location.href = window.location.protocol + '//' + pageInfo.mobile_url.split('://')[1]
+            }
+        }
+    } catch (err) {
+        console.log(err)
+    }
+    $.browser.msie && $.browser.version < 9 ? $('.explorer-com-bg, .unuse-explorer-pop').show() : $('.explorer-com-bg, .unuse-explorer-pop').hide()
+</script>
+
+
+<div class="main">
+    <!-- 面包屑 -->
+    <div class="box-mod">
+        <div class="box-mod-left">
+            <div class="mod-left-wrap" style="margin-top: 0;">
+                <div class="box-mod-th">
+                    <h1 class="box-mod-th-title">北京市历史天气</h1>
+                    <div class="location-change-home">
+                        <a id="js_cascadeDisable" onclick="allCount('历史天气_切换_国内城市')" class="location-change-btn"
+                           href="javascript:;"><i class="wea-info-loca"></i>切换国内城市</a>
+                        <div id="js_cascadeBox" class="cascade-box">
+                            <div class="cascade-box-con">
+                                <div class="cascade-box-select">
+                                    <span class="cascade-val"><em></em><i></i></span>
+                                    <ul id="js_provinceCascade" class="cascade-box-select-list"></ul>
+                                </div>
+                                <div class="cascade-box-select">
+                                    <span class="cascade-val"><em></em><i></i></span>
+                                    <ul id="js_cityCascade" class="cascade-box-select-list"></ul>
+                                </div>
+                                <div class="cascade-box-select">
+                                    <span class="cascade-val"><em></em><i></i></span>
+                                    <ul id="js_countyCascade" class="cascade-box-select-list"></ul>
+                                </div>
+                            </div>
+                            <div class="set-default-city"><i id="js_isSetDefaultCity"></i>设为默认城市</div>
+                            <div class="cascade-box-tf">
+                                <a id="js_addDefaultCity" href="javascript:">确定</a>
+                                <a id="js_cancelAddCity" href="javascript:">取消</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="location-change-home">
+                        <a id="js_cascadeInterDisable" onclick="allCount('历史天气_切换_国际城市')" class="location-change-btn"
+                           href="javascript:;"><i class="wea-info-loca"></i>切换国际城市</a>
+                        <div id="js_cascadeInterBox" class="cascade-box">
+                            <div class="cascade-box-con">
+                                <div class="cascade-box-select">
+                                    <span class="cascade-val"><em></em><i></i></span>
+                                    <ul id="js_provinceInterCascade" class="cascade-box-select-list"></ul>
+                                </div>
+                                <div class="cascade-box-select">
+                                    <span class="cascade-val"><em></em><i></i></span>
+                                    <ul id="js_cityInterCascade" class="cascade-box-select-list"></ul>
+                                </div>
+                                <div class="cascade-box-select">
+                                    <span class="cascade-val"><em></em><i></i></span>
+                                    <ul id="js_countyInterCascade" class="cascade-box-select-list"></ul>
+                                </div>
+                            </div>
+                            <div class="cascade-box-tf">
+                                <a id="js_addDefaultInterCity" href="javascript:">确定</a>
+                                <a id="js_cancelAddInterCity" href="javascript:">取消</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-mod-th-right select-inline">
+                        <div class="select-mod mt13">
+                            <i class="select-arrow"></i>
+                            <span dataval="" id="js_yearVal" class="select-mod-val js_selectMod"></span>
+                            <div class="select-down js_selectDown">
+                                <ul class="select-down-list">
+                                    <li><a dataval="2011" href="javascript:">2011年</a></li>
+                                    <li><a dataval="2012" href="javascript:">2012年</a></li>
+                                    <li><a dataval="2013" href="javascript:">2013年</a></li>
+                                    <li><a dataval="2014" href="javascript:">2014年</a></li>
+                                    <li><a dataval="2015" href="javascript:">2015年</a></li>
+                                    <li><a dataval="2016" href="javascript:">2016年</a></li>
+                                    <li><a dataval="2017" href="javascript:">2017年</a></li>
+                                    <li><a dataval="2018" href="javascript:">2018年</a></li>
+                                    <li><a dataval="2019" href="javascript:">2019年</a></li>
+                                    <li><a class="select-curr" dataval="2020" href="javascript:">2020年</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="select-mod mt13">
+                            <i class="select-arrow"></i>
+                            <span id="js_monthVal" dataval="" class="select-mod-val js_selectMod"></span>
+                            <div class="select-down js_selectDown">
+                                <ul class="select-down-list">
+                                    <li><a dataval="1" href="javascript:">1月</a></li>
+                                    <li><a dataval="2" href="javascript:">2月</a></li>
+                                    <li><a dataval="3" href="javascript:">3月</a></li>
+                                    <li><a dataval="4" href="javascript:">4月</a></li>
+                                    <li><a dataval="5" href="javascript:">5月</a></li>
+                                    <li><a dataval="6" href="javascript:">6月</a></li>
+                                    <li><a class="select-curr" dataval="7" href="javascript:">7月</a></li>
+                                    <li><a dataval="8" href="javascript:">8月</a></li>
+                                    <li><a dataval="9" href="javascript:">9月</a></li>
+                                    <li><a dataval="10" href="javascript:">10月</a></li>
+                                    <li><a dataval="11" href="javascript:">11月</a></li>
+                                    <li><a dataval="12" href="javascript:">12月</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-mod-tb" id="weather-history">
+                    <ul class="history-msg">
+                        <li>平均高温：<em class="orange-txt">30°</em>&nbsp;&nbsp;&nbsp;&nbsp;平均低温：<em
+                                class="blue-txt">21°</em></li>
+                        <li>极端高温：<em class="orange-txt">34°</em><b>(2020-07-01)</b></li>
+                        <li>极端低温：<em class="blue-txt">20°</em><b>(2020-07-03)</b></li>
+                        <li>平均空气质量指数：<em class="blod-txt">67</em></li>
+                        <li>空气最好：<em class="green-txt">49 优</em><b>(07月02日)</b></li>
+                        <li>空气最差：<em class="yellow-txt">74良</em><b>(07月01日)</b></li>
+                    </ul>
+                    <table class="history-table" width="100%">
+                        <tr>
+                            <th width="169">日期</th>
+                            <th width="68">最高温</th>
+                            <th width="68">最低温</th>
+                            <th width="122">天气</th>
+                            <th>风力风向</th>
+                            <th width="140">空气质量指数</th>
+                        </tr>
+                        <tr>
+                            <td>2020-07-01 周三</td>
+                            <td style="color:#ff5040;">34°</td>
+                            <td style="color:#3097fd;">22°</td>
+                            <td>阴~雷阵雨</td>
+                            <td>东风2级</td>
+                            <td><span class="history-aqi wea-aqi-2">74 良</span></td>
+                        </tr>
+                        <tr>
+                            <td>2020-07-02 周四</td>
+                            <td style="color:#ff5040;">28°</td>
+                            <td style="color:#3097fd;">21°</td>
+                            <td>阴~中雨</td>
+                            <td>东北风2级</td>
+                            <td><span class="history-aqi wea-aqi-1">49 优</span></td>
+                        </tr>
+                        <tr>
+                            <td>2020-07-03 周五</td>
+                            <td style="color:#ff5040;">27°</td>
+                            <td style="color:#3097fd;">20°</td>
+                            <td>小雨~多云</td>
+                            <td>东风2级</td>
+                            <td><span class="history-aqi wea-aqi-2">71 良</span></td>
+                        </tr>
+                        <tr>
+                            <td>2020-07-04 周六</td>
+                            <td style="color:#ff5040;">30°</td>
+                            <td style="color:#3097fd;">22°</td>
+                            <td>阴~雷阵雨</td>
+                            <td>西南风2级</td>
+                            <td><span class="history-aqi wea-aqi-2">72 良</span></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="history-btn">
+                    <a id="js_prevMonth" href="javascript:;" onclick="allCount('历史天气_点击_上一月')">上一月</a>
+                    <a id="js_nextMonth" href="javascript:;" onclick="allCount('历史天气_点击_下一月')">下一月</a>
+                </div>
+            </div>
+            <div class="half-ads">
+                <div class="_y6ygcdm9v9o"></div>
+                <script type="text/javascript">
+                    (window.slotbydup = window.slotbydup || []).push({
+                        id: "u6093123",
+                        container: "_y6ygcdm9v9o",
+                        async: true
+                    });
+                </script>
+            </div>
+
+            <div class="ads1000">
+                <div class="_2lbtfm6jq2c"></div>
+                <script type="text/javascript">
+                    (window.slotbydup = window.slotbydup || []).push({
+                        id: "u6093168",
+                        container: "_2lbtfm6jq2c",
+                        async: true
+                    });
+                </script>
+            </div>
+
+            <!-- 历史当月气温趋势 begin -->
+            <div class="mod-left-wrap">
+                <div class="box-mod-th">
+                    <h2 class="box-mod-th-title">北京市历史7月气温趋势</h2>
+                </div>
+                <div class="box-mod-bd">
+                    <div class="echart-tip">
+                        <span><i class="heig-t"></i>平均高温</span>
+                        <span><i class="low-t"></i>平均低温</span>
+                    </div>
+                    <div id="js_historyCurr" class="history-echart"></div>
+                </div>
+            </div>
+            <!-- 历史当月气温趋势 end -->
+
+            <!-- 历史各月气温趋势 begin -->
+            <div class="mod-left-wrap">
+                <div class="box-mod-th">
+                    <h2 class="box-mod-th-title">北京市历史各月气温趋势</h2>
+                </div>
+                <div class="box-mod-bd">
+                    <div class="echart-tip">
+                        <span><i class="heig-t"></i>平均高温</span>
+                        <span><i class="low-t"></i>平均低温</span>
+                    </div>
+                    <div id="js_historyAll" class="history-echart"></div>
+                </div>
+            </div>
+            <!-- 历史各月气温趋势 end -->
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        // var screenH = $(window).height()
+        $('.wea-app-ad').hover(function () {
+            allCount('页面右侧_展现_APP下载二维码')
+            $('.hover-qrcode-show').show()
+        }, function () {
+            $('.hover-qrcode-show').hide()
+        })
+        $('.back-move').on('click', function () {
+            $('html , body').animate({
+                scrollTop: 0
+            })
+        })
+        $(window).scroll(function () {
+            $(document).scrollTop() > 0 ? $('.back-move').show() : $('.back-move').hide()
+        });
+    });
+</script>
+
+<span style="display: none;">
+    <script src="//union2.50bang.org/js/tianqi"></script>
+</span>
+<script type="text/javascript" src="//tianqi.2345.com/tianqiimg/theme4/js/global.js"></script>
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?a3f2879f6b3620a363bec646b7a8bcdd";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+    try {
+        if (pageInfo.viewPage && typeof (pageInfo.name) === 'string') {
+            allCount(pageInfo.name + '_总浏览');
+        }
+    } catch (e) {
+        // do nothing
+    }
+</script>
+
+</body>
+
+<script src="//tianqi.2345.com/tianqiimg/theme4/js/echarts.js"></script>
+<script src="//tianqi.2345.com/tianqiimg/theme4/js/modules/tab.js"></script>
+<script src="//tianqi.2345.com/tianqiimg/theme4/js/interCitySelectData2.js"></script>
+<script src="//tianqi.2345.com/tianqiimg/theme4/js/changeCity.js"></script>
+<script>
+    // 当月气温数据-ajax获取数据
+    var currMonthData = {
+        // 日期
+        date: ["2011\/7", "2012\/7", "2013\/7", "2014\/7", "2015\/7", "2016\/7", "2017\/7", "2018\/7", "2019\/7", "2020\/7"],
+        // 高温
+        seriesData1: ["23", "23", "23", "24", "22", "23", "24", "24", "24", "21"],
+        // 低温
+        seriesData2: ["31", "31", "32", "33", "31", "32", "32", "32", "33", "30"]
+    };
+
+    // 当月气温数据-ajax获取数据
+    var allMonthData = {
+        // 日期
+        date: ["1\u6708", "2\u6708", "3\u6708", "4\u6708", "5\u6708", "6\u6708", "7\u6708", "8\u6708", "9\u6708", "10\u6708", "11\u6708", "12\u6708"],
+        // 数据1
+        seriesData1: [-6, -4, 2, 8, 15, 20, 23, 21, 17, 8, 0, -5],
+        // 数据2
+        seriesData2: [4, 5, 15, 20, 29, 32, 32, 30, 29, 19, 10, 3]
+    };
+</script>
+<script src="//tianqi.2345.com/tianqiimg/theme4/js2/history.js"></script>
+
+</html>
