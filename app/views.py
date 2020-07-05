@@ -9,6 +9,7 @@ from django.contrib import messages
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.core.mail import send_mail
+from datetime import datetime
 from . import models
 from . import forms
 from Weather import settings
@@ -168,18 +169,29 @@ def history_page(request):
 
 def transfer_history(request):
     city = request.GET.get('CC')
-    date = request.GET.get('YYYY')
+    year = request.GET.get('YYYY')
     mon = request.GET.get('MM')
     day = request.GET.get('DD')
     print(city)
-    print(date)
+    print(year)
     print(mon)
     print(day)
-    datestr = str(city*10000+mon*100+day)
-    # datetime = datetime.strptime(datestr, '%Y-%m-%d')
-    # the_weather = models.Weather.objects.filter(date=datetime)
-    # print(the_weather)
-    return render(request, 'app/search-history.html')
+    if year == 0:
+        History_data = models.HistoryData.objects.filter().values()
+    else:
+        if mon == 0:
+            History_data = models.HistoryData.objects.filter(date__year=year).values()
+        else:
+            if day == 0:
+                History_data = models.HistoryData.objects.filter(date__year=year, date__month=mon).values()
+            else:
+                History_data = models.HistoryData.objects.filter(date__year=year, date__month=mon,date__day=day).values()
+
+    for date in History_data:
+        print(date['tmax'])
+    print(History_data)
+
+    return render(request, 'app/search-history.html', {'History_data': History_data})
 
 
 def hash_code(s, salt=settings.SECRET_KEY):
