@@ -13,13 +13,13 @@ class DataClean:
         pass
 
     def cleanData(self, startTime ='', endTime ='',isChooseDay=True, day='',resultFileName='trainData.csv'):
-        startYear=int(startTime[:4])
-        startMonth= int(startTime[6:7])
-        startDay= int(startTime[9:10])
+        startYear = int(startTime[:4])
+        startMonth = int(startTime[5:7])
+        startDay = int(startTime[8:10])
 
         endYear = int(endTime[:4])
-        endMonth = int(endTime[6:7])
-        endDay = int(endTime[9:10])
+        endMonth = int(endTime[5:7])
+        endDay = int(endTime[8:10])
 
         data_raw = pd.read_csv('originData.csv', encoding='utf-8')
 
