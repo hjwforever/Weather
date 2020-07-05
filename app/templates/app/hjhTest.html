@@ -1,161 +1,58 @@
 {% load static %}
-<!DOCTYPE html>
-<html lang="zxx">
-<head>
-    <meta charset="UTF-8">
-    <title>History data</title>
-    <link REL="SHORTCUT ICON" HREF="{% static 'html/images/favicon.ico' %}"/>
-    <!--引入echarts.js-->
-    <script src="{% static 'echarts.min.js' %}"></script>
-</head>
-
-<body>
-<h1 align="center">第三小组测试-app主页面 </h1><br>
-</body>
-{#背景#}
-{#<body style="background-images: url({% static 'images/1.jpg' %})">#}
-<!--为ECharts准备一个具备大小的Dom-->
-<div id="main" style="width: 800px;height: 600px;"></div>
-  <script src = "../static/echarts.min.js"></script>
-</head>
-<body>
-  <div id="main" style="width: 600px;height: 400px;"></div>
-  <script type="text/javascript">
-      var myChart = echarts.init(document.getElementById('main'));
-      var option = {
-          title:{
-              text:'Echarts入门示例'
-          },
-          tooltip:{},
-          legend:{
-              data:['销量']
-          },
-          xAxis:{
-              data: [
-                  {% for Big_datum in Bigdata %}
-                      "{{ Big_datum.date }}",
-                  {% endfor %}
-              ]
-          },
-          yAxis:{},
-          series:[{
-                  name:'销量',
-                  type:'bar',
-                  data:[
-                      {% for Big_datum in Bigdata %}
-                          {{ Big_datum.tmin }},
-                      {% endfor %}
-                  ]
-          }]
-      };
-      myChart.setOption(option);
-  </script>
-{#<script type="text/javascript">#}
-{##}
-{#    // 基于准备好的dom，初始化echarts实例#}
-{#    var myChart = echarts.init(document.getElementById('main'));#}
-{#    // 指定图表的配置项和数据#}
-{#    option = {#}
-{#        title: {#}
-{#            text: '历史天气数据'#}
-{#        },#}
-{#        tooltip: {#}
-{#            trigger: 'axis'#}
-{#        },#}
-{#        legend: {#}
-{#            data: ['最高温', '最低温']#}
-{#        },#}
-{#        grid: {#}
-{#            left: '3%',#}
-{#            right: '4%',#}
-{#            bottom: '3%',#}
-{#            containLabel: true#}
-{#        },#}
-{#        toolbox: {#}
-{#            feature: {#}
-{#                saveAsImage: {}#}
-{#            }#}
-{#        },#}
-{#        xAxis: {#}
-{#            type: 'category',#}
-{#            boundaryGap: false,#}
-{#            data: date#}
-{#        },#}
-{#        yAxis: {#}
-{#            type: 'value'#}
-{#        },#}
-{#        series: [#}
-{#            {#}
-{#                name: '最高温',#}
-{#                type: 'line',#}
-{#                stack: '总量',#}
-{#                data: tmax#}
-{#            },#}
-{#            {#}
-{#                name: '最低温',#}
-{#                type: 'line',#}
-{#                stack: '总量',#}
-{#                data: tmin#}
-{#            }]#}
-{#    };#}
-{#    // 使用刚指定的配置项和数据显示图表。#}
-{#    myChart.setOption(option);#}
-{#</script>#}
-{#<a herf="{% url "show" %}" >导入数据</a><br \>#}
-{#<a href="{% url 'history' %}" role="button">历史天气数据</a><br \>#}
-{#{% if request.user.is_authenticated %}#}
-{#    {{ request.user.username }}，您好！#}
-{#{% else %}#}
-{#    <a href="{{ request.path }}?{{ request.GET.urlencode }}&num=1">参数 num</a><br \>#}
-{#{% endif %}#}
-
-<a href="{% url 'home' %}" role="button">home</a><br>
-<table border="1" align="center">
-    <div align="center">
-        <img src="{% static "test1.jpg" %}" alt="历史数据" width="45%"/>
-        <img src="{% static "test2.jpg" %}" alt="差分数据" width="35%"/><br>
-        <h1 align="middle">图1 历史数据 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;图2
-            差分数据</h1>
-
-        <img src="{% static "test3.jpg" %}" alt="Autocorrelation&Partial Autocorrelation" width="45%"/>
-        <img src="{% static "test4.jpg" %}" alt="验证模型" width="45%"/><br>
-        <h1 align="middle">图3 Autocorrelation 和 Partial Autocorrelation &emsp;&emsp;&emsp;&emsp;&emsp;图4 验证模型</h1>
-
-    </div>
-    <caption>第三小组数据展示</caption>
-    <thead>
-    <tr>
-        <td>日期</td>
-        <td>最高温度</td>
-        <td>最低温度</td>
-        <td>平均温度</td>
-        <td>光照</td>
-        <td>风力</td>
-        <td>降水量</td>
-        <td>天气</td>
-    </tr>
-    </thead>
-    {% for Big_datum in Bigdata %}
-        <tr>
-            "{{ Big_datum.date }}",
-        </tr>
-
-    {% endfor %}
-</table>
-</body>
-</html>
-
 {#<!DOCTYPE html>#}
-{#<html lang="en">#}
+{#<html lang="zxx">#}
 {#<head>#}
 {#    <meta charset="UTF-8">#}
-{#    <title>历史天气</title>#}
+{#    <title>History data</title>#}
+{#    <link REL="SHORTCUT ICON" HREF="{% static 'html/images/favicon.ico' %}"/>#}
+{#    <!--引入echarts.js-->#}
+{#    <script src="{% static 'echarts.min.js' %}"></script>#}
+{#</head>#}
+{##}
+{#<body>#}
+{#<h1 align="center">第三小组测试-app主页面 </h1><br>#}
+{#</body>#}
+{#背景#}
+{#<body style="background-images: url({% static 'images/1.jpg' %})">#}
+{#<!--为ECharts准备一个具备大小的Dom-->#}
+{#<div id="main" style="width: 800px;height: 600px;"></div>#}
+{# <script src = "/static/echarts.min.js"></script> #}
 {#</head>#}
 {#<body>#}
-{#<a href="{% url 'home' %}" role="button">home</a>#}
+{#  <div id="main" style="width: 600px;height: 400px;"></div>#}
+{#  <script type="text/javascript">#}
+{#      var myChart = echarts.init(document.getElementById('main'));#}
+{#      var option = {#}
+{#          title:{#}
+{#              text:'Echarts入门示例'#}
+{#          },#}
+{#          tooltip:{},#}
+{#          legend:{#}
+{#              data:['销量']#}
+{#          },#}
+{#          xAxis:{#}
+{#              data: [#}
+{#                  {% for Big_datum in Bigdata %}#}
+{#                      "{{ Big_datum.date }}",#}
+{#                  {% endfor %}#}
+{#              ]#}
+{#          },#}
+{#          yAxis:{},#}
+{#          series:[{#}
+{#                  name:'销量',#}
+{#                  type:'bar',#}
+{#                  data:[#}
+{#                      {% for Big_datum in Bigdata %}#}
+{#                          {{ Big_datum.tmin }},#}
+{#                      {% endfor %}#}
+{#                  ]#}
+{#          }]#}
+{#      };#}
+{#      myChart.setOption(option);#}
+{#  </script>#}
+{##}
+{#<a href="{% url 'home' %}" role="button">home</a><br>#}
 {#<table border="1" align="center">#}
-{#    {% load static %}#}
-{#    <img src="{% static "test1.jpg" %}" alt="Leo头像" height=100 width=100 />#}
 {#    <div align="center">#}
 {#        <img src="{% static "test1.jpg" %}" alt="历史数据" width="45%"/>#}
 {#        <img src="{% static "test2.jpg" %}" alt="差分数据" width="35%"/><br>#}
@@ -170,25 +67,111 @@
 {#    <caption>第三小组数据展示</caption>#}
 {#    <thead>#}
 {#    <tr>#}
-{#                        <td>ID</td>#}
 {#        <td>日期</td>#}
 {#        <td>最高温度</td>#}
 {#        <td>最低温度</td>#}
-{#        <td>平均温度</td>#}
-{#        <td>光照</td>#}
-{#        <td>风力</td>#}
-{#        <td>降水量</td>#}
-{#        <td>天气</td>#}
-{##}
 {#    </tr>#}
 {#    </thead>#}
-{#    {% for row in test_data %}#}
+{#    {% for Big_datum in Bigdata %}#}
 {#        <tr>#}
-{#            {% for i in row %}#}
-{#                <td>{{ i }}</td>#}
-{#            {% endfor %}#}
+{#            <td>{{ Big_datum.date }}</td>#}
+{#            <td>{{ Big_datum.tmax }}</td>#}
+{#            <td>{{ Big_datum.tmin }}</td>#}
 {#        </tr>#}
+{##}
 {#    {% endfor %}#}
 {#</table>#}
 {#</body>#}
 {#</html>#}
+
+
+<!DOCTYPE html>
+{#<html lang="zh_CN" bigrender="fe:widget/js/lib/bigRender.js">#}
+<html lang="zh_CN" >
+<head>
+    <noscript>
+        <meta http-equiv="refresh" content="0; URL='/tianqi/?__noscript__-=1'"/>
+    </noscript>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="referrer" content="always">
+
+    <link rel="stylesheet" type="text/css" href="http://s1.hao123img.com/resource/fe/pkg/aio-eef856ab5.1fd5261cd.css"/>
+    <link rel="stylesheet" type="text/css" href="http://s0.hao123img.com/resource/tianqi/pkg/aio-519f9ba.08a30c5.css"/>
+    <link rel="stylesheet" type="text/css" href="http://s2.hao123img.com/resource/fe/pkg/aio-8155b5719.e2c46864a.css"/>
+</head>
+<body>
+
+<div class="page-layer status-day">
+    <div class="header-layer" monkey="tianqi-index">
+        <div class="weather-info-layer">
+            <div class="weather-info-inner">
+                <div class="real-time-box">
+                    <div class="icon icon-w w-00"></div>
+                    <div class="text"><span class="label">今日当前天气</span>
+                        <div class="temperature"><span class="num">31</span><span class="symbol">℃</span></div>
+                        <div class="others">
+                            <div class="line-1"><span>晴</span><span>空气质量良</span></div>
+                            <div class="line-2"><span>PM2.574</span><span>气压991</span><span>湿度46</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="forecast-box">
+                    <div class="forecast-item">
+                        <div class="info">
+                            <div class="icon icon-w w-01"><i class="icon-date ming"></i></div>
+                            <div class="temp">21-31<span class="symbol">℃</span></div>
+                        </div>
+                        <div class="text">多云&nbsp;&nbsp;微风&nbsp;&nbsp;空气质量优</div>
+                    </div>
+                    <div class="forecast-item last">
+                        <div class="info">
+                            <div class="icon icon-w w-08"><i class="icon-date hou"></i></div>{#07 08 09 分别对应小雨中雨大雨#}
+                            <div class="temp">24-33<span class="symbol">℃</span></div>
+                        </div>
+                        <div class="text">雨&nbsp;&nbsp;微风&nbsp;&nbsp;空气质量优</div>
+                    </div>
+                </div>
+                <div class="fifteen-days-box">
+                    <div class="slide-layer">
+                        <div class="slide-inner">
+                            <div class="slide-item">
+                                <div class="temp">07月05日&nbsp;(周日)&nbsp;22℃ /&nbsp;30℃</div>
+                                <div class="weather"><span class="text">雷阵雨</span><i class="icon-air icon-air-1"></i>
+                                </div>
+                                <div class="wind">无持续风向&nbsp;微风</div>
+                            </div>
+                            <div class="slide-item">
+                                <div class="temp">07月06日&nbsp;(周一)&nbsp;21℃ /&nbsp;31℃</div>
+                                <div class="weather"><span class="text">多云</span><i class="icon-air icon-air-1"></i>
+                                </div>
+                                <div class="wind">无持续风向&nbsp;微风</div>
+                            </div>
+                            <div class="slide-item">
+                                <div class="temp">07月07日&nbsp;(周二)&nbsp;24℃ /&nbsp;33℃</div>
+                                <div class="weather"><span class="text">多云</span><i class="icon-air icon-air-1"></i>
+                                </div>
+                                <div class="wind">无持续风向&nbsp;微风</div>
+                            </div>
+                            <div class="slide-item">
+                                <div class="temp">07月08日&nbsp;(周三)&nbsp;22℃ /&nbsp;33℃</div>
+                                <div class="weather"><span class="text">多云</span><i class="icon-air icon-air-2"></i>
+                                </div>
+                                <div class="wind">东北风&nbsp;3-4级</div>
+                            </div>
+                        </div>
+                        <a href="javascript:;" class="prev"></a><a href="javascript:;" class="next"></a></div>
+                    <a class="label" href="//www.weather.com.cn/weather15d/101010100.shtml" target="_blank"
+                       monkey="swrtq">
+                        <div class="text">15日天气</div>
+                    </a></div>
+                <div class="data-source">数据来自中国天气网</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

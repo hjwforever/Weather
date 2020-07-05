@@ -18,7 +18,7 @@ import pandas as pd
 import app.mod_timeseries.weather_model as wm
 import numpy as np
 from Weather import settings
-from app.static.weather_training import predict_dta as pdata
+# from app.static.weather_training import predict_dta as pdata
 import json
 from random import randrange
 from rest_framework.views import APIView
@@ -123,18 +123,20 @@ class IndexView(APIView):
 
 
 def home(request):
-    l = pdata.values
-    l2 = ['{:.2f}'.format(i) for i in l]
-    dta = zip(pdata.keys(), l2)
-    # print(dta)
-    return render(request, 'app/home.html', {'pdata': dta})
+    # l = pdata.values
+    # l2 = ['{:.2f}'.format(i) for i in l]
+    # dta = zip(pdata.keys(), l2)
+    # # print(dta)
+    # return render(request, 'app/home.html', {'pdata': dta})
+    return render(request, 'app/home.html')
 
 
 def index(request):
-    string = u"hhhhhhhhhhh"
-    if not request.session.get('is_login', None):
-        return redirect('/app/home/')
-    return render(request, 'app/home.html', {'string': string})
+    # string = u"hhhhhhhhhhh"
+    # if not request.session.get('is_login', None):
+    #     return redirect('/app/home/')
+    # return render(request, 'app/home.html', {'string': string})
+    return render(request, 'app/index.html')
 
 
 def get_test(request):
