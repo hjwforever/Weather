@@ -55,6 +55,43 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <script src="{% static 'html/js/modernizr.custom.97074.js' %}"></script>
 </head>
 <body>
+<div class="header">
+    <div class="container">
+        <div class="header-menu">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <div class="navbar-brand logo">
+                            <h1><a href="search-history.html"><span>Trip</span> Guide</a></h1>
+                        </div>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav cl-effect-11">
+                            <li class="active"><a href="{% url 'index' %}" data-hover="Home">Home </a></li>
+                            <li><a href="#about" data-hover="About" class="scroll">About</a></li>
+                            <li><a href="#services" data-hover="Services" class="scroll">Services</a></li>
+                            <li><a href="#tours" data-hover="Tours" class="scroll">Tours</a></li>
+                            <li><a data-hover="News" href="#news" class="scroll">News</a></li>
+                            <li><a href="#guides" data-hover="Guides" class="scroll">Guides</a></li>
+                            <li><a data-hover="Contact" href="#contact" class="scroll">Contact</a></li>
+
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
 <div class="banner-section">
     <div class="container">
         <div class="banner-heder">
@@ -176,43 +213,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
 </script>
-<div class="header">
-    <div class="container">
-        <div class="header-menu">
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <div class="navbar-brand logo">
-                            <h1><a href="search-history.html"><span>Trip</span> Guide</a></h1>
-                        </div>
-                    </div>
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav cl-effect-11">
-                            <li class="active"><a href="#" data-hover="Home" class="scroll">Home </a></li>
-                            <li><a href="#about" data-hover="About" class="scroll">About</a></li>
-                            <li><a href="#services" data-hover="Services" class="scroll">Services</a></li>
-                            <li><a href="#tours" data-hover="Tours" class="scroll">Tours</a></li>
-                            <li><a data-hover="News" href="#news" class="scroll">News</a></li>
-                            <li><a href="#guides" data-hover="Guides" class="scroll">Guides</a></li>
-                            <li><a data-hover="Contact" href="#contact" class="scroll">Contact</a></li>
-
-                        </ul>
-                    </div><!-- /.navbar-collapse -->
-                </div><!-- /.container-fluid -->
-            </nav>
-            <div class="clearfix"></div>
-        </div>
-    </div>
-</div>
 <div class="content">
     <div class="promotions">
         <div class="container">

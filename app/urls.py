@@ -7,14 +7,15 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('home/', views.home, name='home'),
     path('index/', views.IndexView.as_view(), name='demo'),
+    #登陆注册
     path('login/', views.login, name='login'),
-    # path('show/', views.show_data, name='show_data'),
+    path('register/', views.register, name='register'),
+
     path('upload/', views.upload_file, name='upload_file'),
     path('show/', views.get_test, name='get_test'),
     path('history/', views.history_page, name='history'),
     path('transfer/', views.transfer_history, name='transfer_data'),
-    path('html/', views.login),
-    path('register/', views.register,name='register'),
+
     path('logout/', views.logout),
     path('captcha/', include('captcha.urls')),
     path('confirm/', views.user_confirm),
@@ -23,7 +24,6 @@ urlpatterns = [
     path('newhome/', views.home_index),
     path('BJ/', views.beijingweather),
     path('hjhTest/', views.hjh_test),
-
 ]
 
 # from django.conf.urls import include, url
