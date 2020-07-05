@@ -8,12 +8,13 @@ class Person(models.Model):
     age = models.IntegerField()
 
 class Weather(models.Model):
-    date = models.CharField(max_length=30)
+    date = models.DateTimeField(primary_key=True)
     tmax = models.FloatField()
     tmin = models.FloatField()
     tavg = models.FloatField()
+
     def __str__(self):
-        return self.date
+        return str(self.date)
 
 
 
