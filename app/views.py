@@ -13,7 +13,7 @@ from . import models
 from . import forms
 from Weather import settings
 # Create your views here.
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 import pandas as pd
 import app.mod_timeseries.weather_model as wm
