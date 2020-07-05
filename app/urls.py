@@ -20,6 +20,8 @@ urlpatterns = [
     path('line/', views.ChartView.as_view(), name='line'),
     path('bar/', views.ChartView.as_view(), name='bar'),
     path('newhome/', views.home_index),
+
+    path('hjhTest/', views.hjh_test)
 ]
 
 # from django.conf.urls import include, url

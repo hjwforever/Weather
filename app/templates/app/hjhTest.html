@@ -1,0 +1,194 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <meta charset="UTF-8">
+    <title>History data</title>
+    <link REL="SHORTCUT ICON" HREF="{% static 'html/images/favicon.ico' %}"/>
+    <!--引入echarts.js-->
+    <script src="{% static 'echarts.min.js' %}"></script>
+</head>
+
+<body>
+<h1 align="center">第三小组测试-app主页面 </h1><br>
+</body>
+{#背景#}
+{#<body style="background-images: url({% static 'images/1.jpg' %})">#}
+<!--为ECharts准备一个具备大小的Dom-->
+<div id="main" style="width: 800px;height: 600px;"></div>
+  <script src = "../static/echarts.min.js"></script>
+</head>
+<body>
+  <div id="main" style="width: 600px;height: 400px;"></div>
+  <script type="text/javascript">
+      var myChart = echarts.init(document.getElementById('main'));
+      var option = {
+          title:{
+              text:'Echarts入门示例'
+          },
+          tooltip:{},
+          legend:{
+              data:['销量']
+          },
+          xAxis:{
+              data: [
+                  {% for Big_datum in Bigdata %}
+                      "{{ Big_datum.date }}",
+                  {% endfor %}
+              ]
+          },
+          yAxis:{},
+          series:[{
+                  name:'销量',
+                  type:'bar',
+                  data:[
+                      {% for Big_datum in Bigdata %}
+                          {{ Big_datum.tmin }},
+                      {% endfor %}
+                  ]
+          }]
+      };
+      myChart.setOption(option);
+  </script>
+{#<script type="text/javascript">#}
+{##}
+{#    // 基于准备好的dom，初始化echarts实例#}
+{#    var myChart = echarts.init(document.getElementById('main'));#}
+{#    // 指定图表的配置项和数据#}
+{#    option = {#}
+{#        title: {#}
+{#            text: '历史天气数据'#}
+{#        },#}
+{#        tooltip: {#}
+{#            trigger: 'axis'#}
+{#        },#}
+{#        legend: {#}
+{#            data: ['最高温', '最低温']#}
+{#        },#}
+{#        grid: {#}
+{#            left: '3%',#}
+{#            right: '4%',#}
+{#            bottom: '3%',#}
+{#            containLabel: true#}
+{#        },#}
+{#        toolbox: {#}
+{#            feature: {#}
+{#                saveAsImage: {}#}
+{#            }#}
+{#        },#}
+{#        xAxis: {#}
+{#            type: 'category',#}
+{#            boundaryGap: false,#}
+{#            data: date#}
+{#        },#}
+{#        yAxis: {#}
+{#            type: 'value'#}
+{#        },#}
+{#        series: [#}
+{#            {#}
+{#                name: '最高温',#}
+{#                type: 'line',#}
+{#                stack: '总量',#}
+{#                data: tmax#}
+{#            },#}
+{#            {#}
+{#                name: '最低温',#}
+{#                type: 'line',#}
+{#                stack: '总量',#}
+{#                data: tmin#}
+{#            }]#}
+{#    };#}
+{#    // 使用刚指定的配置项和数据显示图表。#}
+{#    myChart.setOption(option);#}
+{#</script>#}
+{#<a herf="{% url "show" %}" >导入数据</a><br \>#}
+{#<a href="{% url 'history' %}" role="button">历史天气数据</a><br \>#}
+{#{% if request.user.is_authenticated %}#}
+{#    {{ request.user.username }}，您好！#}
+{#{% else %}#}
+{#    <a href="{{ request.path }}?{{ request.GET.urlencode }}&num=1">参数 num</a><br \>#}
+{#{% endif %}#}
+
+<a href="{% url 'home' %}" role="button">home</a><br>
+<table border="1" align="center">
+    <div align="center">
+        <img src="{% static "test1.jpg" %}" alt="历史数据" width="45%"/>
+        <img src="{% static "test2.jpg" %}" alt="差分数据" width="35%"/><br>
+        <h1 align="middle">图1 历史数据 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;图2
+            差分数据</h1>
+
+        <img src="{% static "test3.jpg" %}" alt="Autocorrelation&Partial Autocorrelation" width="45%"/>
+        <img src="{% static "test4.jpg" %}" alt="验证模型" width="45%"/><br>
+        <h1 align="middle">图3 Autocorrelation 和 Partial Autocorrelation &emsp;&emsp;&emsp;&emsp;&emsp;图4 验证模型</h1>
+
+    </div>
+    <caption>第三小组数据展示</caption>
+    <thead>
+    <tr>
+        <td>日期</td>
+        <td>最高温度</td>
+        <td>最低温度</td>
+        <td>平均温度</td>
+        <td>光照</td>
+        <td>风力</td>
+        <td>降水量</td>
+        <td>天气</td>
+    </tr>
+    </thead>
+    {% for Big_datum in Bigdata %}
+        <tr>
+            "{{ Big_datum.date }}",
+        </tr>
+
+    {% endfor %}
+</table>
+</body>
+</html>
+
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>历史天气</title>#}
+{#</head>#}
+{#<body>#}
+{#<a href="{% url 'home' %}" role="button">home</a>#}
+{#<table border="1" align="center">#}
+{#    {% load static %}#}
+{#    <img src="{% static "test1.jpg" %}" alt="Leo头像" height=100 width=100 />#}
+{#    <div align="center">#}
+{#        <img src="{% static "test1.jpg" %}" alt="历史数据" width="45%"/>#}
+{#        <img src="{% static "test2.jpg" %}" alt="差分数据" width="35%"/><br>#}
+{#        <h1 align="middle">图1 历史数据 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;图2#}
+{#            差分数据</h1>#}
+{##}
+{#        <img src="{% static "test3.jpg" %}" alt="Autocorrelation&Partial Autocorrelation" width="45%"/>#}
+{#        <img src="{% static "test4.jpg" %}" alt="验证模型" width="45%"/><br>#}
+{#        <h1 align="middle">图3 Autocorrelation 和 Partial Autocorrelation &emsp;&emsp;&emsp;&emsp;&emsp;图4 验证模型</h1>#}
+{##}
+{#    </div>#}
+{#    <caption>第三小组数据展示</caption>#}
+{#    <thead>#}
+{#    <tr>#}
+{#                        <td>ID</td>#}
+{#        <td>日期</td>#}
+{#        <td>最高温度</td>#}
+{#        <td>最低温度</td>#}
+{#        <td>平均温度</td>#}
+{#        <td>光照</td>#}
+{#        <td>风力</td>#}
+{#        <td>降水量</td>#}
+{#        <td>天气</td>#}
+{##}
+{#    </tr>#}
+{#    </thead>#}
+{#    {% for row in test_data %}#}
+{#        <tr>#}
+{#            {% for i in row %}#}
+{#                <td>{{ i }}</td>#}
+{#            {% endfor %}#}
+{#        </tr>#}
+{#    {% endfor %}#}
+{#</table>#}
+{#</body>#}
+{#</html>#}

@@ -1,3 +1,6 @@
+import os, django
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Weather.settings")# project_name 项目名称
+django.setup()
 import logging
 import datetime
 import hashlib
@@ -22,10 +25,10 @@ from rest_framework.views import APIView
 from pyecharts.charts import Bar, Line
 from pyecharts import options as opts
 from app.models import Weather
-import os, django
-
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Weather.settings")
-django.setup()
+# import os, django
+#
+# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Weather.settings")
+# django.setup()
 
 class EventsForm(object):
     pass
@@ -379,3 +382,7 @@ def user_confirm(request):
         confirm.delete()
         message = "感谢确认，请使用账户登陆！"
         return render(request, 'app/confirm.html', locals())
+
+def hjh_test(request):
+    big_data = models.PredictData.objects.all()
+    return render(request, 'app/hjhTest.html', {'Bigdata': big_data})
