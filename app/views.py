@@ -1,5 +1,6 @@
 import os, django
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Weather.settings")# project_name 项目名称
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Weather.settings")  # project_name 项目名称
 django.setup()
 import logging
 import datetime
@@ -25,6 +26,9 @@ from rest_framework.views import APIView
 from pyecharts.charts import Bar, Line
 from pyecharts import options as opts
 from app.models import Weather
+from rest_framework.decorators import api_view
+
+
 # import os, django
 #
 # os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Weather.settings")
@@ -33,8 +37,7 @@ from app.models import Weather
 class EventsForm(object):
     pass
 
-def ds_test(request):
-    return render(request, 'app/search-history.html')
+
 
 
 def response_as_json(data):
@@ -54,27 +57,10 @@ def beijingweather(request):
     return render(request, 'app/beijingweather.html')
 
 
-def json_response(data, code=200):
-    data = {
-        "code": code,
-        "msg": "success",
-        "data": data,
-    }
-    return response_as_json(data)
 
 
-def json_error(error_string="error", code=500, **kwargs):
-    data = {
-        "code": code,
-        "msg": error_string,
-        "data": {}
-    }
-    data.update(kwargs)
-    return response_as_json(data)
 
 
-JsonResponse = json_response
-JsonError = json_error
 
 
 def bar_base() -> Bar:
@@ -123,19 +109,10 @@ class IndexView(APIView):
 
 
 def home(request):
-    # l = pdata.values
-    # l2 = ['{:.2f}'.format(i) for i in l]
-    # dta = zip(pdata.keys(), l2)
-    # # print(dta)
-    # return render(request, 'app/home.html', {'pdata': dta})
     return render(request, 'app/home.html')
 
 
 def index(request):
-    # string = u"hhhhhhhhhhh"
-    # if not request.session.get('is_login', None):
-    #     return redirect('/app/home/')
-    # return render(request, 'app/home.html', {'string': string})
     return render(request, 'app/index.html')
 
 
@@ -167,47 +144,6 @@ def show_data(request):
 
 
 def upload_file(request):
-    # def upload_csv(request):
-    #     data = {}
-    #     if "GET" == request.method:
-    #         return render(request, "upload_file.html", data)
-    #     # if not GET, then proceed
-    #     try:
-    #         csv_file = request.FILES["csv_file"]
-    #         if not csv_file.name.endswith('.csv'):
-    #             messages.error(request, 'File is not CSV type')
-    #             return HttpResponseRedirect(reverse("myapp:upload_csv"))
-    #         # if file is too large, return
-    #         if csv_file.multiple_chunks():
-    #             messages.error(request, "Uploaded file is too big (%.2f MB)." % (csv_file.size / (1000 * 1000),))
-    #             return HttpResponseRedirect(reverse("myapp:upload_csv"))
-    #
-    #         file_data = csv_file.read().decode("utf-8")
-    #
-    #         lines = file_data.split("\n")
-    #         # loop over the lines and save them in db. If error , store as string and then display
-    #         for line in lines:
-    #             fields = line.split(",")
-    #             data_dict = {}
-    #             data_dict["name"] = fields[0]
-    #             data_dict["start_date_time"] = fields[1]
-    #             data_dict["end_date_time"] = fields[2]
-    #             data_dict["notes"] = fields[3]
-    #             try:
-    #                 form = EventsForm(data_dict)
-    #                 if form.is_valid():
-    #                     form.save()
-    #                 else:
-    #                     logging.getLogger("error_logger").error(form.errors.as_json())
-    #             except Exception as e:
-    #                 logging.getLogger("error_logger").error(repr(e))
-    #                 pass
-    #
-    #     except Exception as e:
-    #         logging.getLogger("error_logger").error("Unable to upload file. " + repr(e))
-    #         messages.error(request, "Unable to upload file. " + repr(e))
-    #
-    #     return HttpResponseRedirect(reverse("app/upload_csv"))
     if request.method == "POST":
         File = request.FILES.get("files", "app/static/DataResult.csv")
         predict_year = request.GET.get('predict_year', None)
@@ -226,26 +162,18 @@ def upload_file(request):
 
 
 def history_page(request):
-    data_set = pd.read_csv("app/static/DataResult.csv")
-    p = wm.ProcessData("app/static/DataResult.csv", 10, 'min')
-    data = data_set.values[:, :]
-    test_data = []
-    date = []
-    tmax = []
-    tmin = []
-    for row in data:
-        ls = []
-        for j in row:
-            ls.append(j)
-        test_data.append(ls)
-        date.append(row[0])
-        tmax.append(row[1])
-        tmin.append(row[2])
+    return render(request, 'app/search-history.html')
 
-    # weathers = Weather.objects.all()
-    # print(weathers)
-    return render(request, 'app/history_data.html',
-                  {'test_data': test_data, 'date_list': date, 'tmax_list': tmax, 'tmin_list': tmin})
+def transfer_history(request):
+    city = request.GET.get('CC')
+    date = request.GET.get('YYYY')
+    mon = request.GET.get('MM')
+    day = request.GET.get('DD')
+    print(city)
+    print(date)
+    print(mon)
+    print(day)
+    return render(request, 'app/search-history.html')
 
 
 def hash_code(s, salt=settings.SECRET_KEY):
@@ -390,6 +318,7 @@ def user_confirm(request):
         confirm.delete()
         message = "感谢确认，请使用账户登陆！"
         return render(request, 'app/confirm.html', locals())
+
 
 def hjh_test(request):
     big_data = models.PredictData.objects.all()

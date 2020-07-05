@@ -61,14 +61,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <h3>We Plan Your Trip<span>Best Available Choice in Town</span></h3>
         </div>
         <div class="banner-grids">
-            <form name="reg_testdate">
+            <form  name="reg_testdate" action="{% url 'transfer_data' %}" method="GET">
+                {%  csrf_token %}
                 <div class="col-md-2 banner-grid">
-                    <select class="sel">
+                    <select type="text" class="sel" name="CC">
                         <option value="">请选择城市</option>
-                        <option value="">Czech Republic</option>
-                        <option value="">France</option>
-                        <option value="">germany</option>
-                        <option value="">Italy</option>
+                        <option value="beijing">北京</option>
+                        <option value="tianjin">天津</option>
+                        <option value="fujian">胡建</option>
+                        <option value="henan">河兰</option>
+                        <option value="jiangxi">江西</option>
+                        <option value="neimeng">内蒙</option>
+                        <option value="hubei">湖北</option>
                     </select>
                 </div>
                 <div class="col-md-2 banner-grid">
@@ -87,7 +91,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </select>
                 </div>
                 <div class="col-md-4 search">
-                    <form action="#" method="post">
+                    <form action="{% url 'transfer_data' %}" method="GET">
                         <input type="submit" value="Check Availability">
                     </form>
                 </div>
@@ -98,6 +102,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </div>
 <!--计算年月日函数-->
 <script language="JavaScript">
+    var datelist = []
+
     function YYYYMMDDstart() {
         MonHead = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
@@ -105,16 +111,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         var y = new Date().getFullYear();
         for (var i = (y - 40); i < (y + 3); i++) //以今年为准，前40年，后2年
             document.reg_testdate.YYYY.options.add(new Option(" " + i + " 年", i));
-
+        datelist[0] = i;
         //赋月份的下拉框
         for (var i = 1; i < 13; i++)
             document.reg_testdate.MM.options.add(new Option(" " + i + " 月", i));
-
+        datelist[1] = i;
         document.reg_testdate.YYYY.value = y;
         document.reg_testdate.MM.value = new Date().getMonth() + 1;
         var n = MonHead[new Date().getMonth()];
         if (new Date().getMonth() == 1 && IsPinYear(YYYYvalue)) n++;
         writeDay(n); //赋日期下拉框Author:meizz
+        datelist[2] = n;
         document.reg_testdate.DD.value = new Date().getDate();
     }
 
@@ -133,6 +140,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         }
         var n = MonHead[MMvalue - 1];
         if (MMvalue == 2 && IsPinYear(str)) n++;
+        datelist = n;
         writeDay(n)
     }
 
@@ -165,6 +173,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     function optionsClear(e) {
         e.options.length = 1;
     }
+
+
 </script>
 <div class="header">
     <div class="container">

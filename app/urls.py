@@ -12,6 +12,7 @@ urlpatterns = [
     path('upload/', views.upload_file, name='upload_file'),
     path('show/', views.get_test, name='get_test'),
     path('history/', views.history_page, name='history'),
+    path('transfer/', views.transfer_history, name='transfer_data'),
     path('html/', views.login),
     path('register/', views.register,name='register'),
     path('logout/', views.logout),
@@ -21,8 +22,7 @@ urlpatterns = [
     path('bar/', views.ChartView.as_view(), name='bar'),
     path('newhome/', views.home_index),
     path('BJ/', views.beijingweather),
-    path('dstest/', views.ds_test),
-    path('hjhTest/', views.hjh_test)
+    path('hjhTest/', views.hjh_test),
 
 ]
 
