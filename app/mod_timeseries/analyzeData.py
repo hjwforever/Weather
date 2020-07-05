@@ -42,6 +42,35 @@ class analyzeData:
 
         return Monthdata
 
+    def avgMax(self):
+        avgmax = ['' for i in range(12)]
+        for i in range(12):
+            avgmax[i] = 0
+        for m in range(12):
+            for y in range(1981, 2011):
+                max = 0
+                data = models.HistoryData.objects.filter(date__year=y, date__month=m + 1).values()
+                for n in data:
+                    max += n['tmax']
+                avgmax[m] += max / len(data)
+            avgmax[m] = avgmax[m] / 30
+        return avgmax
+
+    def avgMin(self):
+        avgmin = ['' for i in range(12)]
+        for i in range(12):
+            avgmin[i] = 0
+        for m in range(12):
+            for y in range(1981, 2011):
+                min = 0
+                data = models.HistoryData.objects.filter(date__year=y, date__month=m + 1).values()
+                for n in data:
+                    min += n['tmin']
+                avgmin[m] += min / len(data)
+            avgmin[m] = avgmin[m] / 30
+        return avgmin
+
+
     # def MonthTmaxData(self, year=2010, month=3,gap=5):
     #     data = models.HistoryData.objects.filter(date__year=year, date__month=month).values()
     #     # print(data)
