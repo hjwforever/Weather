@@ -176,20 +176,24 @@ def transfer_history(request):
     print(year)
     print(mon)
     print(day)
-    if year == 0:
+    if year == '0':
         History_data = models.HistoryData.objects.filter().values()
+        print(History_data)
     else:
-        if mon == 0:
+        if mon == '0':
             History_data = models.HistoryData.objects.filter(date__year=year).values()
+            print(History_data)
         else:
-            if day == 0:
+            if day == '0':
                 History_data = models.HistoryData.objects.filter(date__year=year, date__month=mon).values()
+                print(History_data)
             else:
-                History_data = models.HistoryData.objects.filter(date__year=year, date__month=mon,date__day=day).values()
+                History_data = models.HistoryData.objects.filter(date__year=year, date__month=mon, date__day=day).values()
+                print(History_data)
 
     for date in History_data:
         print(date['tmax'])
-    print(History_data)
+    # print(History_data)
 
     return render(request, 'app/search-history.html', {'History_data': History_data})
 
