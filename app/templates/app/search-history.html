@@ -3,8 +3,6 @@
 <html>
 <head>
     <title>Trip Guide a Travel Agency Category Flat Bootstrap Responsive website Template | Home :: w3layouts</title>
-        <!--引入echarts.js-->
-    <script src="{% static 'echarts.min.js' %}"></script>
     <link href="{% static 'html/css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all"/>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="{% static 'html/js/jquery.min.js' %}"></script>
@@ -139,164 +137,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
     </div>
 </div>
-<!--为ECharts准备一个具备大小的Dom-->
-<div id="main" style="width: 1200px;height: 600px;" align="center"></div>
-<script type="text/javascript">
-    // 基于准备好的dom，初始化echarts实例
-    var myChart = echarts.init(document.getElementById('main'));
-    // 指定图表的配置项和数据
-    var option = {
-        tooltip: {
-            trigger: 'axis',
-
-{#            position: function (pt) {#}
-{#                return [pt[0], '10%'];#}
-{#            },#}
-{#            axisPointer: {#}
-{#            type: 'cross' //是否显示十字标签#}
-{#        }#}
-        },
-        title: {
-            left: 'center',
-            text: '历史气温变化图',
-        },
-        toolbox: {
-        show: true,
-        feature: {
-            dataZoom: {
-                yAxisIndex: 'none'
-            },
-            dataView: {readOnly: false},
-            magicType: {type: ['line', 'bar']},
-            restore: {},
-            saveAsImage: {}
-        }
-    },
-        xAxis: {
-            type: 'category',
-            boundaryGap: false,
-            data: [
-                  {% for row in History_data %}
-                      "{{ row.date }}",
-                  {% endfor %}
-              ]
-        },
-        yAxis: {
-            type: 'value',
-            boundaryGap: [0, '100%'],
-            min: function(value) {return value.min-20;},
-            max: function(value) {return value.max+20;}
-        },
-        dataZoom: [{
-            type: 'inside',
-            start: 0,
-            end: 10
-        }, {
-            start: 0,
-            end: 10,
-            handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
-            handleSize: '80%',
-            handleStyle: {
-                color: '#fff',
-                shadowBlur: 3,
-                shadowColor: 'rgba(0, 0, 0, 0.6)',
-                shadowOffsetX: 2,
-                shadowOffsetY: 2
-            }
-        }],
-        series: [
-            {
-                name: '最大温度',
-                type: 'line',
-                smooth: true,
-                symbol: 'none',
-                sampling: 'average',
-                itemStyle: {
-                    color: 'rgb(255, 0, 0)'
-                },
-                markPoint: {
-                data: [
-                    {type: 'max', name: '最大值'},
-                    {type: 'min', name: '最小值'}
-                ]
-            },
-                markLine: {
-                data: [
-                    {type: 'max', name: '视图中最高温'}
-                ]
-            },
-                data: [
-                  {% for row in History_data %}
-                      "{{ row.tmax }}",
-                  {% endfor %}
-              ],
-            },
-            {
-                name: '最低温度',
-                type: 'line',
-                smooth: true,
-                symbol: 'none',
-                sampling: 'average',
-                itemStyle: {
-                    color: 'rgb(0, 0, 255)'
-                },
-                markPoint: {
-                data: [
-                    {type: 'max', name: '最大值'},
-                    {type: 'min', name: '最小值'}
-                ]
-            },
-                markLine: {
-                data: [
-                    {type: 'min', name: '视图中最低温'}
-                ]
-            },
-                data: [
-                  {% for row in History_data %}
-                      "{{ row.tmin }}",
-                  {% endfor %}
-              ],
-            },
-            {
-                name: '平均温度',
-                type: 'line',
-                smooth: true,
-                symbol: 'none',
-                sampling: 'average',
-                itemStyle: {
-                    color: 'rgb(0, 255, 0)'
-                },
-                data: [
-                  {% for row in History_data %}
-                      "{{ row.tavg }}",
-                  {% endfor %}
-              ],
-            }
-        ]
-    };
-    // 使用刚指定的配置项和数据显示图表。
-    myChart.setOption(option);
-</script>
-{#<table border="1">#}
-{#    <thead>#}
-{#    <tr>#}
-{#        <td>日期</td>#}
-{#        <td>最高温度</td>#}
-{#        <td>最低温度</td>#}
-{#        <td>平均温度</td>#}
-{#    </tr>#}
-{#    </thead>#}
-{#    <tbody>#}
-{#    {% for row in History_data %}#}
-{#        <tr>#}
-{#            <td>{{ row.date }}</td>#}
-{#            <td>{{ row.tmax }}</td>#}
-{#            <td>{{ row.tmin }}</td>#}
-{#            <td>{{ row.tavg }}</td>#}
-{#        </tr>#}
-{#    {% endfor %}#}
-{#    </tbody>#}
-{#</table>#}
 <!--计算年月日函数-->
 <script language="JavaScript">
     var datelist = []
@@ -370,6 +210,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     function optionsClear(e) {
         e.options.length = 1;
     }
+
+
 </script>
 <div class="content">
     <div class="promotions">
