@@ -162,7 +162,9 @@ def upload_file(request):
 
 
 def history_page(request):
-    return render(request, 'app/search-history.html')
+    History_data = models.HistoryData.objects.all()
+    print(History_data)
+    return render(request, 'app/search-history.html', {'History_data': History_data})
 
 def transfer_history(request):
     city = request.GET.get('CC')
@@ -173,6 +175,10 @@ def transfer_history(request):
     print(date)
     print(mon)
     print(day)
+    datestr = str(city*10000+mon*100+day)
+    # datetime = datetime.strptime(datestr, '%Y-%m-%d')
+    # the_weather = models.Weather.objects.filter(date=datetime)
+    # print(the_weather)
     return render(request, 'app/search-history.html')
 
 
