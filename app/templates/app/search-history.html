@@ -2,9 +2,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Trip Guide a Travel Agency Category Flat Bootstrap Responsive website Template | Home :: w3layouts</title>
+    <title>Six Single Dogs History Weather</title>
         <!--引入echarts.js-->
     <script src="{% static 'echarts.min.js' %}"></script>
+    <link href="{% static 'img/favicon.ico' %}" rel="shortcut icon"/>
     <link href="{% static 'html/css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all"/>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="{% static 'html/js/jquery.min.js' %}"></script>
@@ -97,7 +98,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="banner-section">
     <div class="container">
         <div class="banner-heder">
-            <h3>We Plan Your Trip<span>Best Available Choice in Town</span></h3>
+            <h3>Weather Information <span>of Different Time Periods in History</span></h3>
         </div>
         <div class="banner-grids">
             <form  name="reg_testdate" action="{% url 'transfer_data' %}" method="GET">
@@ -131,7 +132,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </div>
                 <div class="col-md-4 search">
                     <form action="{% url 'transfer_data' %}" method="GET">
-                        <input type="submit" value="Check Availability">
+                        <input type="submit" value="Weather Inquiry">
                     </form>
                 </div>
                 <div class="clearfix"></div>
@@ -158,7 +159,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         },
         title: {
             left: 'center',
-            text: '历史气温变化图',
+            text: '历史气温变化图',//Historical Temperature Change Chart
         },
         toolbox: {
         show: true,
@@ -498,7 +499,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <h3 class="tittle"> About us</h3>
             <div class="about-grids">
                 <div class="col-md-4 about-grid">
-                    <img src="{% static 'html/images/tt2.png' %}" class="img-responsive" alt=""/>
+                    <img src="{% static 'html/images/six_single_dogs.png' %}" class="img-responsive" alt=""/>
                 </div>
                 <div class="col-md-8 about-grid1">
                     <div class="about-top">
@@ -506,10 +507,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i>
                         </div>
                         <div class="about-right">
-                            <h4>Hotel Online Booking Service</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aut dignissimos ea est,
-                                impedit incidunt, laboriosam maxime molestias numquam odio officiis. Ab aut dignissimos
-                                ea est, impedit incidunt.</p>
+                            <h4>The Latest Weather Forecast</h4>
+                            <p>Global and national weather forecast,
+                                 timely and accurate release of forecast weather information
+                                from NOAA National Climate Data Center (NCDC) based on Spark technology
+                            </p>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -518,10 +520,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <i class="glyphicon glyphicon-plane" aria-hidden="true"></i>
                         </div>
                         <div class="about-right">
-                            <h4>Book Cheap Flights Online</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aut dignissimos ea est,
-                                impedit incidunt, laboriosam maxime molestias numquam odio officiis. Ab aut dignissimos
-                                ea est, impedit incidunt.</p>
+                            <h4>Weather Information of Different Time Periods in History</h4>
+                            <p>convenient query of today's and historical weather periods around the world,
+                                and weekly weather forecast</p>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -530,10 +531,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <i class="glyphicon glyphicon-dashboard" aria-hidden="true"></i>
                         </div>
                         <div class="about-right">
-                            <h4>Taxi Cab Booking Hotline</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aut dignissimos ea est,
-                                impedit incidunt, laboriosam maxime molestias numquam odio officiis. Ab aut dignissimos
-                                ea est, impedit incidunt.</p>
+                            <h4>Top Trip Guide</h4>
+                            <p>We will provide the best travel package according to the forecast weather conditions,
+                                to provide the perfect choices for your travel or business trip</p>
                         </div>
                         <div class="clearfix"></div>
                     </div>
