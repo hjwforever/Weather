@@ -282,7 +282,7 @@ def register(request):
                 code = make_confirm_string(new_user)
                 send_email(email, code)
 
-                return redirect('/app/html/')
+                return redirect('/app/login/')
         else:
             return render(request, 'app/register.html', locals())
     register_form = forms.RegisterForm()
@@ -292,9 +292,9 @@ def register(request):
 def logout(request):
     print('登出函数')
     if not request.session.get('is_login', None):
-        return redirect('/app/html/')
+        return redirect('/app/index/')
     request.session.flush()
-    return redirect('/app/html/')
+    return redirect('/app/index/')
 
 
 def user_confirm(request):
