@@ -33,6 +33,9 @@ from app.models import Weather
 class EventsForm(object):
     pass
 
+def ds_test(request):
+    return render(request, 'app/search-history.html')
+
 
 def response_as_json(data):
     json_str = json.dumps(data)

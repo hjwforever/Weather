@@ -1,0 +1,577 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Trip Guide a Travel Agency Category Flat Bootstrap Responsive website Template | Home :: w3layouts</title>
+    <link href="{% static 'html/css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all"/>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="{% static 'html/js/jquery.min.js' %}"></script>
+    <!-- Custom Theme files -->
+    <!--theme-style-->
+    <link href="{% static 'html/css/style.css' %}" rel="stylesheet" type="text/css" media="all"/>
+    <link rel="stylesheet" href="{% static 'html/css/chocolat.css' %}" type="text/css">
+
+    <!--//theme-style-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta property="og:title" content="Vide"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="Trip Guide Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+    <!---->
+    <script src="{% static 'html/js/bootstrap.min.js' %}"></script>
+    <!---->
+    <link href='//fonts.googleapis.com/css?family=Questrial' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,800italic,800,700italic,700,600italic,600,400italic,300italic,300'
+          rel='stylesheet' type='text/css'>
+    <script src="{% static 'html/js/jquery.chocolat.js' %}"></script>
+    <!--lightboxfiles-->
+    <script type="text/javascript">
+        $(function () {
+            $('.gallery a').Chocolat();
+        });
+    </script>
+    <!--script-->
+    <!--startsmothscrolling-->
+    <script type="text/javascript" src="{% static 'html/js/move-top.js' %}"></script>
+    <script type="text/javascript" src="{% static 'html/js/easing.js' %}"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1200);
+            });
+        });
+    </script>
+
+    <script src="{% static 'html/js/modernizr.custom.97074.js' %}"></script>
+</head>
+<body>
+<div class="banner-section">
+    <div class="container">
+        <div class="banner-heder">
+            <h3>We Plan Your Trip<span>Best Available Choice in Town</span></h3>
+        </div>
+        <div class="banner-grids">
+            <form name="reg_testdate">
+                <div class="col-md-2 banner-grid">
+                    <select class="sel">
+                        <option value="">请选择城市</option>
+                        <option value="">Czech Republic</option>
+                        <option value="">France</option>
+                        <option value="">germany</option>
+                        <option value="">Italy</option>
+                    </select>
+                </div>
+                <div class="col-md-2 banner-grid">
+                    <select class="sel" name="YYYY" onchange="YYYYDD(this.value)" id="select">
+                        <option value="">请选择年份</option>
+                    </select>
+                </div>
+                <div class="col-md-2 banner-grid">
+                    <select class="sel" name="MM" onchange="MMDD(this.value)">
+                        <option value="">请选择月份</option>
+                    </select>
+                </div>
+                <div class="col-md-2 banner-grid">
+                    <select class="sel" name="DD">
+                        <option value="">请选择日期</option>
+                    </select>
+                </div>
+                <div class="col-md-4 search">
+                    <form action="#" method="post">
+                        <input type="submit" value="Check Availability">
+                    </form>
+                </div>
+                <div class="clearfix"></div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--计算年月日函数-->
+<script language="JavaScript">
+    function YYYYMMDDstart() {
+        MonHead = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+        //先给年下拉框赋内容
+        var y = new Date().getFullYear();
+        for (var i = (y - 40); i < (y + 3); i++) //以今年为准，前40年，后2年
+            document.reg_testdate.YYYY.options.add(new Option(" " + i + " 年", i));
+
+        //赋月份的下拉框
+        for (var i = 1; i < 13; i++)
+            document.reg_testdate.MM.options.add(new Option(" " + i + " 月", i));
+
+        document.reg_testdate.YYYY.value = y;
+        document.reg_testdate.MM.value = new Date().getMonth() + 1;
+        var n = MonHead[new Date().getMonth()];
+        if (new Date().getMonth() == 1 && IsPinYear(YYYYvalue)) n++;
+        writeDay(n); //赋日期下拉框Author:meizz
+        document.reg_testdate.DD.value = new Date().getDate();
+    }
+
+    if (document.attachEvent)
+        window.attachEvent("onload", YYYYMMDDstart);
+    else
+        window.addEventListener('load', YYYYMMDDstart, false);
+
+    function YYYYDD(str) //年发生变化时日期发生变化(主要是判断闰平年)
+    {
+        var MMvalue = document.reg_testdate.MM.options[document.reg_testdate.MM.selectedIndex].value;
+        if (MMvalue == "") {
+            var e = document.reg_testdate.DD;
+            optionsClear(e);
+            return;
+        }
+        var n = MonHead[MMvalue - 1];
+        if (MMvalue == 2 && IsPinYear(str)) n++;
+        writeDay(n)
+    }
+
+    function MMDD(str)   //月发生变化时日期联动
+    {
+        var YYYYvalue = document.reg_testdate.YYYY.options[document.reg_testdate.YYYY.selectedIndex].value;
+        if (YYYYvalue == "") {
+            var e = document.reg_testdate.DD;
+            optionsClear(e);
+            return;
+        }
+        var n = MonHead[str - 1];
+        if (str == 2 && IsPinYear(YYYYvalue)) n++;
+        writeDay(n)
+    }
+
+    function writeDay(n)   //据条件写日期的下拉框
+    {
+        var e = document.reg_testdate.DD;
+        optionsClear(e);
+        for (var i = 1; i < (n + 1); i++)
+            e.options.add(new Option(" " + i + " 日", i));
+    }
+
+    function IsPinYear(year)//判断是否闰平年
+    {
+        return (0 == year % 4 && (year % 100 != 0 || year % 400 == 0));
+    }
+
+    function optionsClear(e) {
+        e.options.length = 1;
+    }
+</script>
+<div class="header">
+    <div class="container">
+        <div class="header-menu">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <div class="navbar-brand logo">
+                            <h1><a href="search-history.html"><span>Trip</span> Guide</a></h1>
+                        </div>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav cl-effect-11">
+                            <li class="active"><a href="#" data-hover="Home" class="scroll">Home </a></li>
+                            <li><a href="#about" data-hover="About" class="scroll">About</a></li>
+                            <li><a href="#services" data-hover="Services" class="scroll">Services</a></li>
+                            <li><a href="#tours" data-hover="Tours" class="scroll">Tours</a></li>
+                            <li><a data-hover="News" href="#news" class="scroll">News</a></li>
+                            <li><a href="#guides" data-hover="Guides" class="scroll">Guides</a></li>
+                            <li><a data-hover="Contact" href="#contact" class="scroll">Contact</a></li>
+
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <div class="promotions">
+        <div class="container">
+            <h2 class="tittle">Top Trip Guide</h2>
+            <span>Best Travel Packages Available</span>
+            <div class="promotion-grids">
+                <div class="col-md-4 promation-grid">
+                    <img src="{% static 'html/images/p1.jpg' %}" class="img-responsive" alt=""/>
+                    <div class="prom-text">
+                        <h4>Cuba</h4>
+                        <div class="prom-bottom">
+                            <div class="prom-left">
+                                <h5> America </h5>
+                            </div>
+                            <div class="prom-right">
+                                <h5> Luxury </h5>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut efficitur ante. Donec
+                            dapibus dictum scelerisque. Maecenas semper erat et justo porta auctor nec lobortis
+                            elit.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 promation-grid">
+                    <img src="{% static 'html/images/p2.jpg' %}" class="img-responsive" alt=""/>
+                    <div class="prom-text">
+                        <h4>Berlin</h4>
+                        <div class="prom-bottom">
+                            <div class="prom-left">
+                                <h5> Europe </h5>
+                            </div>
+                            <div class="prom-right">
+                                <h5> Relax </h5>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut efficitur ante. Donec
+                            dapibus dictum scelerisque. Maecenas semper erat et justo porta auctor nec lobortis
+                            elit.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 promation-grid">
+                    <img src="{% static 'html/images/p3.jpg' %}" class="img-responsive" alt=""/>
+                    <div class="prom-text">
+                        <h4>Dubai</h4>
+                        <div class="prom-bottom">
+                            <div class="prom-left">
+                                <h5> Asia </h5>
+                            </div>
+                            <div class="prom-right">
+                                <h5> Luxury </h5>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut efficitur ante. Donec
+                            dapibus dictum scelerisque. Maecenas semper erat et justo porta auctor nec lobortis
+                            elit.</p>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="promotion-grids">
+                <div class="col-md-4 promation-grid">
+                    <img src="{% static 'html/images/p5.jpg' %}" class="img-responsive" alt=""/>
+                    <div class="prom-text">
+                        <h4>Rome</h4>
+                        <div class="prom-bottom">
+                            <div class="prom-left">
+                                <h5> Europe </h5>
+                            </div>
+                            <div class="prom-right">
+                                <h5> Luxury </h5>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut efficitur ante. Donec
+                            dapibus dictum scelerisque. Maecenas semper erat et justo porta auctor nec lobortis
+                            elit.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 promation-grid">
+                    <img src="{% static 'html/images/p6.jpg' %}" class="img-responsive" alt=""/>
+                    <div class="prom-text">
+                        <h4>india</h4>
+                        <div class="prom-bottom">
+                            <div class="prom-left">
+                                <h5> Asia </h5>
+                            </div>
+                            <div class="prom-right">
+                                <h5> Relax </h5>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut efficitur ante. Donec
+                            dapibus dictum scelerisque. Maecenas semper erat et justo porta auctor nec lobortis
+                            elit.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 promation-grid">
+                    <img src="{% static 'html/images/p4.jpg' %}" class="img-responsive" alt=""/>
+                    <div class="prom-text">
+                        <h4>London</h4>
+                        <div class="prom-bottom">
+                            <div class="prom-left">
+                                <h5> Europe </h5>
+                            </div>
+                            <div class="prom-right">
+                                <h5> Relax </h5>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut efficitur ante. Donec
+                            dapibus dictum scelerisque. Maecenas semper erat et justo porta auctor nec lobortis
+                            elit.</p>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <!--about--->
+    <div class="about-section" id="about">
+        <div class="container">
+            <h3 class="tittle"> About us</h3>
+            <div class="about-grids">
+                <div class="col-md-4 about-grid">
+                    <img src="{% static 'html/images/tt2.png' %}" class="img-responsive" alt=""/>
+                </div>
+                <div class="col-md-8 about-grid1">
+                    <div class="about-top">
+                        <div class="about-left">
+                            <i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i>
+                        </div>
+                        <div class="about-right">
+                            <h4>Hotel Online Booking Service</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aut dignissimos ea est,
+                                impedit incidunt, laboriosam maxime molestias numquam odio officiis. Ab aut dignissimos
+                                ea est, impedit incidunt.</p>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="about-top1">
+                        <div class="about-left">
+                            <i class="glyphicon glyphicon-plane" aria-hidden="true"></i>
+                        </div>
+                        <div class="about-right">
+                            <h4>Book Cheap Flights Online</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aut dignissimos ea est,
+                                impedit incidunt, laboriosam maxime molestias numquam odio officiis. Ab aut dignissimos
+                                ea est, impedit incidunt.</p>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="about-top1">
+                        <div class="about-left">
+                            <i class="glyphicon glyphicon-dashboard" aria-hidden="true"></i>
+                        </div>
+                        <div class="about-right">
+                            <h4>Taxi Cab Booking Hotline</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aut dignissimos ea est,
+                                impedit incidunt, laboriosam maxime molestias numquam odio officiis. Ab aut dignissimos
+                                ea est, impedit incidunt.</p>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="about-top">
+                        <div class="about-left">
+                            <i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>
+                        </div>
+                        <div class="about-right">
+                            <h4>Tour Guide & Private Guided Tours</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aut dignissimos ea est,
+                                impedit incidunt, laboriosam maxime molestias numquam odio officiis. Ab aut dignissimos
+                                ea est, impedit incidunt.</p>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <!--about--->
+    <div class="featured-services" id="services">
+        <div class="container">
+            <h3 class="tittle">Our Services</h3>
+            <div class="featured-grids">
+                <div class="col-md-3 featured-grid">
+                    <div class="featured-grd">
+                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                        <h5>vel illum qui dolorem</h5>
+                        <p>Neque porro quisquam est, qui dolorem ipsum quia dolor
+                            sit amet, consectetur, adipisci velit, sed quia non numquam.</p>
+                        <div class="more m2">
+                            <a href="#" class="btn effect6" data-toggle="modal" data-target="#myModal1">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 featured-grid">
+                    <div class="featured-grd">
+                        <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+                        <h5>vel illum qui dolorem</h5>
+                        <p>Neque porro quisquam est, qui dolorem ipsum quia dolor
+                            sit amet, consectetur, adipisci velit, sed quia non numquam.</p>
+                        <div class="more m2">
+                            <a href="#" class="btn effect6" data-toggle="modal" data-target="#myModal1">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 featured-grid">
+                    <div class="featured-grd">
+                        <span class="glyphicon glyphicon-fire" aria-hidden="true"></span>
+                        <h5>vel illum qui dolorem</h5>
+                        <p>Neque porro quisquam est, qui dolorem ipsum quia dolor
+                            sit amet, consectetur, adipisci velit, sed quia non numquam.</p>
+                        <div class="more m2">
+                            <a href="#" class="btn effect6" data-toggle="modal" data-target="#myModal1">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 featured-grid">
+                    <div class="featured-grd">
+                        <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+                        <h5>vel illum qui dolorem</h5>
+                        <p>Neque porro quisquam est, qui dolorem ipsum quia dolor
+                            sit amet, consectetur, adipisci velit, sed quia non numquam.</p>
+                        <div class="more m2">
+                            <a href="#" class="btn effect6" data-toggle="modal" data-target="#myModal1">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <!--gallery-->
+    <div class="gallery" id="tours">
+        <div class="container">
+            <h3 class="tittle">Tours</h3>
+            <div class="gallery-grids">
+                <section>
+                    <ul id="da-thumbs" class="da-thumbs">
+                        <li>
+                            <a href="{% static 'html/images/a1.jpg' %}" class="b-link-stripe b-animate-go thickbox">
+                                <img src="{% static 'html/images/a1.jpg' %}" alt=""/>
+                                <div>
+                                    <h5>Trip Guide</h5>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% static 'html/images/a2.jpg' %}" class="b-link-stripe b-animate-go thickbox">
+                                <img src="{% static 'html/images/a2.jpg' %}" alt=""/>
+                                <div>
+                                    <h5>Trip Guide</h5>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% static 'html/images/a3.jpg' %}" class="b-link-stripe b-animate-go thickbox">
+                                <img src="{% static 'html/images/a3.jpg' %}" alt=""/>
+                                <div>
+                                    <h5>Trip Guide</h5>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% static 'html/images/a4.jpg' %}" class="b-link-stripe b-animate-go thickbox">
+                                <img src="{% static 'html/images/a4.jpg' %}" alt=""/>
+                                <div>
+                                    <h5>Trip Guide</h5>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% static 'html/images/a5.jpg' %}" class="b-link-stripe b-animate-go thickbox">
+                                <img src="{% static 'html/images/a5.jpg' %}" alt=""/>
+                                <div>
+                                    <h5>Trip Guide</h5>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% static 'html/images/a6.jpg' %}" class="b-link-stripe b-animate-go thickbox">
+                                <img src="{% static 'html/images/a6.jpg' %}" alt=""/>
+                                <div>
+                                    <h5>Trip Guide</h5>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% static 'html/images/a7.jpg' %}" class="b-link-stripe b-animate-go thickbox">
+                                <img src="{% static 'html/images/a7.jpg' %}" alt=""/>
+                                <div>
+                                    <h5>Trip Guide</h5>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% static 'html/images/a1.jpg' %}" class="b-link-stripe b-animate-go thickbox">
+                                <img src="{% static 'html/images/a1.jpg' %}" alt=""/>
+                                <div>
+                                    <h5>Trip Guide</h5>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% static 'html/images/a2.jpg' %}" class="b-link-stripe b-animate-go thickbox">
+                                <img src="{% static 'html/images/a2.jpg' %}" alt=""/>
+                                <div>
+                                    <h5>Trip Guide</h5>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </section>
+            </div>
+            <script type="text/javascript" src="{% static 'html/js/jquery.hoverdir.js' %}"></script>
+            <script type="text/javascript">
+                $(function () {
+                    $('#da-thumbs > li').each(function () {
+                        $(this).hoverdir();
+                    });
+                });
+            </script>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        /*
+        var defaults = {
+              containerID: 'home', // fading element id
+            containerHoverID: 'toTopHover', // fading element hover id
+            scrollSpeed: 1200,
+            easingType: 'linear'
+         };
+        */
+
+        $().UItoTop({easingType: 'easeOutQuart'});
+
+    });
+</script>
+<a href="#" id="home" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content modal-info">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="news-gr">
+                    <img src="{% static 'html/images/p6.jpg' %}" class="img-responsive"/>
+                    <h3 class="tittle1">Trip Guide</h3>
+                    <p>Nam aliquam pretium feugiat. Duis sem est, viverra eu interdum ac, suscipit nec mauris.
+                        Suspendisse commodo tempor sagittis! In justo est, sollicitudin eu scelerisque pretium,
+                        placerat
+                        eget elit. Praesent faucibus rutrum odio at rhoncus. Pel ermentum pretium. Maecenas ac lacus
+                        ut
+                        neque rhoncus laoreet sed id tellus. Donec justo tellus.</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

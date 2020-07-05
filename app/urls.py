@@ -21,6 +21,7 @@ urlpatterns = [
     path('bar/', views.ChartView.as_view(), name='bar'),
     path('newhome/', views.home_index),
 
+    path('dstest/', views.ds_test),
     path('hjhTest/', views.hjh_test)
 ]
 
