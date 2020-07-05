@@ -11,6 +11,7 @@ import statsmodels.api as sm
 from pandas import DataFrame, Series
 from app.mod_timeseries.dataClean import DataClean
 from app import models
+from datetime import datetime
 
 class ArimaMethod:
     def __init__(self):
@@ -129,7 +130,11 @@ class ArimaMethod:
         print(isinstance(data2, Series))
         # for row in data2.itertuples():
 
-        for date, value in data2.iteritems():
+        for date_0, value in data2.iteritems():
+            date= datetime(date_0.year, date_0.month, int(preDay))
+            print(isinstance(date, datetime))
+            print(date.day)
+
             # print(getattr(row, 'c1'), getattr(row, 'c2'))  # 输出每一行
             # models.HistoryData.objects.
             if models.PredictData.objects.filter(date=date):
