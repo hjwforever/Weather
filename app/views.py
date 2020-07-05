@@ -50,6 +50,9 @@ def response_as_json(data):
 def home_index(request):
     return render(request, 'app/home-index.html')
 
+def beijingweather(request):
+    return render(request, 'app/beijingweather.html')
+
 
 def json_response(data, code=200):
     data = {
@@ -123,7 +126,7 @@ def home(request):
     l = pdata.values
     l2 = ['{:.2f}'.format(i) for i in l]
     dta = zip(pdata.keys(), l2)
-    print(dta)
+    # print(dta)
     return render(request, 'app/home.html', {'pdata': dta})
 
 
