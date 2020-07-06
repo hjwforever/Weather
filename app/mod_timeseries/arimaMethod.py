@@ -25,8 +25,10 @@ class ArimaMethod:
         trainEndYear = str(int(preSatrtYear) - 1)
         trainEndTime = str(int(startTime[:4]) - 1) + '-12-31'
 
-        print(trainStartTime)
-        print(trainEndTime)
+        print(startTime)
+        print(endTime)
+        # print(trainStartTime)
+        # print(trainEndTime)
 
         cld= DataClean()
         if dataType=='tmin':

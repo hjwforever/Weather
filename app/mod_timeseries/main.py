@@ -12,16 +12,20 @@ from django.utils import timezone
 # cld= DataClean()
 # cld.cleanData(startTime='1980-01-01', endTime='2020-12-31', needAllData=True,isChooseDay=False,resultFileName='historyData.csv')
 
-models.PredictData.objects.all().delete()
+
 datenow = timezone.now()
-startTime = datenow.strftime("%Y-%m-%d")
-endTime=datetime(datenow.year,datenow.month+1,1).strftime("%Y-%m-%d")
+models.PredictData.objects.filter(date__year=datenow.year, date__month=datenow.month,date__day=datenow.day)
+startTime = datetime(datenow.year,datenow.month,1).strftime("%Y-%m-%d")
+endTime=datetime(datenow.year,datenow.month,1).strftime("%Y-%m-%d")
+
+print(startTime)
+print(endTime)
 
 i=datenow.day
 p= ArimaMethod()
-for n in range(0,7):
-    i=i+1
-    p.predict(dataType='tavg', startTime=startTime, endTime=endTime, preDay=str(i))
+# for n in range(0,7):
+i=i+7
+p.predict(dataType='tavg', startTime=startTime, endTime=endTime, preDay=str(i))
 
 # data=models.HistoryData.objects.filter(date__year=2010, date__month=3).values()
 # print(data)
