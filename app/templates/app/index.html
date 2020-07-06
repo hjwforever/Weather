@@ -190,6 +190,12 @@
         text: '平均气温预测图',
         left: '10%',
         top: '3%',
+        textStyle:{
+                color: 'white',
+            },
+        subtextStyle: {
+                color: colors[0],
+            },
     },
     //backgroundColor: '#000000',
     // background-image: url('../img/pattern.png'),
@@ -231,7 +237,12 @@
                 magicType: {type: ['line', 'bar']},
                 restore: {},
                 saveAsImage: {},
-            }
+            },
+             iconStyle:{
+                    normal:{
+                      color:'orange',//设置颜色
+                    }
+                }
         },
     xAxis: {
         type: 'category',
