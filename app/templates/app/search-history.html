@@ -73,19 +73,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <span class="icon-bar"></span>
                         </button>
                         <div class="navbar-brand logo">
-                            <h1><a href="search-history.html"><span>Trip</span> Guide</a></h1>
+                            <h1><a href="{% url 'history' %}"><span>历史</span>天气</a></h1>
                         </div>
                     </div>
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav cl-effect-11">
-                            <li class="active"><a href="{% url 'index' %}" data-hover="Home">Home </a></li>
-                            <li><a href="#about" data-hover="About" class="scroll">About</a></li>
-                            <li><a href="#services" data-hover="Services" class="scroll">Services</a></li>
-                            <li><a href="#tours" data-hover="Tours" class="scroll">Tours</a></li>
-                            <li><a data-hover="News" href="#news" class="scroll">News</a></li>
-                            <li><a href="#guides" data-hover="Guides" class="scroll">Guides</a></li>
-                            <li><a data-hover="Contact" href="#contact" class="scroll">Contact</a></li>
+                            <li class="active"><a href="{% url 'index' %}" data-hover="Home">首页 </a></li>
+                            <li><a href="#about" data-hover="About" class="scroll">关于</a></li>
+                            <li><a href="#services" data-hover="Services" class="scroll">服务</a></li>
+                            <li><a href="#tours" data-hover="Tours" class="scroll">旅行</a></li>
+                            <li><a data-hover="News" href="#news" class="scroll">新闻</a></li>
+                            <li><a href="#guides" data-hover="Guides" class="scroll">指南</a></li>
+                            <li><a data-hover="Contact" href="#contact" class="scroll">联系</a></li>
 
                         </ul>
                     </div><!-- /.navbar-collapse -->
@@ -98,7 +98,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="banner-section">
     <div class="container">
         <div class="banner-heder">
-            <h3>Weather Information <span>of Different Time Periods in History</span></h3>
+            <h3>历史<span></span>天气预测</h3>
+{#            <h5>各个时间段</h5> #}
         </div>
         <div class="banner-grids">
             <form  name="reg_testdate" action="{% url 'transfer_data' %}" method="GET">
@@ -132,7 +133,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </div>
                 <div class="col-md-4 search">
                     <form action="{% url 'transfer_data' %}" method="GET">
-                        <input type="submit" value="Weather Inquiry">
+                        <input type="submit" value="查询">
                     </form>
                 </div>
                 <div class="clearfix"></div>
@@ -141,7 +142,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
 </div>
 <!--为ECharts准备一个具备大小的Dom-->
-<div id="main" style="width: 1200px;height: 600px;" align="center"></div>
+<div id="main" style="width: 1200px;height: 550px;" align="center"></div>
 <script type="text/javascript">
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('main'));
@@ -156,6 +157,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 {#            axisPointer: {#}
 {#            type: 'cross' //是否显示十字标签#}
 {#        }#}
+        },
+
+        legend: {
+            left: 'left',
+            data: ['最大温度', '最低温度', '平均温度'],
         },
         title: {
             left: 'center',
@@ -185,7 +191,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         yAxis: {
             type: 'value',
             boundaryGap: [0, '100%'],
-            min: function(value) {return value.min-20;},
+            axisLabel: {
+            formatter: '{value} °C'
+            },
+            min: function(value) {return value.min-10;},
             max: function(value) {return value.max+20;}
         },
         dataZoom: [{
@@ -210,10 +219,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 name: '最大温度',
                 type: 'line',
                 smooth: true,
-                symbol: 'none',
                 sampling: 'average',
                 itemStyle: {
-                    color: 'rgb(255, 0, 0)'
+                    color: 'rgb(255, 48, 48)'
                 },
                 markPoint: {
                 data: [
@@ -236,10 +244,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 name: '最低温度',
                 type: 'line',
                 smooth: true,
-                symbol: 'none',
                 sampling: 'average',
                 itemStyle: {
-                    color: 'rgb(0, 0, 255)'
+                    color: 'rgb(0 ,191 ,255)'
                 },
                 markPoint: {
                 data: [
@@ -262,10 +269,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 name: '平均温度',
                 type: 'line',
                 smooth: true,
-                symbol: 'none',
                 sampling: 'average',
                 itemStyle: {
-                    color: 'rgb(0, 255, 0)'
+                    color: 'rgb(0, 205, 0)'
                 },
                 data: [
                   {% for row in History_data %}
@@ -375,8 +381,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="content">
     <div class="promotions">
         <div class="container">
-            <h2 class="tittle">Top Trip Guide</h2>
-            <span>Best Travel Packages Available</span>
+            <h2 class="tittle">顶级行程指南</h2>
+            <span>最佳旅行套餐</span>
             <div class="promotion-grids">
                 <div class="col-md-4 promation-grid">
                     <img src="{% static 'html/images/p1.jpg' %}" class="img-responsive" alt=""/>
