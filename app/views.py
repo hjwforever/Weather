@@ -27,7 +27,7 @@ from pyecharts.charts import Bar, Line
 from pyecharts import options as opts
 from app.models import Weather
 from rest_framework.decorators import api_view
-
+from django.utils import timezone
 
 # import os, django
 #
@@ -113,7 +113,11 @@ def home(request):
 
 
 def index(request):
-    return render(request, 'app/index.html')
+    datenow = timezone.now()
+    # datenow = datenow.strftime("%Y-%m-%d")
+    print(datenow)
+    print(isinstance(datenow, datetime))
+    return render(request, 'app/index.html', {'datenow': datenow})
 
 
 def get_test(request):
