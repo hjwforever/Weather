@@ -147,7 +147,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
 </div>
 <!--为ECharts准备一个具备大小的Dom-->
-<div id="main" style="width: 1200px;height: 550px;" align="center"></div>
+<div id="main" style="width: 100%;height: 500%;" align="middle" ></div>
 <script type="text/javascript">
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('main'));
@@ -163,7 +163,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             {#            type: 'cross' //是否显示十字标签#}
             {#        }#}
         },
-
         legend: {
             left: 'left',
             data: ['最大温度', '最低温度', '平均温度'],
@@ -172,6 +171,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             left: 'center',
             text: '历史气温变化图',//Historical Temperature Change Chart
         },
+        backgroundColor: '#f5f9fd',
         toolbox: {
             show: true,
             feature: {
