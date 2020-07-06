@@ -7,11 +7,11 @@ from app.mod_timeseries.arimaMethod import ArimaMethod
 from app.mod_timeseries.dataClean import DataClean
 from datetime import datetime
 from app.mod_timeseries.analyzeData import analyzeData
-cld= DataClean()
-cld.cleanData(startTime='1980-01-01', endTime='2020-12-31', needAllData=True,isChooseDay=False,resultFileName='historyData.csv')
+# cld= DataClean()
+# cld.cleanData(startTime='1980-01-01', endTime='2020-12-31', needAllData=True,isChooseDay=False,resultFileName='historyData.csv')
 
-# p= ArimaMethod()
-# p.predict(dataType='tmax', startTime='2012-01-01', endTime='2012-11-10', preDay='3')
+p= ArimaMethod()
+p.predict(dataType='tavg', startTime='2020-01-01', endTime='2020-12-31', preDay='7')
 
 # data=models.HistoryData.objects.filter(date__year=2010, date__month=3).values()
 # print(data)

@@ -100,12 +100,15 @@ class DataClean:
         #     print(msg)
         #     models.HistoryData.objects.create(date=msg,tavg=64,tmin=55,tmax=78,prcp=0.1)
 
+
         if needAllData:
             for row in data.itertuples():
                 # tmaxC=int((row[4]-32.0)/1.8)
                 # tminC=int((row[5]-32.0)/1.8)
                 # tavgC=int((row[3]-32.0)/1.8)
                 # models.HistoryData.objects.get_or_create(date=getattr(row, 'date'), tavg=getattr(row, 'tavg'), tmin=getattr(row, 'tmin'), tmax=getattr(row, 'tmax'), prcp=getattr(row, 'prcp'))
-                models.HistoryData.objects.get_or_create(date=getattr(row, 'date'), tavg=getattr(row, 'tavg'),
-                                                 tmin=getattr(row, 'tmin'), tmax=getattr(row, 'tmax'),
-                                                 prcp=getattr(row, 'prcp'))
+                queryset = models.HistoryData.objects.filter(date=getattr(row, 'date'))
+                if not queryset.exists():
+                    models.HistoryData.objects.get_or_create(date=getattr(row, 'date'), tavg=getattr(row, 'tavg'),
+                                                    tmin=getattr(row, 'tmin'), tmax=getattr(row, 'tmax'),
+                                                    prcp=getattr(row, 'prcp'))

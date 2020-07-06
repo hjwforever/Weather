@@ -138,13 +138,16 @@ class ArimaMethod:
         # for row in data2.itertuples():
 
         for date_0, value in data2.iteritems():
-            date= datetime(date_0.year, date_0.month, int(preDay))
-            print(isinstance(date, datetime))
-            print(date.day)
+            value = round(value)
+            date = datetime(date_0.year, date_0.month, int(preDay))
+            # print(isinstance(date, datetime))
+            # print(date.day)
 
             # print(getattr(row, 'c1'), getattr(row, 'c2'))  # 输出每一行
             # models.HistoryData.objects.
-            if models.PredictData.objects.filter(date=date):
+            queryset = models.PredictData.objects.filter(date=date)
+            # if models.PredictData.objects.filter(date=date):
+            if queryset.exists():
                 if dataType=='tmin':
                     models.PredictData.objects.filter(date=date).update(tmin=value)
                 elif dataType=='tmax':
