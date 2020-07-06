@@ -25,7 +25,7 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+    <script src="{% static 'echarts.min.js' %}"></script>
     {#    hao123header#}
     <noscript>
         <meta http-equiv="refresh" content="0; URL='/tianqi/?__noscript__-=1'"/>
@@ -175,11 +175,123 @@
     </div>
 </div>
 <!-- Latest news section end -->
+<body>
 
+<!--为ECharts准备一个具备大小的Dom-->
+<div id="main" style="background:url({% static 'img/pattern.png' %});width: 100%;height: 80%;"></div>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+    // 指定图表的配置项和数据
+    var colors = ['#5793f3', '#ffb320', 'orange','orange'];
+    var option = {
+    color: colors,
+    title: {
+        text: '平均气温预测图',
+        left: '10%',
+        top: '3%',
+    },
+    //backgroundColor: '#000000',
+    // background-image: url('../img/pattern.png'),
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'cross'
+        },
+
+        right: '20%',
+        top: '3%',
+    },
+    legend: {
+        data: ['平均气温'],
+        top: '3%',
+        color: colors[2],
+        textStyle:{
+                            fontSize: 18,//字体大小
+                            color: colors[0]//字体颜色
+                        },
+        //backgroundColor: 'red',
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    toolbox: {
+            color: colors[0],
+            show: true,
+            right:'10%',
+            top: '3%',
+            feature: {
+                dataZoom: {
+                    yAxisIndex: 'none'
+                },
+                dataView: {readOnly: false},
+                magicType: {type: ['line', 'bar']},
+                restore: {},
+                saveAsImage: {},
+            }
+        },
+    xAxis: {
+        type: 'category',
+            axisTick: {
+                alignWithLabel: true
+            },
+            axisLine: {
+                onZero: false,
+                lineStyle: {
+                    color: colors[1]
+                }
+            },
+        boundaryGap: false,
+        data: [
+                {% for row in predict_queryset %}
+                    "{{ row.date }}",
+                {% endfor %}
+              ],
+    },
+    yAxis: {
+        type: 'value',
+            axisTick: {
+                alignWithLabel: true
+            },
+            axisLine: {
+                onZero: false,
+                lineStyle: {
+                    color: colors[2]
+                }
+            },
+        boundaryGap: false,
+        min: function (value) {
+                return value.min - 10;
+            },
+        max: function (value) {
+                return value.max + 10;
+            }
+    },
+    series: [
+        {
+            name: '平均气温',
+            type: 'line',
+            smooth:true,
+            stack: '总量',
+            data: [
+                {% for row in predict_queryset %}
+                    "{{ row.tavg | floatformat:0}}",
+                {% endfor %}
+              ],
+        }
+    ]
+};
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+</body>
 
 <!-- Footer top section -->
 <section class="footer-top-section">
-    <p style="text-align: center;color: orange;font-size: 50px">Six-Single-Dogs</p>
+    <p style="text-align: center;color: #ffa500;font-size: 50px">Six-Single-Dogs</p>
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-md-6">

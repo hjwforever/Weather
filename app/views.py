@@ -116,10 +116,10 @@ def index(request):
     datenow = timezone.now()
     queryset = models.HistoryData.objects.filter(date=datenow).values()
     print(queryset)
-    # datenow = datenow.strftime("%Y-%m-%d")
-    print(datenow)
-    print(isinstance(datenow, datetime))
-    return render(request, 'app/index.html', {'queryset': queryset})
+
+    predict_queryset = models.PredictData.objects.all()
+    print(predict_queryset)
+    return render(request, 'app/index.html', {'queryset': queryset, 'predict_queryset': predict_queryset})
 
 
 def get_test(request):
