@@ -61,6 +61,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="header">
     <div class="container">
         <div class="header-menu">
+
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
                     <!-- Brand and toggle get grouped for better mobile display -->
@@ -72,8 +73,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <div class="navbar-brand logo">
-                            <h1><a href="{% url 'history' %}"><span>历史</span>天气</a></h1>
+                        <a class="navbar-brand logo" href="{% url 'index' %}" style="padding-top: 0" title="返回首页">
+                            <img src="{% static 'img/favicon.ico' %}" alt="返回首页" height="40" width="40">
+                        </a>
+                        <div style="padding-left: 20px" class="navbar-brand logo" title="返回首页">
+                            <h1><a style="font-size: 40px;color: white;padding-left: 20px;" href="{% url 'index' %}">Six-Single-Dog</a>
+                            </h1>
                         </div>
                     </div>
                     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -85,13 +90,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                                                 class="scroll">历史天气曲线</a>
                             </li>
                             <li style="white-space: nowrap;"><a href="#guides" data-hover="指南" class="scroll">指南</a>
-                            <li style="white-space: nowrap;"><a href="#about" data-hover="关于" class="scroll">关于</a></li>
                             <li style="white-space: nowrap;"><a href="#tours" data-hover="旅行" class="scroll">旅行</a></li>
-                            <li style="white-space: nowrap;"><a data-hover="新闻" href="#news" class="scroll">新闻</a></li>
-                            </li>
-                            <li style="white-space: nowrap;"><a data-hover="联系" href="#contact" class="scroll">联系</a>
-                            </li>
-
+                            <li style="white-space: nowrap;"><a href="#about" data-hover="关于" class="scroll">关于</a></li>
+                            <li style="white-space: nowrap;"><a data-hover="新闻" href="http://www.people.com.cn/"
+                                                                target="_blank">新闻</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
@@ -147,7 +149,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
 </div>
 <!--为ECharts准备一个具备大小的Dom-->
-<div id="main" style="width: 100%;height: 500%;" align="middle" ></div>
+<div id="main" style="width: 100%;height: 500%;" align="middle"></div>
 <script type="text/javascript">
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('main'));
@@ -394,7 +396,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <span>我们的城市</span>
             <div class="promotion-grids">
                 <div class="col-md-4 promation-grid">
-                    <img src="{% static 'html/images/p1.jpg' %}" class="img-responsive" alt=""/>
+                    <img src="{% static 'html/images/tianjin.jpg' %}" class="img-responsive" alt=""/>
                     <div class="prom-text">
                         <h4>天津</h4>
                         <div class="prom-bottom">
@@ -413,7 +415,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </div>
                 </div>
                 <div class="col-md-4 promation-grid">
-                    <img src="{% static 'html/images/p2.jpg' %}" class="img-responsive" alt=""/>
+                    <img src="{% static 'html/images/longyan.jpg' %}" class="img-responsive" alt=""/>
                     <div class="prom-text">
                         <h4>龙岩</h4>
                         <div class="prom-bottom">
@@ -430,7 +432,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </div>
                 </div>
                 <div class="col-md-4 promation-grid">
-                    <img src="{% static 'html/images/p3.jpg' %}" class="img-responsive" alt=""/>
+                    <img src="{% static 'html/images/fengcheng.jpg' %}" class="img-responsive" alt=""/>
                     <div class="prom-text">
                         <h4>丰城</h4>
                         <div class="prom-bottom">
@@ -451,7 +453,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
             <div class="promotion-grids">
                 <div class="col-md-4 promation-grid">
-                    <img src="{% static 'html/images/p5.jpg' %}" class="img-responsive" alt=""/>
+                    <img src="{% static 'html/images/zhengzhou.jpg' %}" class="img-responsive" alt=""/>
                     <div class="prom-text">
                         <h4>郑州</h4>
                         <div class="prom-bottom">
@@ -468,7 +470,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </div>
                 </div>
                 <div class="col-md-4 promation-grid">
-                    <img src="{% static 'html/images/p6.jpg' %}" class="img-responsive" alt=""/>
+                    <img src="{% static 'html/images/xiangyang.jpg' %}" class="img-responsive" alt=""/>
                     <div class="prom-text">
                         <h4>襄阳</h4>
                         <div class="prom-bottom">
@@ -485,7 +487,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </div>
                 </div>
                 <div class="col-md-4 promation-grid">
-                    <img src="{% static 'html/images/p4.jpg' %}" class="img-responsive" alt=""/>
+                    <img src="{% static 'html/images/hulunbeier.jpg' %}" class="img-responsive" alt=""/>
                     <div class="prom-text">
                         <h4>呼伦贝尔</h4>
                         <div class="prom-bottom">
@@ -506,62 +508,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
         </div>
     </div>
-    <!--about--->
-    <div class="about-section" id="about">
-        <div class="container">
-            <h3 class="tittle">关于我们</h3>
-            <div class="about-grids">
-                <div class="col-md-4 about-grid">
-                    <img src="{% static 'html/images/six_single_dogs.png' %}" class="img-responsive" alt=""/>
-                </div>
-                <div class="col-md-8 about-grid1">
-                    <div class="about-top">
-                        <div class="about-left">
-                            <i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i>
-                        </div>
-                        <div class="about-right">
-                            <h4>预测最新天气预报</h4>
-                            <p>本站基于Spark技术，根据国家气候数据中心的历史天气数据预测未来天气信息，并及时发布准确的全球天气预报信息。
-                            </p>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="about-top1">
-                        <div class="about-left">
-                            <i class="glyphicon glyphicon-plane" aria-hidden="true"></i>
-                        </div>
-                        <div class="about-right">
-                            <h4>获取历史上不同时期的天气信息</h4>
-                            <p>方便查询世界各地的今天和历史天气，以及每周天气预报。</p>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="about-top1">
-                        <div class="about-left">
-                            <i class="glyphicon glyphicon-dashboard" aria-hidden="true"></i>
-                        </div>
-                        <div class="about-right">
-                            <h4>最佳旅行指南</h4>
-                            <p>我们将根据天气预报提供最佳旅行套餐，为您的旅行或商务旅行提供最佳选择。</p>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="about-top">
-                        <div class="about-left">
-                            <i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>
-                        </div>
-                        <div class="about-right">
-                            <h4>天气资讯</h4>
-                            <p>集合全网资源，发布最新最全的与天气有关的新闻！</p>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-        </div>
-    </div>
-    <!--about--->
     <!--gallery-->
     <div class="gallery" id="tours">
         <div class="container">
@@ -655,6 +601,62 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </script>
         </div>
     </div>
+    <!--about--->
+    <div class="about-section" id="about">
+        <div class="container">
+            <h3 class="tittle">关于我们</h3>
+            <div class="about-grids">
+                <div class="col-md-4 about-grid">
+                    <img src="{% static 'html/images/six_single_dogs.png' %}" class="img-responsive" alt=""/>
+                </div>
+                <div class="col-md-8 about-grid1">
+                    <div class="about-top">
+                        <div class="about-left">
+                            <i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i>
+                        </div>
+                        <div class="about-right">
+                            <h4>预测最新天气预报</h4>
+                            <p>本站基于Spark技术，根据国家气候数据中心的历史天气数据预测未来天气信息，并及时发布准确的全球天气预报信息。
+                            </p>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="about-top1">
+                        <div class="about-left">
+                            <i class="glyphicon glyphicon-plane" aria-hidden="true"></i>
+                        </div>
+                        <div class="about-right">
+                            <h4>获取历史上不同时期的天气信息</h4>
+                            <p>方便查询世界各地的今天和历史天气，以及每周天气预报。</p>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="about-top1">
+                        <div class="about-left">
+                            <i class="glyphicon glyphicon-dashboard" aria-hidden="true"></i>
+                        </div>
+                        <div class="about-right">
+                            <h4>最佳旅行指南</h4>
+                            <p>我们将根据天气预报提供最佳旅行套餐，为您的旅行或商务旅行提供最佳选择。</p>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="about-top">
+                        <div class="about-left">
+                            <i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>
+                        </div>
+                        <div class="about-right">
+                            <h4>天气资讯</h4>
+                            <p>集合全网资源，发布最新最全的与天气有关的新闻！</p>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <!--about--->
 </div>
 <script type="text/javascript">
     $(document).ready(function () {

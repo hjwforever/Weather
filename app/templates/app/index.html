@@ -55,10 +55,10 @@
 <header class="header-section">
     <div class="container">
         <!-- logo -->
-        <a class="site-logo" href="{% url 'index' %}" style="padding-top: 0">
+        <a class="site-logo" href="{% url 'index' %}" style="padding-top: 0" title="返回首页">
             <img src="{% static 'img/favicon.ico' %}" alt="返回首页" height="40" width="40">
         </a>
-        <a style="font-size: 40px;color: orange;padding-left: 20px" href="{% url 'index' %}">Six-Single-Dogs</a>
+        <a style="font-size: 40px;color: orange;padding-left: 20px" href="{% url 'index' %}" title="返回首页">Six-Single-Dogs</a>
         <div class="user-panel">
             <a href="{% url 'login' %}" style="font-size: 20px;color: white">登录 / </a>
             <a href="{% url 'register' %}" style="color: white;font-size: 20px">注册</a>
