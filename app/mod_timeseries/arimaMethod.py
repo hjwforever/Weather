@@ -45,7 +45,9 @@ class ArimaMethod:
         plt.style.use('ggplot')
 
         # Load the data
-        data = pd.read_csv('trainData.csv', engine='python', skipfooter=3, usecols=['date', dataType])
+        data = pd.read_csv('trainData.csv', engine='python', skipfooter=3, usecols=['date', dataType])#skipfooter=3,
+        print('NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN')
+        print(data)
         i = 0
         for ch in data['date'].values:
             data['date'].values[i]=ch[:-3]
@@ -59,6 +61,7 @@ class ArimaMethod:
         data['date'] = pd.to_datetime(data['date'], format='%Y-%m-%d')
         data.set_index(['date'], inplace=True)
 
+        print('MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM')
         print(data)
 
 
@@ -86,7 +89,8 @@ class ArimaMethod:
         print('SARIMAX: {} x {}'.format(pdq[2], seasonal_pdq[4]))
 
 
-        train_data = data[trainStartTime:trainEndTime]
+        # train_data = data[trainStartTime:trainEndTime]
+        train_data = data[trainStartTime:startTime]                 #如果有问题就把这行换成上面一行
         #train_data = data['2002-01-01':'2011-12-31']
         test_data = data[startTime:endTime]
 

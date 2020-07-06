@@ -7,11 +7,21 @@ from app.mod_timeseries.arimaMethod import ArimaMethod
 from app.mod_timeseries.dataClean import DataClean
 from datetime import datetime
 from app.mod_timeseries.analyzeData import analyzeData
+from django.utils import timezone
+
 # cld= DataClean()
 # cld.cleanData(startTime='1980-01-01', endTime='2020-12-31', needAllData=True,isChooseDay=False,resultFileName='historyData.csv')
 
+models.PredictData.objects.all().delete()
+datenow = timezone.now()
+startTime = datenow.strftime("%Y-%m-%d")
+endTime=datetime(datenow.year,datenow.month+1,1).strftime("%Y-%m-%d")
+
+i=datenow.day
 p= ArimaMethod()
-p.predict(dataType='tavg', startTime='2020-01-01', endTime='2020-12-31', preDay='7')
+for n in range(0,7):
+    i=i+1
+    p.predict(dataType='tavg', startTime=startTime, endTime=endTime, preDay=str(i))
 
 # data=models.HistoryData.objects.filter(date__year=2010, date__month=3).values()
 # print(data)
