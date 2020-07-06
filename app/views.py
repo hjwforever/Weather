@@ -114,10 +114,12 @@ def home(request):
 
 def index(request):
     datenow = timezone.now()
+    queryset = models.HistoryData.objects.filter(date=datenow).values()
+    print(queryset)
     # datenow = datenow.strftime("%Y-%m-%d")
     print(datenow)
     print(isinstance(datenow, datetime))
-    return render(request, 'app/index.html', {'datenow': datenow})
+    return render(request, 'app/index.html', {'queryset': queryset})
 
 
 def get_test(request):
