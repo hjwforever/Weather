@@ -17,7 +17,7 @@ class ArimaMethod:
     def __init__(self):
         pass
 
-    def predict(self, dataType='tmin', startTime='1991-01-01', endTime='1991-12-31', preDay='1'):
+    def predict(self, dataType='tmin', startTime='1991-01-01', endTime='1991-12-31', preDay='01'):
         preSatrtYear = startTime[:4]
         trainStartYear = str(int(preSatrtYear) - 10)
         trainStartTime = trainStartYear + '-01-01'
@@ -29,7 +29,14 @@ class ArimaMethod:
         print(trainEndTime)
 
         cld= DataClean()
-        cld.cleanData(startTime=str(trainStartTime), endTime=str(startTime), day=preDay)
+        if dataType=='tmin':
+            cld.cleanData(startTime=str(trainStartTime), endTime=str(startTime), day=preDay,justNeedTmin=True)
+        elif dataType=='tmax':
+            cld.cleanData(startTime=str(trainStartTime), endTime=str(startTime), day=preDay, justNeedTmax=True)
+        elif dataType=='tavg':
+            cld.cleanData(startTime=str(trainStartTime), endTime=str(startTime), day=preDay, justNeedTavg=True)
+        elif dataType=='prcp':
+            cld.cleanData(startTime=str(trainStartTime), endTime=str(startTime), day=preDay, justNeedPrcp=True)
 
 
         # Defaults
