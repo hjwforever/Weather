@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>Six Single Dogs History Weather</title>
-        <!--引入echarts.js-->
+    <!--引入echarts.js-->
     <script src="{% static 'echarts.min.js' %}"></script>
     <link href="{% static 'img/favicon.ico' %}" rel="shortcut icon"/>
     <link href="{% static 'html/css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all"/>
@@ -79,13 +79,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav cl-effect-11">
-                            <li class="active"><a href="{% url 'index' %}" data-hover="Home">首页 </a></li>
-                            <li><a href="#about" data-hover="About" class="scroll">关于</a></li>
-                            <li><a href="#services" data-hover="Services" class="scroll">服务</a></li>
-                            <li><a href="#tours" data-hover="Tours" class="scroll">旅行</a></li>
-                            <li><a data-hover="News" href="#news" class="scroll">新闻</a></li>
-                            <li><a href="#guides" data-hover="Guides" class="scroll">指南</a></li>
-                            <li><a data-hover="Contact" href="#contact" class="scroll">联系</a></li>
+                            <li class="active" style="white-space: nowrap;"><a href="{% url 'index' %}" data-hover="首页">首页</a></li>
+                            <li style="white-space: nowrap;"><a href="#about" data-hover="关于" class="scroll">{{ '关于' }}</a></li>
+                            <li style="white-space: nowrap;"><a href="#services" data-hover="服务" class="scroll">服务</a></li>
+                            <li style="white-space: nowrap;"><a href="#tours" data-hover="旅行" class="scroll">旅行</a></li>
+                            <li style="white-space: nowrap;"><a data-hover="新闻" href="#news" class="scroll">新闻</a></li>
+                            <li style="white-space: nowrap;"><a href="#guides" data-hover="指南" class="scroll">指南</a></li>
+                            <li style="white-space: nowrap;"><a data-hover="联系" href="#contact" class="scroll">联系</a></li>
 
                         </ul>
                     </div><!-- /.navbar-collapse -->
@@ -99,11 +99,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <div class="banner-heder">
             <h3>历史<span></span>天气预测</h3>
-{#            <h5>各个时间段</h5> #}
+            {#            <h5>各个时间段</h5> #}
         </div>
         <div class="banner-grids">
-            <form  name="reg_testdate" action="{% url 'transfer_data' %}" method="GET">
-                {%  csrf_token %}
+            <form name="reg_testdate" action="{% url 'transfer_data' %}" method="GET">
+                {% csrf_token %}
                 <div class="col-md-2 banner-grid">
                     <select type="text" class="sel" name="CC">
                         <option value="">请选择城市</option>
@@ -151,12 +151,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         tooltip: {
             trigger: 'axis',
 
-{#            position: function (pt) {#}
-{#                return [pt[0], '10%'];#}
-{#            },#}
-{#            axisPointer: {#}
-{#            type: 'cross' //是否显示十字标签#}
-{#        }#}
+            {#            position: function (pt) {#}
+            {#                return [pt[0], '10%'];#}
+            {#            },#}
+            {#            axisPointer: {#}
+            {#            type: 'cross' //是否显示十字标签#}
+            {#        }#}
         },
 
         legend: {
@@ -168,34 +168,38 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             text: '历史气温变化图',//Historical Temperature Change Chart
         },
         toolbox: {
-        show: true,
-        feature: {
-            dataZoom: {
-                yAxisIndex: 'none'
-            },
-            dataView: {readOnly: false},
-            magicType: {type: ['line', 'bar']},
-            restore: {},
-            saveAsImage: {}
-        }
-    },
+            show: true,
+            feature: {
+                dataZoom: {
+                    yAxisIndex: 'none'
+                },
+                dataView: {readOnly: false},
+                magicType: {type: ['line', 'bar']},
+                restore: {},
+                saveAsImage: {}
+            }
+        },
         xAxis: {
             type: 'category',
             boundaryGap: false,
             data: [
-                  {% for row in History_data %}
-                      "{{ row.date }}",
-                  {% endfor %}
-              ]
+                {% for row in History_data %}
+                    "{{ row.date }}",
+                {% endfor %}
+            ]
         },
         yAxis: {
             type: 'value',
             boundaryGap: [0, '100%'],
             axisLabel: {
-            formatter: '{value} °C'
+                formatter: '{value} °C'
             },
-            min: function(value) {return value.min-10;},
-            max: function(value) {return value.max+20;}
+            min: function (value) {
+                return value.min - 10;
+            },
+            max: function (value) {
+                return value.max + 20;
+            }
         },
         dataZoom: [{
             type: 'inside',
@@ -224,21 +228,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     color: 'rgb(255, 48, 48)'
                 },
                 markPoint: {
-                data: [
-                    {type: 'max', name: '最大值'},
-                    {type: 'min', name: '最小值'}
-                ]
-            },
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]
+                },
                 markLine: {
+                    data: [
+                        {type: 'max', name: '视图中最高温'}
+                    ]
+                },
                 data: [
-                    {type: 'max', name: '视图中最高温'}
-                ]
-            },
-                data: [
-                  {% for row in History_data %}
-                      "{{ row.tmax }}",
-                  {% endfor %}
-              ],
+                    {% for row in History_data %}
+                        "{{ row.tmax }}",
+                    {% endfor %}
+                ],
             },
             {
                 name: '最低温度',
@@ -249,21 +253,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     color: 'rgb(0 ,191 ,255)'
                 },
                 markPoint: {
-                data: [
-                    {type: 'max', name: '最大值'},
-                    {type: 'min', name: '最小值'}
-                ]
-            },
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]
+                },
                 markLine: {
+                    data: [
+                        {type: 'min', name: '视图中最低温'}
+                    ]
+                },
                 data: [
-                    {type: 'min', name: '视图中最低温'}
-                ]
-            },
-                data: [
-                  {% for row in History_data %}
-                      "{{ row.tmin }}",
-                  {% endfor %}
-              ],
+                    {% for row in History_data %}
+                        "{{ row.tmin }}",
+                    {% endfor %}
+                ],
             },
             {
                 name: '平均温度',
@@ -274,10 +278,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     color: 'rgb(0, 205, 0)'
                 },
                 data: [
-                  {% for row in History_data %}
-                      "{{ row.tavg }}",
-                  {% endfor %}
-              ],
+                    {% for row in History_data %}
+                        "{{ row.tavg }}",
+                    {% endfor %}
+                ],
             }
         ]
     };
@@ -502,7 +506,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!--about--->
     <div class="about-section" id="about">
         <div class="container">
-            <h3 class="tittle"> About us</h3>
+            <h3 class="tittle">关于我们</h3>
             <div class="about-grids">
                 <div class="col-md-4 about-grid">
                     <img src="{% static 'html/images/six_single_dogs.png' %}" class="img-responsive" alt=""/>
@@ -513,10 +517,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i>
                         </div>
                         <div class="about-right">
-                            <h4>The Latest Weather Forecast</h4>
-                            <p>Global and national weather forecast,
-                                 timely and accurate release of forecast weather information
-                                from NOAA National Climate Data Center (NCDC) based on Spark technology
+                            <h4>最新天气预报</h4>
+                            <p>本站基于Spark技术，根据国家气候数据中心的历史天气数据预测未来天气信息，并及时发布准确的全球天气预报信息。
                             </p>
                         </div>
                         <div class="clearfix"></div>
@@ -526,9 +528,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <i class="glyphicon glyphicon-plane" aria-hidden="true"></i>
                         </div>
                         <div class="about-right">
-                            <h4>Weather Information of Different Time Periods in History</h4>
-                            <p>convenient query of today's and historical weather periods around the world,
-                                and weekly weather forecast</p>
+                            <h4>历史上不同时期的天气信息</h4>
+                            <p>方便查询世界各地的今天和历史天气，以及每周天气预报。</p>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -537,9 +538,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <i class="glyphicon glyphicon-dashboard" aria-hidden="true"></i>
                         </div>
                         <div class="about-right">
-                            <h4>Top Trip Guide</h4>
-                            <p>We will provide the best travel package according to the forecast weather conditions,
-                                to provide the perfect choices for your travel or business trip</p>
+                            <h4>最佳旅行指南</h4>
+                            <p>我们将根据天气预报提供最佳旅行套餐，为您的旅行或商务旅行提供最佳选择。</p>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -548,10 +548,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>
                         </div>
                         <div class="about-right">
-                            <h4>Tour Guide & Private Guided Tours</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aut dignissimos ea est,
-                                impedit incidunt, laboriosam maxime molestias numquam odio officiis. Ab aut dignissimos
-                                ea est, impedit incidunt.</p>
+                            <h4>导游和私人导游</h4>
+                            <p>坐下，享受高贵的生活。 绝对有效，即刻起义，实验室内最大数量的麻醉品。 绝对有效，即刻起义。</p>
                         </div>
                         <div class="clearfix"></div>
                     </div>
