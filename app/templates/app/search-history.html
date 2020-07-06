@@ -151,12 +151,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         tooltip: {
             trigger: 'axis',
 
-            {#            position: function (pt) {#}
-            {#                return [pt[0], '10%'];#}
-            {#            },#}
-            {#            axisPointer: {#}
-            {#            type: 'cross' //是否显示十字标签#}
-            {#        }#}
+{#            position: function (pt) {#}
+{#                return [pt[0], '10%'];#}
+{#            },#}
+{#            axisPointer: {#}
+{#            type: 'cross' //是否显示十字标签#}
+{#        }#}
         },
 
         legend: {
@@ -168,38 +168,34 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             text: '历史气温变化图',//Historical Temperature Change Chart
         },
         toolbox: {
-            show: true,
-            feature: {
-                dataZoom: {
-                    yAxisIndex: 'none'
-                },
-                dataView: {readOnly: false},
-                magicType: {type: ['line', 'bar']},
-                restore: {},
-                saveAsImage: {}
-            }
-        },
+        show: true,
+        feature: {
+            dataZoom: {
+                yAxisIndex: 'none'
+            },
+            dataView: {readOnly: false},
+            magicType: {type: ['line', 'bar']},
+            restore: {},
+            saveAsImage: {}
+        }
+    },
         xAxis: {
             type: 'category',
             boundaryGap: false,
             data: [
-                {% for row in History_data %}
-                    "{{ row.date }}",
-                {% endfor %}
-            ]
+                  {% for row in History_data %}
+                      "{{ row.date }}",
+                  {% endfor %}
+              ]
         },
         yAxis: {
             type: 'value',
-            boundaryGap: [0, '100%'],
+            boundaryGap: [0, '10%'],
             axisLabel: {
-                formatter: '{value} °C'
+            formatter: '{value} °C'
             },
-            min: function (value) {
-                return value.min - 10;
-            },
-            max: function (value) {
-                return value.max + 20;
-            }
+            min: function(value) {return value.min-10;},
+            max: function(value) {return value.max+20;}
         },
         dataZoom: [{
             type: 'inside',
@@ -225,24 +221,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 smooth: true,
                 sampling: 'average',
                 itemStyle: {
-                    color: 'rgb(255, 48, 48)'
+                    color: 'rgb(255, 70, 131)'
                 },
                 markPoint: {
-                    data: [
-                        {type: 'max', name: '最大值'},
-                        {type: 'min', name: '最小值'}
-                    ]
-                },
-                markLine: {
-                    data: [
-                        {type: 'max', name: '视图中最高温'}
-                    ]
-                },
                 data: [
-                    {% for row in History_data %}
-                        "{{ row.tmax }}",
-                    {% endfor %}
-                ],
+                    {type: 'max', name: '最大值'},
+                    {type: 'min', name: '最小值'}
+                ]
+            },
+                markLine: {
+                data: [
+                    {type: 'max', name: '视图中最高温'}
+                ]
+            },
+                data: [
+                  {% for row in History_data %}
+                      "{{ row.tmax }}",
+                  {% endfor %}
+              ],
             },
             {
                 name: '最低温度',
@@ -253,21 +249,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     color: 'rgb(0 ,191 ,255)'
                 },
                 markPoint: {
-                    data: [
-                        {type: 'max', name: '最大值'},
-                        {type: 'min', name: '最小值'}
-                    ]
-                },
-                markLine: {
-                    data: [
-                        {type: 'min', name: '视图中最低温'}
-                    ]
-                },
                 data: [
-                    {% for row in History_data %}
-                        "{{ row.tmin }}",
-                    {% endfor %}
-                ],
+                    {type: 'max', name: '最大值'},
+                    {type: 'min', name: '最小值'}
+                ]
+            },
+                markLine: {
+                data: [
+                    {type: 'min', name: '视图中最低温'}
+                ]
+            },
+                data: [
+                  {% for row in History_data %}
+                      "{{ row.tmin }}",
+                  {% endfor %}
+              ],
             },
             {
                 name: '平均温度',
@@ -278,10 +274,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     color: 'rgb(0, 205, 0)'
                 },
                 data: [
-                    {% for row in History_data %}
-                        "{{ row.tavg }}",
-                    {% endfor %}
-                ],
+                  {% for row in History_data %}
+                      "{{ row.tavg }}",
+                  {% endfor %}
+              ],
             }
         ]
     };
