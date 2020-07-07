@@ -195,6 +195,7 @@
     var myChart = echarts.init(document.getElementById('main'));
     // 指定图表的配置项和数据
     var colors = ['red','#5793f3', '#ffb320', 'orange','white','pink'];
+    var symbolsizes = [8];
     var option = {
     baseOption: {
         timeline: {
@@ -308,7 +309,7 @@
                     'interval':0,
                     onZero: false,
                     },
-                splitLine: {show: false}
+{#                splitLine: {show: false}#}
             }
         ],
         yAxis: [
@@ -385,6 +386,7 @@
                 name: '平均温度',
                 type: 'line',
                 smooth: true,
+                symbolSize: symbolsizes[0],
                 color: colors[2],
                 lineStyle: {
                         color: colors[2],
@@ -449,6 +451,7 @@
                  {
                     name: '最高温度',
                     type: 'line',
+                    symbolSize: symbolsizes[0],
                     color: colors[0],
                     lineStyle: {
                         color: colors[0],
@@ -465,6 +468,7 @@
                     name: '最低温度',
                     type: 'line',
                     color: colors[1],
+                    symbolSize: symbolsizes[0],
                     lineStyle: {
                         color: colors[1],
                         width: 4,
@@ -480,6 +484,7 @@
                     name: '平均温度',
                     type: 'line',
                     color: colors[2],
+                    symbolSize: symbolsizes[0],
                     lineStyle: {
                         color: colors[2],
                         width: 4,
