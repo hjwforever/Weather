@@ -61,16 +61,16 @@
         <a style="font-size: 40px;color: orange;padding-left: 20px" href="{% url 'index' %}" title="返回首页">Six-Single-Dogs</a>
         <div class="user-panel">
 
-                {% if has_login %}
-                    <a href="{% url 'logout' %}" style="font-size: 20px;color: white">
+            {% if has_login %}
+                <a href="{% url 'logout' %}" style="font-size: 20px;color: white">
                     {{ "登出" }}
-                     </a>
-                {% else %}
-                    <a href="{% url 'login' %}" style="font-size: 20px;color: white">
+                </a>
+            {% else %}
+                <a href="{% url 'login' %}" style="font-size: 20px;color: white">
                     {{ "登录" }}
-                     </a>
-                    <a href="{% url 'register' %}" style="color: white;font-size: 20px"> / 注册</a>
-                {% endif %}
+                </a>
+                <a href="{% url 'register' %}" style="color: white;font-size: 20px"> / 注册</a>
+            {% endif %}
 
 
         </div>
@@ -110,7 +110,8 @@
                     <div class="forecast-item">
                         <div class="info">
                             <div class="icon icon-w w-01"><i class="icon-date ming"></i></div>
-                            <div class="temp">21-31<span class="symbol">℃</span></div>
+                            <div class="temp">{{ predict_queryset.0.tavg | floatformat:0 }}<span class="symbol">℃</span>
+                            </div>
                         </div>
                         <div class="text">多云&nbsp;&nbsp;微风&nbsp;&nbsp;空气质量优</div>
                     </div>
@@ -118,7 +119,8 @@
                         <div class="info">
                             <div class="icon icon-w w-08"><i class="icon-date hou"></i></div>
                             {#07 08 09 分别对应小雨中雨大雨#}
-                            <div class="temp">24-33<span class="symbol">℃</span></div>
+                            <div class="temp">{{ predict_queryset.1.tavg | floatformat:0 }}<span class="symbol">℃</span>
+                            </div>
                         </div>
                         <div class="text">中雨&nbsp;&nbsp;微风&nbsp;&nbsp;空气质量优</div>
                     </div>
@@ -127,25 +129,73 @@
                     <div class="slide-layer">
                         <div class="slide-inner">
                             <div class="slide-item">
-                                <div class="temp">07月05日&nbsp;(周日)&nbsp;22℃ /&nbsp;30℃</div>
+                                <div class="temp">
+                                    {% if predict_queryset.0.date|date:'m' < 10 %}
+                                        0{{ predict_queryset.0.date|date:'m' }}月
+                                    {% else %}
+                                        {{ predict_queryset.0.date|date:'m' }}月
+                                    {% endif %}
+                                    {% if predict_queryset.0.date|date:'d' < 10 %}
+                                        0{{ predict_queryset.0.date|date:'d' }}日
+                                    {% else %}
+                                        {{ predict_queryset.0.date|date:'d' }}日
+                                    {% endif %}
+                                    &nbsp&nbsp{{ predict_queryset.0.tavg | floatformat:0 }}℃
+                                </div>
                                 <div class="weather"><span class="text">雷阵雨</span><i class="icon-air icon-air-1"></i>
                                 </div>
                                 <div class="wind">无持续风向&nbsp;微风</div>
                             </div>
                             <div class="slide-item">
-                                <div class="temp">07月06日&nbsp;(周一)&nbsp;21℃ /&nbsp;31℃</div>
+                                <div class="temp">
+                                    {% if predict_queryset.1.date|date:'m' < 10 %}
+                                        0{{ predict_queryset.1.date|date:'m' }}月
+                                    {% else %}
+                                        {{ predict_queryset.1.date|date:'m' }}月
+                                    {% endif %}
+                                    {% if predict_queryset.1.date.day < 10 %}
+                                        0{{ predict_queryset.1.date.day }}日
+                                    {% else %}
+                                        {{ predict_queryset.1.date.day }}日
+                                    {% endif %}
+                                    &nbsp&nbsp{{ predict_queryset.1.tavg | floatformat:0 }}℃
+                                </div>
                                 <div class="weather"><span class="text">多云</span><i class="icon-air icon-air-1"></i>
                                 </div>
                                 <div class="wind">无持续风向&nbsp;微风</div>
                             </div>
                             <div class="slide-item">
-                                <div class="temp">07月07日&nbsp;(周二)&nbsp;24℃ /&nbsp;33℃</div>
+                                <div class="temp">
+                                    {% if predict_queryset.2.date|date:'m' < 10 %}
+                                        0{{ predict_queryset.2.date|date:'m' }}月
+                                    {% else %}
+                                        {{ predict_queryset.2.date|date:'m' }}月
+                                    {% endif %}
+                                    {% if predict_queryset.2.date|date:'d' < 10 %}
+                                        0{{ predict_queryset.2.date|date:'d' }}日
+                                    {% else %}
+                                        {{ predict_queryset.2.date|date:'d' }}日
+                                    {% endif %}
+                                    &nbsp&nbsp{{ predict_queryset.2.tavg | floatformat:0 }}℃
+                                </div>
                                 <div class="weather"><span class="text">多云</span><i class="icon-air icon-air-1"></i>
                                 </div>
                                 <div class="wind">无持续风向&nbsp;微风</div>
                             </div>
                             <div class="slide-item">
-                                <div class="temp">07月08日&nbsp;(周三)&nbsp;22℃ /&nbsp;33℃</div>
+                                <div class="temp">
+                                    {% if predict_queryset.3.date|date:'m' < 10 %}
+                                        0{{ predict_queryset.3.date|date:'m' }}月
+                                    {% else %}
+                                        {{ predict_queryset.3.date|date:'m' }}月
+                                    {% endif %}
+                                    {% if predict_queryset.3.date|date:'d' < 10 %}
+                                        0{{ predict_queryset.3.date|date:'d' }}日
+                                    {% else %}
+                                        {{ predict_queryset.3.date|date:'d' }}日
+                                    {% endif %}
+                                    &nbsp&nbsp{{ predict_queryset.3.tavg | floatformat:0 }}℃
+                                </div>
                                 <div class="weather"><span class="text">多云</span><i class="icon-air icon-air-2"></i>
                                 </div>
                                 <div class="wind">东北风&nbsp;3-4级</div>
@@ -194,308 +244,309 @@
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('main'));
     // 指定图表的配置项和数据
-    var colors = ['red','#5793f3', '#ffb320', 'orange','white','pink'];
+    var colors = ['red', '#5793f3', '#ffb320', 'orange', 'white', 'pink'];
     var option = {
-    baseOption: {
-        timeline: {
-            axisType: 'category',
-            // realtime: false,
-            // loop: false,
-            autoPlay: true,
-            // currentIndex: 2,
-            playInterval: 5000,
-            // controlStyle: {
-            //     position: 'left'
-            // },
-            lineStyle:{
-                 color: colors[0],
-            },
-            controlStyle:{
-                 color: colors[0],
-                 borderColor:colors[0],
-                 borderWidth: 2,
-            },
-            label:{
-                 color: 'yellow',
-            },
-            data: [
-                '未来一周',
-                {
-                    value: '近十年同一天',
-{#                    tooltip: {#}
-{#                        formatter: '{b} 部分数据缺失！'#}
-{#                    },#}
-                    symbol: 'diamond',
-                    symbolSize: 20
-                },
-            ],
-            // label: {
-            //     formatter : function(s) {
-            //         return (new Date(s)).getFullYear();
-            //     }
-            // }
-        },
-        title: {
-            left: '10%',
-            top: '1%',
-{#            fontsize: 3,#}
-{#            subtextStyle: {#}
-{#                color: 'green',//'white'#}
-{#                },#}
-{#            subtext: '数据来自国家统计局'#}
-        },
-        tooltip: {
-        trigger: 'axis',
-        axisPointer: {
-            type: 'cross'
-        },
-
-        right: '20%',
-        top: '3%',
-        },
-        calculable : true,
-        grid: {
-        left: '8%',
-        right: '8%',
-        bottom: '10%',
-        containLabel: true
-    },
-        toolbox: {
-            color: colors[0],
-            show: true,
-            right:'10%',
-            top: '3%',
-            feature: {
-                dataZoom: {
-                    yAxisIndex: 'none'
-                },
-                dataView: {readOnly: false},
-{#                dataView: {#}
-{#                // 数据视图#}
-{#                optionToContent: (opt) => {#}
-{#                    var axisData = opt.xAxis[0].data;#}
-{#                    var series = opt.series;#}
-{#                    var table = `<div class="echartstableview"><table style="width:100%;text-align:center">#}
-{#                                    <thead><tr><th>时间</th>`;#}
-{#                    series.forEach(( element, index) => {#}
-{#                        table += `<th>${element.name}</th>`;#}
-{#                    })#}
-{#                    table += `</tr></thead><tbody>`;#}
-{#                    axisData.forEach(( date, index) => {#}
-{#                        table += `<tr><td>${date}</td>`;#}
-{#                        series.forEach(( series_, index_) => {#}
-{#                            table += `<td>${series_.data[index]}</td>`;#}
-{#                        })  #}
-{#                        table += `</tr>`;#}
-{#                    })#}
-{#                    table += '</tbody></table></div>';#}
-{#                    return table;#}
-{#                },#}
-                magicType: {type: ['line', 'bar']},
-                restore: {},
-                saveAsImage: {},
-            },
-             iconStyle:{
-                    normal:{
-                      color:colors[5],//设置颜色
-                    }
-                }
-        },
-        xAxis: [
-            {
-                'type':'category',
-                'axisLabel':{
-                    'interval':0,
-                    onZero: false,
-                    },
-                splitLine: {show: false}
-            }
-        ],
-        yAxis: [
-            {
-                type: 'value',
-                boundaryGap: false,
-                axisTick: {
-                alignWithLabel: true
-            },
-                axisLine: {
-                    onZero: false,
-                    lineStyle: {
-                    color: colors[2]
-                    }
-                },
-                min: function (value) {
-                    return value.min - 10;
-                     },
-                max: function (value) {
-                    return value.max + 10;
-                    }
-            }
-        ],
-    },
-    options: [
-        {
-            legend: {
-            top: '3%',
-            color: colors[2],
-            textStyle:{
-                            fontSize: 18,
-                            color: colors[2]
-                        },
-            data: ['平均温度'],
-            selected: {
-                '最高温度': false, '最低温度': false,
-            },
-            },
-            title: {
-                text: '未来一周',
-                textStyle:{
-                    color: colors[2],
-                    },
-                },
-            xAxis: [
-            {
-                'data':[
-                {% for row in predict_queryset %}
-                    "{{ row.date }}",
-                {% endfor %}
-              ],
-                axisLine: {
+        baseOption: {
+            timeline: {
+                axisType: 'category',
+                // realtime: false,
+                // loop: false,
+                autoPlay: true,
+                // currentIndex: 2,
+                playInterval: 5000,
+                // controlStyle: {
+                //     position: 'left'
+                // },
                 lineStyle: {
-                    color: colors[2]
-                }
-            },
-            }
-        ],
-            yAxis: [
-            {
-                axisLine: {
-                    onZero: false,
-                    lineStyle: {
-                    color: colors[2]
-                    }
-                },
-            }
-        ],
-            series: [
-            {
-                    name: '最高温度',
-                    type: 'line',
-              },{
-                name: '平均温度',
-                type: 'line',
-                smooth: true,
-                color: colors[2],
-                lineStyle: {
-                        color: colors[2],
-                        width: 4,
-                    },
-                data: [ "{{ queryset.0.tavg | floatformat:0 }}",
-                {% for row in predict_queryset %}
-                    "{{ row.tavg | floatformat:0}}",
-                {% endfor %}
-              ],},
-              {
-                    name: '最低温度',
-                    type: 'line',
-              },
-
-            ]
-        },
-        {
-            legend: {
-            top: '3%',
-            color: colors[1],
-            textStyle:{
-                            fontSize: 18,
-                            color: colors[1]
-                        },
-            data: ['最高温度','平均温度','最低温度'],
-            selected: {
-                '最高温度': true, '最低温度': true,'平均温度': true,
-            },
-            },
-            title: {
-                text: '近10年同一天',
-                textStyle:{
-                    color: colors[1],
-                    },
-                },
-            xAxis: [
-            {
-                'data':[
-                {% for row in everyyeartodayhistory %}
-                    "{{ row.date }}",
-                {% endfor %}
-              ],
-                axisLine: {
-                lineStyle: {
-                    color: colors[1]
-                }
-            },
-            }
-        ],
-            yAxis: [
-            {
-                axisLine: {
-                    onZero: false,
-                    lineStyle: {
-                    color: colors[1]
-                    }
-                },
-            }
-        ],
-            series : [
-                 {
-                    name: '最高温度',
-                    type: 'line',
                     color: colors[0],
-                    lineStyle: {
-                        color: colors[0],
-                        width: 4,
+                },
+                controlStyle: {
+                    color: colors[0],
+                    borderColor: colors[0],
+                    borderWidth: 2,
+                },
+                label: {
+                    color: 'yellow',
+                },
+                data: [
+                    '未来一周',
+                    {
+                        value: '近十年同一天',
+                        {#                    tooltip: {#}
+                        {#                        formatter: '{b} 部分数据缺失！'#}
+                        {#                    },#}
+                        symbol: 'diamond',
+                        symbolSize: 20
                     },
-                    smooth: true,
-                    data: [
-                        {% for row in everyyeartodayhistory %}
-                            "{{ row.tmax | floatformat:0}}",
-                        {% endfor %}
-                    ],
-              },
-              {
-                    name: '最低温度',
-                    type: 'line',
-                    color: colors[1],
-                    lineStyle: {
-                        color: colors[1],
-                        width: 4,
-                    },
-                    smooth: true,
-                    data: [
-                        {% for row in everyyeartodayhistory %}
-                            "{{ row.tmin | floatformat:0}}",
-                        {% endfor %}
-                    ],
-              },
-                {
-                    name: '平均温度',
-                    type: 'line',
-                    color: colors[2],
-                    lineStyle: {
-                        color: colors[2],
-                        width: 4,
-                    },
-                    smooth: true,
-                    data: [
-                        {% for row in everyyeartodayhistory %}
-                            "{{ row.tavg | floatformat:0}}",
-                        {% endfor %}
-                    ],
-              },
-            ]
-        },
+                ],
+                // label: {
+                //     formatter : function(s) {
+                //         return (new Date(s)).getFullYear();
+                //     }
+                // }
+            },
+            title: {
+                left: '10%',
+                top: '1%',
+                {#            fontsize: 3,#}
+                {#            subtextStyle: {#}
+                {#                color: 'green',//'white'#}
+                {#                },#}
+                {#            subtext: '数据来自国家统计局'#}
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross'
+                },
 
-    ]
-};
+                right: '20%',
+                top: '3%',
+            },
+            calculable: true,
+            grid: {
+                left: '8%',
+                right: '8%',
+                bottom: '10%',
+                containLabel: true
+            },
+            toolbox: {
+                color: colors[0],
+                show: true,
+                right: '10%',
+                top: '3%',
+                feature: {
+                    dataZoom: {
+                        yAxisIndex: 'none'
+                    },
+                    dataView: {readOnly: false},
+                    {#                dataView: {#}
+                    {#                // 数据视图#}
+                    {#                optionToContent: (opt) => {#}
+                    {#                    var axisData = opt.xAxis[0].data;#}
+                    {#                    var series = opt.series;#}
+                    {#                    var table = `<div class="echartstableview"><table style="width:100%;text-align:center">#}
+                    {#                                    <thead><tr><th>时间</th>`;#}
+                    {#                    series.forEach(( element, index) => {#}
+                    {#                        table += `<th>${element.name}</th>`;#}
+                    {#                    })#}
+                    {#                    table += `</tr></thead><tbody>`;#}
+                    {#                    axisData.forEach(( date, index) => {#}
+                    {#                        table += `<tr><td>${date}</td>`;#}
+                    {#                        series.forEach(( series_, index_) => {#}
+                    {#                            table += `<td>${series_.data[index]}</td>`;#}
+                    {#                        })  #}
+                    {#                        table += `</tr>`;#}
+                    {#                    })#}
+                    {#                    table += '</tbody></table></div>';#}
+                    {#                    return table;#}
+                    {#                },#}
+                    magicType: {type: ['line', 'bar']},
+                    restore: {},
+                    saveAsImage: {},
+                },
+                iconStyle: {
+                    normal: {
+                        color: colors[5],//设置颜色
+                    }
+                }
+            },
+            xAxis: [
+                {
+                    'type': 'category',
+                    'axisLabel': {
+                        'interval': 0,
+                        onZero: false,
+                    },
+                    splitLine: {show: false}
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    boundaryGap: false,
+                    axisTick: {
+                        alignWithLabel: true
+                    },
+                    axisLine: {
+                        onZero: false,
+                        lineStyle: {
+                            color: colors[2]
+                        }
+                    },
+                    min: function (value) {
+                        return value.min - 10;
+                    },
+                    max: function (value) {
+                        return value.max + 10;
+                    }
+                }
+            ],
+        },
+        options: [
+            {
+                legend: {
+                    top: '3%',
+                    color: colors[2],
+                    textStyle: {
+                        fontSize: 18,
+                        color: colors[2]
+                    },
+                    data: ['平均温度'],
+                    selected: {
+                        '最高温度': false, '最低温度': false,
+                    },
+                },
+                title: {
+                    text: '未来一周',
+                    textStyle: {
+                        color: colors[2],
+                    },
+                },
+                xAxis: [
+                    {
+                        'data': [
+                            {% for row in predict_queryset %}
+                                "{{ row.date }}",
+                            {% endfor %}
+                        ],
+                        axisLine: {
+                            lineStyle: {
+                                color: colors[2]
+                            }
+                        },
+                    }
+                ],
+                yAxis: [
+                    {
+                        axisLine: {
+                            onZero: false,
+                            lineStyle: {
+                                color: colors[2]
+                            }
+                        },
+                    }
+                ],
+                series: [
+                    {
+                        name: '最高温度',
+                        type: 'line',
+                    }, {
+                        name: '平均温度',
+                        type: 'line',
+                        smooth: true,
+                        color: colors[2],
+                        lineStyle: {
+                            color: colors[2],
+                            width: 4,
+                        },
+                        data: ["{{ queryset.0.tavg | floatformat:0 }}",
+                            {% for row in predict_queryset %}
+                                "{{ row.tavg | floatformat:0}}",
+                            {% endfor %}
+                        ],
+                    },
+                    {
+                        name: '最低温度',
+                        type: 'line',
+                    },
+
+                ]
+            },
+            {
+                legend: {
+                    top: '3%',
+                    color: colors[1],
+                    textStyle: {
+                        fontSize: 18,
+                        color: colors[1]
+                    },
+                    data: ['最高温度', '平均温度', '最低温度'],
+                    selected: {
+                        '最高温度': true, '最低温度': true, '平均温度': true,
+                    },
+                },
+                title: {
+                    text: '近10年同一天',
+                    textStyle: {
+                        color: colors[1],
+                    },
+                },
+                xAxis: [
+                    {
+                        'data': [
+                            {% for row in everyyeartodayhistory %}
+                                "{{ row.date }}",
+                            {% endfor %}
+                        ],
+                        axisLine: {
+                            lineStyle: {
+                                color: colors[1]
+                            }
+                        },
+                    }
+                ],
+                yAxis: [
+                    {
+                        axisLine: {
+                            onZero: false,
+                            lineStyle: {
+                                color: colors[1]
+                            }
+                        },
+                    }
+                ],
+                series: [
+                    {
+                        name: '最高温度',
+                        type: 'line',
+                        color: colors[0],
+                        lineStyle: {
+                            color: colors[0],
+                            width: 4,
+                        },
+                        smooth: true,
+                        data: [
+                            {% for row in everyyeartodayhistory %}
+                                "{{ row.tmax | floatformat:0}}",
+                            {% endfor %}
+                        ],
+                    },
+                    {
+                        name: '最低温度',
+                        type: 'line',
+                        color: colors[1],
+                        lineStyle: {
+                            color: colors[1],
+                            width: 4,
+                        },
+                        smooth: true,
+                        data: [
+                            {% for row in everyyeartodayhistory %}
+                                "{{ row.tmin | floatformat:0}}",
+                            {% endfor %}
+                        ],
+                    },
+                    {
+                        name: '平均温度',
+                        type: 'line',
+                        color: colors[2],
+                        lineStyle: {
+                            color: colors[2],
+                            width: 4,
+                        },
+                        smooth: true,
+                        data: [
+                            {% for row in everyyeartodayhistory %}
+                                "{{ row.tavg | floatformat:0}}",
+                            {% endfor %}
+                        ],
+                    },
+                ]
+            },
+
+        ]
+    };
 
     // 使用刚指定的配置项和数据显示图表。
     myChart.setOption(option);
