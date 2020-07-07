@@ -270,6 +270,27 @@
                     yAxisIndex: 'none'
                 },
                 dataView: {readOnly: false},
+{#                dataView: {#}
+{#                // 数据视图#}
+{#                optionToContent: (opt) => {#}
+{#                    var axisData = opt.xAxis[0].data;#}
+{#                    var series = opt.series;#}
+{#                    var table = `<div class="echartstableview"><table style="width:100%;text-align:center">#}
+{#                                    <thead><tr><th>时间</th>`;#}
+{#                    series.forEach(( element, index) => {#}
+{#                        table += `<th>${element.name}</th>`;#}
+{#                    })#}
+{#                    table += `</tr></thead><tbody>`;#}
+{#                    axisData.forEach(( date, index) => {#}
+{#                        table += `<tr><td>${date}</td>`;#}
+{#                        series.forEach(( series_, index_) => {#}
+{#                            table += `<td>${series_.data[index]}</td>`;#}
+{#                        })  #}
+{#                        table += `</tr>`;#}
+{#                    })#}
+{#                    table += '</tbody></table></div>';#}
+{#                    return table;#}
+{#                },#}
                 magicType: {type: ['line', 'bar']},
                 restore: {},
                 saveAsImage: {},
@@ -321,7 +342,10 @@
                             fontSize: 18,
                             color: colors[2]
                         },
-            data: ['未来一周'],
+            data: ['平均温度'],
+            selected: {
+                '最高温度': false, '最低温度': false,
+            },
             },
             title: {
                 text: '未来一周',
@@ -354,8 +378,11 @@
             }
         ],
             series: [
-                {
-                name: '未来一周',
+            {
+                    name: '最高温度',
+                    type: 'line',
+              },{
+                name: '平均温度',
                 type: 'line',
                 smooth: true,
                 color: colors[2],
@@ -368,6 +395,11 @@
                     "{{ row.tavg | floatformat:0}}",
                 {% endfor %}
               ],},
+              {
+                    name: '最低温度',
+                    type: 'line',
+              },
+
             ]
         },
         {
@@ -378,7 +410,10 @@
                             fontSize: 18,
                             color: colors[1]
                         },
-            data: ['近10年同一天'],
+            data: ['最高温度','平均温度','最低温度'],
+            selected: {
+                '最高温度': true, '最低温度': true,'平均温度': true,
+            },
             },
             title: {
                 text: '近10年同一天',
@@ -411,12 +446,42 @@
             }
         ],
             series : [
-                {
-                    name: '近10年同一天',
+                 {
+                    name: '最高温度',
+                    type: 'line',
+                    color: colors[0],
+                    lineStyle: {
+                        color: colors[0],
+                        width: 4,
+                    },
+                    smooth: true,
+                    data: [
+                        {% for row in everyyeartodayhistory %}
+                            "{{ row.tmax | floatformat:0}}",
+                        {% endfor %}
+                    ],
+              },
+              {
+                    name: '最低温度',
                     type: 'line',
                     color: colors[1],
                     lineStyle: {
                         color: colors[1],
+                        width: 4,
+                    },
+                    smooth: true,
+                    data: [
+                        {% for row in everyyeartodayhistory %}
+                            "{{ row.tmin | floatformat:0}}",
+                        {% endfor %}
+                    ],
+              },
+                {
+                    name: '平均温度',
+                    type: 'line',
+                    color: colors[2],
+                    lineStyle: {
+                        color: colors[2],
                         width: 4,
                     },
                     smooth: true,
