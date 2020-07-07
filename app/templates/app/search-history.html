@@ -4,7 +4,7 @@
 <head>
     <title>Six Single Dogs History Weather</title>
     <!--引入echarts.js-->
-        <script src="{% static 'echarts.min.js' %}"></script>
+    <script src="{% static 'echarts.min.js' %}"></script>
     <link href="{% static 'img/favicon.ico' %}" rel="shortcut icon"/>
     <link href="{% static 'html/css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all"/>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -59,49 +59,60 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 <body>
 <div class="header" style=" height: 75px; background-color: #ffb320;">
-   <div class = "hhhh" style="background-color: black;height: 73px;">
-    <div class="container" style="background-color: black;height: 73px;">
-        <div class="header-menu">
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand logo" href="{% url 'index' %}" style="padding-top: 0" title="返回首页">
-                            <img src="{% static 'img/favicon.ico' %}" alt="返回首页" height="40" width="40">
-                        </a>
-                        <div style="padding-left: 20px" class="navbar-brand logo" title="返回首页">
-                            <h1><a style="font-size: 40px;color: #ffa500;padding-left: 20px;" href="{% url 'index' %}">Six-Single-Dogs</a>
-                            </h1>
+    <div class="hhhh" style="background-color: black;height: 73px;">
+        <div class="container" style="background-color: black;height: 73px;">
+            <div class="header-menu">
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand logo" href="{% url 'index' %}" style="padding-top: 2px" title="返回首页">
+                                <img src="{% static 'img/favicon.ico' %}" alt="返回首页" height="40" width="40">
+                            </a>
+                            <div style="padding-left: 20px" class="navbar-brand logo" title="返回首页">
+                                <h1><a style="font-size: 40px;color: #ffa500;padding-left: 20px;"
+                                       href="{% url 'index' %}">Six-Single-Dogs</a>
+                                </h1>
+                            </div>
                         </div>
-                    </div>
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav cl-effect-11">
-                            <li class="active" style="white-space: nowrap;"><a style="color: #ffa500;margin-top: 5px;font-size: 20px;" href="{% url 'index' %}" data-hover="首页">首页</a>
-                            </li>
-                            <li style="white-space: nowrap;"><a style="color: #ffa500;margin-top: 5px;font-size: 20px;" href="#main" data-hover="历史天气曲线"
-                                                                class="scroll">历史天气曲线</a>
-                            </li>
-                            <li style="white-space: nowrap;"><a style="color: #ffa500;margin-top: 5px;font-size: 20px;" href="#guides" data-hover="指南" class="scroll">指南</a>
-                            <li style="white-space: nowrap;"><a style="color: #ffa500;margin-top: 5px;font-size: 20px;" href="#tours" data-hover="旅行" class="scroll">旅行</a></li>
-                            <li style="white-space: nowrap;"><a style="color: #ffa500;margin-top: 5px;font-size: 20px;" href="#about" data-hover="关于" class="scroll">关于</a></li>
-                            <li style="white-space: nowrap;"><a style="color: #ffa500;margin-top: 5px;font-size: 20px;" data-hover="新闻" href="http://www.people.com.cn/"
-                                                                target="_blank">新闻</a></li>
-                        </ul>
-                    </div><!-- /.navbar-collapse -->
-                </div><!-- /.container-fluid -->
-            </nav>
-            <div class="clearfix"></div>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav cl-effect-11">
+                                <li class="active" style="white-space: nowrap;"><a style="color: #ffa500;margin-top: 5px;font-size: 20px;" href="{% url 'index' %}" data-hover="首页">首页</a>
+                                </li>
+                                <li style="white-space: nowrap;"><a
+                                        style="color: #ffa500;margin-top: 5px;font-size: 20px;" href="#main"
+                                        data-hover="历史天气曲线"
+                                        class="scroll">历史天气曲线</a>
+                                </li>
+                                <li style="white-space: nowrap;"><a
+                                        style="color: #ffa500;margin-top: 5px;font-size: 20px;" href="#guides"
+                                        data-hover="指南" class="scroll">指南</a>
+                                <li style="white-space: nowrap;"><a
+                                        style="color: #ffa500;margin-top: 5px;font-size: 20px;" href="#tours"
+                                        data-hover="旅行" class="scroll">旅行</a></li>
+                                <li style="white-space: nowrap;"><a
+                                        style="color: #ffa500;margin-top: 5px;font-size: 20px;" href="#about"
+                                        data-hover="关于" class="scroll">关于</a></li>
+                                <li style="white-space: nowrap;"><a
+                                        style="color: #ffa500;margin-top: 5px;font-size: 20px;" data-hover="新闻"
+                                        href="http://www.people.com.cn/"
+                                        target="_blank">新闻</a></li>
+                            </ul>
+                        </div><!-- /.navbar-collapse -->
+                    </div><!-- /.container-fluid -->
+                </nav>
+                <div class="clearfix"></div>
+            </div>
         </div>
     </div>
-</div>
 </div>
 <div class="banner-section">
     <div class="container">
@@ -171,28 +182,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         legend: {
             left: '10%',
             top: '3%',
-            data: ['最大温度', '平均温度','最低温度'],
+            data: ['最大温度', '平均温度', '最低温度'],
             color: colors[0],
-            textStyle:{
-                 fontSize: 18,
-                 color: colors[0]
-               },
+            textStyle: {
+                fontSize: 18,
+                color: colors[0]
+            },
         },
         title: {
             left: 'center',
-            top:'3%',
-            textStyle:{
-                    color: colors[0],
-                    },
+            top: '3%',
+            textStyle: {
+                color: colors[0],
+            },
             text: '历史气温变化图',//Historical Temperature Change Chart
         },
         {#backgroundColor: '#f5f9fd',#}
-{#        backgroundColor: 'black',#}
-{#        fillerColor: 'red',#}
+        {#        backgroundColor: 'black',#}
+        {#        fillerColor: 'red',#}
         //borderColor = 'red',
         toolbox: {
             color: 'red',
-            right:'10%',
+            right: '10%',
             top: '3%',
             show: true,
             feature: {
@@ -204,20 +215,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 restore: {},
                 saveAsImage: {}
             },
-            iconStyle:{
-                    normal:{
-                      color:colors[0],//设置颜色
-                    }
+            iconStyle: {
+                normal: {
+                    color: colors[0],//设置颜色
                 }
+            }
         },
         xAxis: {
             type: 'category',
             boundaryGap: false,
             axisLine: {
-                    lineStyle: {
+                lineStyle: {
                     color: colors[0]
-                    }
-                },
+                }
+            },
             data: [
                 {% for row in History_data %}
                     "{{ row.date }}",
@@ -228,10 +239,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             type: 'value',
             boundaryGap: [0, '10%'],
             axisLine: {
-                    lineStyle: {
+                lineStyle: {
                     color: colors[0]
-                    }
-                },
+                }
+            },
             axisLabel: {
                 formatter: '{value} °C'
             },
@@ -244,7 +255,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         },
         dataZoom: [{
             type: 'inside',
-            dataBackground:'red',
+            dataBackground: 'red',
             start: 0,
             end: 90,
         }, {
@@ -259,19 +270,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 shadowOffsetX: 2,
                 shadowOffsetY: 2
             },
-            dataBackground:{
-            lineStyle:{
-                color: 'red',
+            dataBackground: {
+                lineStyle: {
+                    color: 'red',
 
+                },
+                areaStyle: {
+                    color: 'red',
+                    shadowColor: 'red',
+                },
             },
-            areaStyle:{
-                color: 'red',
-                shadowColor:'red',
-            },
-        },
-            textStyle:{
-                color : colors[0],
-                 textBorderColor:colors[0],
+            textStyle: {
+                color: colors[0],
+                textBorderColor: colors[0],
             },
         }],
         series: [
