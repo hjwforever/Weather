@@ -150,10 +150,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
 </div>
 <!--为ECharts准备一个具备大小的Dom-->
-<div id="main" style="width: 100%;height: 500%;background:url({% static 'img/pattern.png' %});" align="middle"></div>
+{#background:url({% static 'img/pattern.png' %});#}
+<div id="main" style="background:url({% static 'img/pattern.png' %});width: 100%;height: 500%;" align="middle"></div>
 <script type="text/javascript">
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('main'));
+    var colors = ['orange'];
     // 指定图表的配置项和数据
     var option = {
         tooltip: {
@@ -167,16 +169,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             {#        }#}
         },
         legend: {
-            left: 'left',
-            data: ['最大温度', '最低温度', '平均温度'],
+            left: '10%',
+            top: '3%',
+            data: ['最大温度', '平均温度','最低温度'],
+            color: colors[0],
+            textStyle:{
+                 fontSize: 18,
+                 color: colors[0]
+               },
         },
         title: {
             left: 'center',
+            top:'3%',
+            textStyle:{
+                    color: colors[0],
+                    },
             text: '历史气温变化图',//Historical Temperature Change Chart
         },
         {#backgroundColor: '#f5f9fd',#}
-        backgroundColor: 'transparent',
+{#        backgroundColor: 'black',#}
+{#        fillerColor: 'red',#}
+        //borderColor = 'red',
         toolbox: {
+            color: 'red',
+            right:'10%',
+            top: '3%',
             show: true,
             feature: {
                 dataZoom: {
@@ -186,11 +203,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 magicType: {type: ['line', 'bar']},
                 restore: {},
                 saveAsImage: {}
-            }
+            },
+            iconStyle:{
+                    normal:{
+                      color:colors[0],//设置颜色
+                    }
+                }
         },
         xAxis: {
             type: 'category',
             boundaryGap: false,
+            axisLine: {
+                    lineStyle: {
+                    color: colors[0]
+                    }
+                },
             data: [
                 {% for row in History_data %}
                     "{{ row.date }}",
@@ -200,27 +227,44 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         yAxis: {
             type: 'value',
             boundaryGap: [0, '10%'],
+            axisLine: {
+                    lineStyle: {
+                    color: colors[0]
+                    }
+                },
             axisLabel: {
                 formatter: '{value} °C'
             },
             min: function (value) {
-                return value.min - 10;
+                return ~~(value.min - 10);
             },
             max: function (value) {
-                return value.max + 20;
+                return ~~(value.max + 20);
             }
         },
         dataZoom: [{
             type: 'inside',
+            dataBackground:'red',
             start: 0,
-            end: 10
+            end: 90,
+            color: 'red',
+            dataBackground:{
+            lineStyle:{
+                color: 'red',
+
+            },
+            areaStyle:{
+                shadowColor:'red',
+            }
+
+        },
         }, {
             start: 0,
             end: 10,
             handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
             handleSize: '80%',
             handleStyle: {
-                color: '#fff',
+                color: colors[0],
                 shadowBlur: 3,
                 shadowColor: 'rgba(0, 0, 0, 0.6)',
                 shadowOffsetX: 2,
@@ -249,7 +293,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 },
                 data: [
                     {% for row in History_data %}
-                        "{{ row.tmax }}",
+                        "{{ row.tmax | floatformat:0}}",
                     {% endfor %}
                 ],
             },
@@ -274,7 +318,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 },
                 data: [
                     {% for row in History_data %}
-                        "{{ row.tmin }}",
+                        "{{ row.tmin | floatformat:0}}",
                     {% endfor %}
                 ],
             },
@@ -288,7 +332,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 },
                 data: [
                     {% for row in History_data %}
-                        "{{ row.tavg }}",
+                        "{{ row.tavg | floatformat:0}}",
                     {% endfor %}
                 ],
             }
