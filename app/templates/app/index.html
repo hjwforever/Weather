@@ -253,7 +253,7 @@
             // loop: false,
             autoPlay: true,
             // currentIndex: 2,
-            playInterval: 3000,
+            playInterval: 5000,
             // controlStyle: {
             //     position: 'left'
             // },
@@ -406,6 +406,7 @@
             xAxis: [
             {
                 'data':[
+                "{{ queryset.0.date }}",
                 {% for row in predict_queryset %}
                     "{{ row.date }}",
                 {% endfor %}
