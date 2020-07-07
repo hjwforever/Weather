@@ -247,17 +247,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             dataBackground:'red',
             start: 0,
             end: 90,
-            color: 'red',
-            dataBackground:{
-            lineStyle:{
-                color: 'red',
-
-            },
-            areaStyle:{
-                shadowColor:'red',
-            }
-
-        },
         }, {
             start: 0,
             end: 10,
@@ -269,7 +258,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 shadowColor: 'rgba(0, 0, 0, 0.6)',
                 shadowOffsetX: 2,
                 shadowOffsetY: 2
-            }
+            },
+            dataBackground:{
+            lineStyle:{
+                color: 'red',
+
+            },
+            areaStyle:{
+                color: 'red',
+                shadowColor:'red',
+            },
+        },
+            textStyle:{
+                color : colors[0],
+                 textBorderColor:colors[0],
+            },
         }],
         series: [
             {
@@ -298,12 +301,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 ],
             },
             {
+                name: '平均温度',
+                type: 'line',
+                smooth: true,
+                sampling: 'average',
+                itemStyle: {
+                    color: 'rgb(0, 205, 0)'
+                },
+                data: [
+                    {% for row in History_data %}
+                        "{{ row.tavg | floatformat:0}}",
+                    {% endfor %}
+                ],
+            },
+            {
                 name: '最低温度',
                 type: 'line',
                 smooth: true,
                 sampling: 'average',
                 itemStyle: {
-                    color: 'rgb(0 ,191 ,255)'
+                    color: 'rgb(0 ,50 ,150)'//rgb(0 ,191 ,255)
                 },
                 markPoint: {
                     data: [
@@ -319,20 +336,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 data: [
                     {% for row in History_data %}
                         "{{ row.tmin | floatformat:0}}",
-                    {% endfor %}
-                ],
-            },
-            {
-                name: '平均温度',
-                type: 'line',
-                smooth: true,
-                sampling: 'average',
-                itemStyle: {
-                    color: 'rgb(0, 205, 0)'
-                },
-                data: [
-                    {% for row in History_data %}
-                        "{{ row.tavg | floatformat:0}}",
                     {% endfor %}
                 ],
             }
