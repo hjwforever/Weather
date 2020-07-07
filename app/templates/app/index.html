@@ -60,8 +60,19 @@
         </a>
         <a style="font-size: 40px;color: orange;padding-left: 20px" href="{% url 'index' %}" title="返回首页">Six-Single-Dogs</a>
         <div class="user-panel">
-            <a href="{% url 'login' %}" style="font-size: 20px;color: white">登录 / </a>
-            <a href="{% url 'register' %}" style="color: white;font-size: 20px">注册</a>
+
+                {% if has_login %}
+                    <a href="{% url 'logout' %}" style="font-size: 20px;color: white">
+                    {{ "登出" }}
+                     </a>
+                {% else %}
+                    <a href="{% url 'login' %}" style="font-size: 20px;color: white">
+                    {{ "登录" }}
+                     </a>
+                    <a href="{% url 'register' %}" style="color: white;font-size: 20px"> / 注册</a>
+                {% endif %}
+
+
         </div>
         <!-- responsive -->
         <div class="nav-switch">

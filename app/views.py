@@ -233,7 +233,7 @@ def send_email(email, code):
 def login(request):
     print('进入login视图函数')
     if request.session.get('is_login', None):
-        return redirect('/index/')
+        return render(request, 'app/index.html', {'has_login': True})
     if request.method == "POST":
         login_form = forms.UserForm(request.POST)
         message = '请检查填写内容!'
@@ -255,7 +255,7 @@ def login(request):
                 request.session['is_login'] = True
                 request.session['user_id'] = user.id
                 request.session['user_name'] = user.name
-                return redirect('/index/')
+                return render(request, 'app/index.html', {'has_login': True})
             else:
                 message = '密码不正确!'
                 return render(request, 'app/login.html', locals())
@@ -263,12 +263,12 @@ def login(request):
         else:
             return render(request, 'app/login.html', locals())
     login_form = forms.UserForm()
-    return render(request, 'app/login.html', locals())
+    return render(request, 'app/login.html',locals())
 
 
 def register(request):
-    if request.session.get('is_login', None):
-        return redirect('/index/')
+    # if request.session.get('is_login', None):
+    #     return redirect('/index/')
 
     if request.method == 'POST':
         register_form = forms.RegisterForm(request.POST)
@@ -313,9 +313,9 @@ def register(request):
 def logout(request):
     print('登出函数')
     if not request.session.get('is_login', None):
-        return redirect('/app/index/')
+        return redirect('/index/')
     request.session.flush()
-    return redirect('/app/index/')
+    return redirect('/index/')
 
 
 def user_confirm(request):
