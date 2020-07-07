@@ -2,15 +2,13 @@ import os, django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Weather.settings")  # project_name 项目名称
 django.setup()
 import logging
-import datetime
 import hashlib
-import time
-import datetime
 from django.contrib import messages
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.core.mail import send_mail
 from datetime import datetime
+from datetime import timedelta
 from . import models
 from . import forms
 from Weather import settings
@@ -207,7 +205,7 @@ def hash_code(s, salt=settings.SECRET_KEY):
 
 
 def make_confirm_string(user):
-    now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     code = hash_code(user.name, now)
     models.ConfirmString.objects.create(code=code, user=user, )
     print(code)
@@ -330,8 +328,8 @@ def user_confirm(request):
         return render(request, 'app/confirm.html', locals())
 
     c_time = confirm.c_time
-    now = datetime.datetime.now()
-    if now > c_time + datetime.timedelta(settings.CONFIRM_DAYS):
+    now = datetime.now()
+    if now > c_time + timedelta(settings.CONFIRM_DAYS):
         confirm.user.delete()
         message = "您的邮件已经过期！请重新注册！"
         return render(request, 'app/confirm.html', locals())
