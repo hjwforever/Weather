@@ -117,11 +117,14 @@ def home(request):
 def index(request):
     datenow = timezone.now()
     queryset = models.HistoryData.objects.filter(date=datenow).values()
+    print('queryset:')
     print(queryset)
     predict_queryset = models.PredictData.objects.all()
+    print('predict_queryset:')
     print(predict_queryset)
     everyyeartodaystart = datetime(datenow.year-10, 1, 1)
     everyyeartodayhistory = models.HistoryData.objects.filter(date__range=[everyyeartodaystart, datenow], date__month=datenow.month, date__day=datenow.day)
+    print('everyyeartodayhistory:')
     print(everyyeartodayhistory)
     return render(request, 'app/index.html', {'queryset': queryset, 'predict_queryset': predict_queryset, 'everyyeartodayhistory': everyyeartodayhistory})
 
