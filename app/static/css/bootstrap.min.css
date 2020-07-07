@@ -35,7 +35,11 @@
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace
 }
 
-*, ::after, ::before {
+.container ::after, ::before {
+    box-sizing: border-box
+}
+
+.footer-top-section ::after, ::before {
     box-sizing: border-box
 }
 
@@ -1247,7 +1251,7 @@ pre code {
     .col-lg-4 {
         -ms-flex: 0 0 33.333333%;
         flex: 0 0 33.333333%;
-        max-width: 33.333333%
+        max-width: 30%
     }
 
     .col-lg-5 {

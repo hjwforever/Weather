@@ -4,7 +4,7 @@
 <head>
     <title>Six Single Dogs History Weather</title>
     <!--引入echarts.js-->
-        <script src="{% static 'echarts.min.js' %}"></script>
+    <script src="{% static 'echarts.min.js' %}"></script>
     <link href="{% static 'img/favicon.ico' %}" rel="shortcut icon"/>
     <link href="{% static 'html/css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all"/>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -58,47 +58,59 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <script src="{% static 'html/js/modernizr.custom.97074.js' %}"></script>
 </head>
 <body>
-<div class="header">
-    <div class="container">
-        <div class="header-menu">
-
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand logo" href="{% url 'index' %}" style="padding-top: 0" title="返回首页">
-                            <img src="{% static 'img/favicon.ico' %}" alt="返回首页" height="40" width="40">
-                        </a>
-                        <div style="padding-left: 20px" class="navbar-brand logo" title="返回首页">
-                            <h1><a style="font-size: 40px;color: white;padding-left: 20px;" href="{% url 'index' %}">Six-Single-Dog</a>
-                            </h1>
+<div class="header" style=" height: 75px; background-color: #ffb320;">
+    <div class="hhhh" style="background-color: black;height: 73px;">
+        <div class="container" style="background-color: black;height: 73px;">
+            <div class="header-menu">
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand logo" href="{% url 'index' %}" style="padding-top: 2px" title="返回首页">
+                                <img src="{% static 'img/favicon.ico' %}" alt="返回首页" height="40" width="40">
+                            </a>
+                            <div style="padding-left: 20px" class="navbar-brand logo" title="返回首页">
+                                <h1><a style="font-size: 40px;color: #ffa500;padding-left: 20px;"
+                                       href="{% url 'index' %}">Six-Single-Dogs</a>
+                                </h1>
+                            </div>
                         </div>
-                    </div>
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav cl-effect-11">
-                            <li class="active" style="white-space: nowrap;"><a href="{% url 'index' %}" data-hover="首页">首页</a>
-                            </li>
-                            <li style="white-space: nowrap;"><a href="#main" data-hover="历史天气曲线"
-                                                                class="scroll">历史天气曲线</a>
-                            </li>
-                            <li style="white-space: nowrap;"><a href="#guides" data-hover="指南" class="scroll">指南</a>
-                            <li style="white-space: nowrap;"><a href="#tours" data-hover="旅行" class="scroll">旅行</a></li>
-                            <li style="white-space: nowrap;"><a href="#about" data-hover="关于" class="scroll">关于</a></li>
-                            <li style="white-space: nowrap;"><a data-hover="新闻" href="http://www.people.com.cn/"
-                                                                target="_blank">新闻</a></li>
-                        </ul>
-                    </div><!-- /.navbar-collapse -->
-                </div><!-- /.container-fluid -->
-            </nav>
-            <div class="clearfix"></div>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav cl-effect-11">
+                                <li class="active" style="white-space: nowrap;"><a style="color: #ffa500;margin-top: 5px;font-size: 20px;" href="{% url 'index' %}" data-hover="首页">首页</a>
+                                </li>
+                                <li style="white-space: nowrap;"><a
+                                        style="color: #ffa500;margin-top: 5px;font-size: 20px;" href="#main"
+                                        data-hover="历史天气曲线"
+                                        class="scroll">历史天气曲线</a>
+                                </li>
+                                <li style="white-space: nowrap;"><a
+                                        style="color: #ffa500;margin-top: 5px;font-size: 20px;" href="#guides"
+                                        data-hover="指南" class="scroll">指南</a>
+                                <li style="white-space: nowrap;"><a
+                                        style="color: #ffa500;margin-top: 5px;font-size: 20px;" href="#tours"
+                                        data-hover="旅行" class="scroll">旅行</a></li>
+                                <li style="white-space: nowrap;"><a
+                                        style="color: #ffa500;margin-top: 5px;font-size: 20px;" href="#about"
+                                        data-hover="关于" class="scroll">关于</a></li>
+                                <li style="white-space: nowrap;"><a
+                                        style="color: #ffa500;margin-top: 5px;font-size: 20px;" data-hover="新闻"
+                                        href="http://www.people.com.cn/"
+                                        target="_blank">新闻</a></li>
+                            </ul>
+                        </div><!-- /.navbar-collapse -->
+                    </div><!-- /.container-fluid -->
+                </nav>
+                <div class="clearfix"></div>
+            </div>
         </div>
     </div>
 </div>
@@ -149,10 +161,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
 </div>
 <!--为ECharts准备一个具备大小的Dom-->
-<div id="main" style="width: 100%;height: 500%;" align="middle"></div>
+{#background:url({% static 'img/pattern.png' %});#}
+<div id="main" style="background:url({% static 'img/pattern.png' %});width: 100%;height: 500%;" align="middle"></div>
 <script type="text/javascript">
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('main'));
+    var colors = ['orange'];
     // 指定图表的配置项和数据
     var option = {
         tooltip: {
@@ -166,15 +180,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             {#        }#}
         },
         legend: {
-            left: 'left',
-            data: ['最大温度', '最低温度', '平均温度'],
+            left: '10%',
+            top: '3%',
+            data: ['最大温度', '平均温度', '最低温度'],
+            color: colors[0],
+            textStyle: {
+                fontSize: 18,
+                color: colors[0]
+            },
         },
         title: {
             left: 'center',
+            top: '3%',
+            textStyle: {
+                color: colors[0],
+            },
             text: '历史气温变化图',//Historical Temperature Change Chart
         },
-        backgroundColor: '#f5f9fd',
+        {#backgroundColor: '#f5f9fd',#}
+        {#        backgroundColor: 'black',#}
+        {#        fillerColor: 'red',#}
+        //borderColor = 'red',
         toolbox: {
+            color: 'red',
+            right: '10%',
+            top: '3%',
             show: true,
             feature: {
                 dataZoom: {
@@ -184,11 +214,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 magicType: {type: ['line', 'bar']},
                 restore: {},
                 saveAsImage: {}
+            },
+            iconStyle: {
+                normal: {
+                    color: colors[0],//设置颜色
+                }
             }
         },
         xAxis: {
             type: 'category',
             boundaryGap: false,
+            axisLine: {
+                lineStyle: {
+                    color: colors[0]
+                }
+            },
             data: [
                 {% for row in History_data %}
                     "{{ row.date }}",
@@ -198,32 +238,52 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         yAxis: {
             type: 'value',
             boundaryGap: [0, '10%'],
+            axisLine: {
+                lineStyle: {
+                    color: colors[0]
+                }
+            },
             axisLabel: {
                 formatter: '{value} °C'
             },
             min: function (value) {
-                return value.min - 10;
+                return ~~(value.min - 10);
             },
             max: function (value) {
-                return value.max + 20;
+                return ~~(value.max + 20);
             }
         },
         dataZoom: [{
             type: 'inside',
+            dataBackground: 'red',
             start: 0,
-            end: 10
+            end: 90,
         }, {
             start: 0,
             end: 10,
             handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
             handleSize: '80%',
             handleStyle: {
-                color: '#fff',
+                color: colors[0],
                 shadowBlur: 3,
                 shadowColor: 'rgba(0, 0, 0, 0.6)',
                 shadowOffsetX: 2,
                 shadowOffsetY: 2
-            }
+            },
+            dataBackground: {
+                lineStyle: {
+                    color: 'red',
+
+                },
+                areaStyle: {
+                    color: 'red',
+                    shadowColor: 'red',
+                },
+            },
+            textStyle: {
+                color: colors[0],
+                textBorderColor: colors[0],
+            },
         }],
         series: [
             {
@@ -247,7 +307,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 },
                 data: [
                     {% for row in History_data %}
-                        "{{ row.tmax }}",
+                        "{{ row.tmax | floatformat:0}}",
+                    {% endfor %}
+                ],
+            },
+            {
+                name: '平均温度',
+                type: 'line',
+                smooth: true,
+                sampling: 'average',
+                itemStyle: {
+                    color: 'rgb(0, 205, 0)'
+                },
+                data: [
+                    {% for row in History_data %}
+                        "{{ row.tavg | floatformat:0}}",
                     {% endfor %}
                 ],
             },
@@ -257,7 +331,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 smooth: true,
                 sampling: 'average',
                 itemStyle: {
-                    color: 'rgb(0 ,191 ,255)'
+                    color: 'rgb(0 ,50 ,150)'//rgb(0 ,191 ,255)
                 },
                 markPoint: {
                     data: [
@@ -272,21 +346,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 },
                 data: [
                     {% for row in History_data %}
-                        "{{ row.tmin }}",
-                    {% endfor %}
-                ],
-            },
-            {
-                name: '平均温度',
-                type: 'line',
-                smooth: true,
-                sampling: 'average',
-                itemStyle: {
-                    color: 'rgb(0, 205, 0)'
-                },
-                data: [
-                    {% for row in History_data %}
-                        "{{ row.tavg }}",
+                        "{{ row.tmin | floatformat:0}}",
                     {% endfor %}
                 ],
             }
@@ -389,11 +449,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         e.options.length = 1;
     }
 </script>
-<div class="content">
-    <div class="promotions" id="guides">
-        <div class="container">
-            <h2 class="tittle">顶级行程指南</h2>
-            <span>我们的城市</span>
+<div class="content" style="background:url({% static 'img/pattern.png' %});">
+    <div class="promotions" id="guides" style="background:url({% static 'img/pattern.png' %});">
+        <div class="container" style="background:url({% static 'img/pattern.png' %});">
+            <h2 class="tittle" style="color: orange;">行程指南</h2>
+            <span style="color: white;">我们的城市</span>
             <div class="promotion-grids">
                 <div class="col-md-4 promation-grid">
                     <img src="{% static 'html/images/tianjin.jpg' %}" class="img-responsive" alt=""/>
@@ -408,7 +468,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                             <div class="clearfix"></div>
                         </div>
-                        <p>
+                        <p style="color: whitesmoke;">
                             天津地处中国北部、海河下游、东临渤海，是中国北方最大的港口城市，国家物流枢纽，北方国际航运核心区，
                             首批沿海开放城市，是中蒙俄经济走廊主要节点、海上丝绸之路的战略支点、“一带一路”交汇点、亚欧大陆桥最近的东部起点，
                             位于海河五大支流南运河、子牙河、大清河、永定河、北运河的汇合处和入海口，素有“九河下梢”“河海要冲”之称。</p>
@@ -427,7 +487,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                             <div class="clearfix"></div>
                         </div>
-                        <p>龙岩是海峡西岸经济区、全国革命老区、中央苏区的重要组成部分，七个县（市、区）均为原中央苏区县，
+                        <p style="color: whitesmoke;">龙岩是海峡西岸经济区、全国革命老区、中央苏区的重要组成部分，七个县（市、区）均为原中央苏区县，
                             是全国赢得“红旗不倒”光荣赞誉仅有的两个地方之一，享有“二十年红旗不倒”赞誉。也是福建省最重要的三条大江――闽江、九龙江、汀江的发源地。</p>
                     </div>
                 </div>
@@ -444,7 +504,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                             <div class="clearfix"></div>
                         </div>
-                        <p>丰城于东汉建安十五年（210年）置县，时名富城县，晋太康元年（280年），移治丰水西，改名丰城县；
+                        <p style="color: whitesmoke;">丰城于东汉建安十五年（210年）置县，时名富城县，晋太康元年（280年），移治丰水西，改名丰城县；
                             丰城原为干将、莫邪宝剑藏地，故又名“剑邑”，还是唐代六大青瓷名窑之一洪州窑的故乡，拥有剑文化、瓷文化、水文化、
                             书院文化和古建筑文化等历史文化；孕育了徐孺子、雷焕、王季友、揭傒斯、邓子龙、夏征农等近现代名人。</p>
                     </div>
@@ -465,7 +525,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                             <div class="clearfix"></div>
                         </div>
-                        <p>郑州是华夏文明的重要发祥地、国家历史文化名城、国家重点支持的六个大遗址片区之一、
+                        <p style="color: whitesmoke;">郑州是华夏文明的重要发祥地、国家历史文化名城、国家重点支持的六个大遗址片区之一、
                             世界历史都市联盟成员。郑州历史上曾五次为都，拥有不可移动文物近万处，其中世界文化遗产2处，全国重点文物保护单位74处80项。</p>
                     </div>
                 </div>
@@ -482,7 +542,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                             <div class="clearfix"></div>
                         </div>
-                        <p>襄阳肇始于周宣王封仲山甫（樊穆仲）于此，已有2800多年建制历史，是楚文化、汉文化、三国文化的主要发源地。
+                        <p style="color: whitesmoke;">襄阳肇始于周宣王封仲山甫（樊穆仲）于此，已有2800多年建制历史，是楚文化、汉文化、三国文化的主要发源地。
                             历代为经济军事要地，素有“华夏第一城池”、“铁打的襄阳”、“兵家必争之地”之称。</p>
                     </div>
                 </div>
@@ -499,7 +559,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                             <div class="clearfix"></div>
                         </div>
-                        <p>呼伦贝尔市拥有12.6万平方公里森林、10万平方公里草原、2万平方公里湿地、500多个湖泊、3000多条河流，构成了中国规模最大、
+                        <p style="color: whitesmoke;">呼伦贝尔市拥有12.6万平方公里森林、10万平方公里草原、2万平方公里湿地、500多个湖泊、3000多条河流，构成了中国规模最大、
                             最为完整的生态系统，是中国优秀旅游城市、全国唯一的草原旅游重点开发地区、国家级旅游业改革创新先行区，2012年7月9日入选国家森林城市，
                             2017年12月当选中国十佳冰雪旅游城市，2018年入选国家物流枢纽承载城市。</p>
                     </div>
@@ -511,7 +571,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!--gallery-->
     <div class="gallery" id="tours">
         <div class="container">
-            <h3 class="tittle">Tours</h3>
+            <h3 class="tittle" style="color: orange;">旅行</h3>
             <div class="gallery-grids">
                 <section>
                     <ul id="da-thumbs" class="da-thumbs">
@@ -604,7 +664,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!--about--->
     <div class="about-section" id="about">
         <div class="container">
-            <h3 class="tittle">关于我们</h3>
+            <h3 class="tittle" style="color: orange;">关于我们</h3>
             <div class="about-grids">
                 <div class="col-md-4 about-grid">
                     <img src="{% static 'html/images/six_single_dogs.png' %}" class="img-responsive" alt=""/>
@@ -615,8 +675,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i>
                         </div>
                         <div class="about-right">
-                            <h4>预测最新天气预报</h4>
-                            <p>本站基于Spark技术，根据国家气候数据中心的历史天气数据预测未来天气信息，并及时发布准确的全球天气预报信息。
+                            <h4 style="color: #67c6d0;">预测最新天气预报</h4>
+                            <p style="color: whitesmoke;">本站基于Spark技术，根据国家气候数据中心的历史天气数据预测未来天气信息，并及时发布准确的全球天气预报信息。
                             </p>
                         </div>
                         <div class="clearfix"></div>
@@ -626,8 +686,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <i class="glyphicon glyphicon-plane" aria-hidden="true"></i>
                         </div>
                         <div class="about-right">
-                            <h4>获取历史上不同时期的天气信息</h4>
-                            <p>方便查询世界各地的今天和历史天气，以及每周天气预报。</p>
+                            <h4 style="color: #67c6d0;">获取历史上不同时期的天气信息</h4>
+                            <p style="color: whitesmoke;">方便查询世界各地的今天和历史天气，以及每周天气预报。</p>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -636,8 +696,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <i class="glyphicon glyphicon-dashboard" aria-hidden="true"></i>
                         </div>
                         <div class="about-right">
-                            <h4>最佳旅行指南</h4>
-                            <p>我们将根据天气预报提供最佳旅行套餐，为您的旅行或商务旅行提供最佳选择。</p>
+                            <h4 style="color: #67c6d0;">最佳旅行指南</h4>
+                            <p style="color: whitesmoke;">我们将根据天气预报提供最佳旅行套餐，为您的旅行或商务旅行提供最佳选择。</p>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -646,8 +706,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>
                         </div>
                         <div class="about-right">
-                            <h4>天气资讯</h4>
-                            <p>集合全网资源，发布最新最全的与天气有关的新闻！</p>
+                            <h4 style="color: #67c6d0;">天气资讯</h4>
+                            <p style="color: whitesmoke;">集合全网资源，发布最新最全的与天气有关的新闻！</p>
                         </div>
                         <div class="clearfix"></div>
                     </div>
