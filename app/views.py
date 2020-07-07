@@ -2,15 +2,13 @@ import os, django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Weather.settings")  # project_name 项目名称
 django.setup()
 import logging
-import datetime
 import hashlib
-import time
-import datetime
 from django.contrib import messages
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.core.mail import send_mail
 from datetime import datetime
+from datetime import timedelta
 from . import models
 from . import forms
 from Weather import settings
@@ -210,7 +208,7 @@ def hash_code(s, salt=settings.SECRET_KEY):
 
 
 def make_confirm_string(user):
-    now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     code = hash_code(user.name, now)
     models.ConfirmString.objects.create(code=code, user=user, )
     print(code)
@@ -238,7 +236,7 @@ def send_email(email, code):
 def login(request):
     print('进入login视图函数')
     if request.session.get('is_login', None):
-        return redirect('/index/')
+        return render(request, 'app/index.html', {'has_login': True})
     if request.method == "POST":
         login_form = forms.UserForm(request.POST)
         message = '请检查填写内容!'
@@ -260,7 +258,7 @@ def login(request):
                 request.session['is_login'] = True
                 request.session['user_id'] = user.id
                 request.session['user_name'] = user.name
-                return redirect('/index/')
+                return render(request, 'app/index.html', {'has_login': True})
             else:
                 message = '密码不正确!'
                 return render(request, 'app/login.html', locals())
@@ -268,12 +266,12 @@ def login(request):
         else:
             return render(request, 'app/login.html', locals())
     login_form = forms.UserForm()
-    return render(request, 'app/login.html', locals())
+    return render(request, 'app/login.html',locals())
 
 
 def register(request):
-    if request.session.get('is_login', None):
-        return redirect('/index/')
+    # if request.session.get('is_login', None):
+    #     return redirect('/index/')
 
     if request.method == 'POST':
         register_form = forms.RegisterForm(request.POST)
@@ -318,9 +316,9 @@ def register(request):
 def logout(request):
     print('登出函数')
     if not request.session.get('is_login', None):
-        return redirect('/app/index/')
+        return redirect('/index/')
     request.session.flush()
-    return redirect('/app/index/')
+    return redirect('/index/')
 
 
 def user_confirm(request):
@@ -333,8 +331,8 @@ def user_confirm(request):
         return render(request, 'app/confirm.html', locals())
 
     c_time = confirm.c_time
-    now = datetime.datetime.now()
-    if now > c_time + datetime.timedelta(settings.CONFIRM_DAYS):
+    now = datetime.now()
+    if now > c_time + timedelta(settings.CONFIRM_DAYS):
         confirm.user.delete()
         message = "您的邮件已经过期！请重新注册！"
         return render(request, 'app/confirm.html', locals())

@@ -16,7 +16,7 @@ urlpatterns = [
     path('history/', views.history_page, name='history'),
     path('transfer/', views.transfer_history, name='transfer_data'),
 
-    path('logout/', views.logout),
+    path('logout/', views.logout, name='logout'),
     path('captcha/', include('captcha.urls')),
     path('confirm/', views.user_confirm),
     # path('line/', views.ChartView.as_view(), name='line'),
