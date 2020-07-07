@@ -61,16 +61,16 @@
         <a style="font-size: 40px;color: orange;padding-left: 20px" href="{% url 'index' %}" title="返回首页">Six-Single-Dogs</a>
         <div class="user-panel">
 
-                {% if has_login %}
-                    <a href="{% url 'logout' %}" style="font-size: 20px;color: white">
+            {% if has_login %}
+                <a href="{% url 'logout' %}" style="font-size: 20px;color: white">
                     {{ "登出" }}
-                     </a>
-                {% else %}
-                    <a href="{% url 'login' %}" style="font-size: 20px;color: white">
+                </a>
+            {% else %}
+                <a href="{% url 'login' %}" style="font-size: 20px;color: white">
                     {{ "登录" }}
-                     </a>
-                    <a href="{% url 'register' %}" style="color: white;font-size: 20px"> / 注册</a>
-                {% endif %}
+                </a>
+                <a href="{% url 'register' %}" style="color: white;font-size: 20px"> / 注册</a>
+            {% endif %}
 
 
         </div>
@@ -110,7 +110,8 @@
                     <div class="forecast-item">
                         <div class="info">
                             <div class="icon icon-w w-01"><i class="icon-date ming"></i></div>
-                            <div class="temp">21-31<span class="symbol">℃</span></div>
+                            <div class="temp">{{ predict_queryset.0.tavg | floatformat:0 }}<span class="symbol">℃</span>
+                            </div>
                         </div>
                         <div class="text">多云&nbsp;&nbsp;微风&nbsp;&nbsp;空气质量优</div>
                     </div>
@@ -118,7 +119,8 @@
                         <div class="info">
                             <div class="icon icon-w w-08"><i class="icon-date hou"></i></div>
                             {#07 08 09 分别对应小雨中雨大雨#}
-                            <div class="temp">24-33<span class="symbol">℃</span></div>
+                            <div class="temp">{{ predict_queryset.1.tavg | floatformat:0 }}<span class="symbol">℃</span>
+                            </div>
                         </div>
                         <div class="text">中雨&nbsp;&nbsp;微风&nbsp;&nbsp;空气质量优</div>
                     </div>
@@ -127,25 +129,73 @@
                     <div class="slide-layer">
                         <div class="slide-inner">
                             <div class="slide-item">
-                                <div class="temp">07月05日&nbsp;(周日)&nbsp;22℃ /&nbsp;30℃</div>
+                                <div class="temp">
+                                    {% if predict_queryset.0.date|date:'m' < 10 %}
+                                        0{{ predict_queryset.0.date|date:'m' }}月
+                                    {% else %}
+                                        {{ predict_queryset.0.date|date:'m' }}月
+                                    {% endif %}
+                                    {% if predict_queryset.0.date|date:'d' < 10 %}
+                                        0{{ predict_queryset.0.date|date:'d' }}日
+                                    {% else %}
+                                        {{ predict_queryset.0.date|date:'d' }}日
+                                    {% endif %}
+                                    &nbsp&nbsp{{ predict_queryset.0.tavg | floatformat:0 }}℃
+                                </div>
                                 <div class="weather"><span class="text">雷阵雨</span><i class="icon-air icon-air-1"></i>
                                 </div>
                                 <div class="wind">无持续风向&nbsp;微风</div>
                             </div>
                             <div class="slide-item">
-                                <div class="temp">07月06日&nbsp;(周一)&nbsp;21℃ /&nbsp;31℃</div>
+                                <div class="temp">
+                                    {% if predict_queryset.1.date|date:'m' < 10 %}
+                                        0{{ predict_queryset.1.date|date:'m' }}月
+                                    {% else %}
+                                        {{ predict_queryset.1.date|date:'m' }}月
+                                    {% endif %}
+                                    {% if predict_queryset.1.date.day < 10 %}
+                                        0{{ predict_queryset.1.date.day }}日
+                                    {% else %}
+                                        {{ predict_queryset.1.date.day }}日
+                                    {% endif %}
+                                    &nbsp&nbsp{{ predict_queryset.1.tavg | floatformat:0 }}℃
+                                </div>
                                 <div class="weather"><span class="text">多云</span><i class="icon-air icon-air-1"></i>
                                 </div>
                                 <div class="wind">无持续风向&nbsp;微风</div>
                             </div>
                             <div class="slide-item">
-                                <div class="temp">07月07日&nbsp;(周二)&nbsp;24℃ /&nbsp;33℃</div>
+                                <div class="temp">
+                                    {% if predict_queryset.2.date|date:'m' < 10 %}
+                                        0{{ predict_queryset.2.date|date:'m' }}月
+                                    {% else %}
+                                        {{ predict_queryset.2.date|date:'m' }}月
+                                    {% endif %}
+                                    {% if predict_queryset.2.date|date:'d' < 10 %}
+                                        0{{ predict_queryset.2.date|date:'d' }}日
+                                    {% else %}
+                                        {{ predict_queryset.2.date|date:'d' }}日
+                                    {% endif %}
+                                    &nbsp&nbsp{{ predict_queryset.2.tavg | floatformat:0 }}℃
+                                </div>
                                 <div class="weather"><span class="text">多云</span><i class="icon-air icon-air-1"></i>
                                 </div>
                                 <div class="wind">无持续风向&nbsp;微风</div>
                             </div>
                             <div class="slide-item">
-                                <div class="temp">07月08日&nbsp;(周三)&nbsp;22℃ /&nbsp;33℃</div>
+                                <div class="temp">
+                                    {% if predict_queryset.3.date|date:'m' < 10 %}
+                                        0{{ predict_queryset.3.date|date:'m' }}月
+                                    {% else %}
+                                        {{ predict_queryset.3.date|date:'m' }}月
+                                    {% endif %}
+                                    {% if predict_queryset.3.date|date:'d' < 10 %}
+                                        0{{ predict_queryset.3.date|date:'d' }}日
+                                    {% else %}
+                                        {{ predict_queryset.3.date|date:'d' }}日
+                                    {% endif %}
+                                    &nbsp&nbsp{{ predict_queryset.3.tavg | floatformat:0 }}℃
+                                </div>
                                 <div class="weather"><span class="text">多云</span><i class="icon-air icon-air-2"></i>
                                 </div>
                                 <div class="wind">东北风&nbsp;3-4级</div>
