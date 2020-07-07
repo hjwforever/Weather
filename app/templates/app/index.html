@@ -256,7 +256,7 @@
                 }
             },
         boundaryGap: false,
-        data: [
+        data: [ "{{ queryset.0.date}}",
                 {% for row in predict_queryset %}
                     "{{ row.date }}",
                 {% endfor %}
@@ -287,7 +287,7 @@
             type: 'line',
             smooth:true,
             stack: '总量',
-            data: [
+            data: [ "{{ queryset.0.tavg | floatformat:0 }}",
                 {% for row in predict_queryset %}
                     "{{ row.tavg | floatformat:0}}",
                 {% endfor %}
