@@ -194,8 +194,7 @@
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('main'));
     // 指定图表的配置项和数据
-    var colors = ['red','#5793f3', '#ffb320', 'orange','white'];
-    var colors1 = ['#5793f3', '#ffb320', 'orange','orange'];
+    var colors = ['red','#5793f3', '#ffb320', 'orange','white','pink'];
     var option = {
     baseOption: {
         timeline: {
@@ -208,16 +207,26 @@
             // controlStyle: {
             //     position: 'left'
             // },
-
+            lineStyle:{
+                 color: colors[0],
+            },
+            controlStyle:{
+                 color: colors[0],
+                 borderColor:colors[0],
+                 borderWidth: 2,
+            },
+            label:{
+                 color: 'yellow',
+            },
             data: [
                 '未来一周',
                 {
                     value: '近十年同一天',
-                    tooltip: {
-                        formatter: '{b} 部分数据缺失！'
-                    },
+{#                    tooltip: {#}
+{#                        formatter: '{b} 部分数据缺失！'#}
+{#                    },#}
                     symbol: 'diamond',
-                    symbolSize: 16
+                    symbolSize: 20
                 },
             ],
             // label: {
@@ -228,11 +237,12 @@
         },
         title: {
             left: '10%',
-            top: '3%',
-            subtextStyle: {
-                color: colors[4],//'white'
-                },
-            subtext: '数据来自国家统计局'
+            top: '1%',
+{#            fontsize: 3,#}
+{#            subtextStyle: {#}
+{#                color: 'green',//'white'#}
+{#                },#}
+{#            subtext: '数据来自国家统计局'#}
         },
         tooltip: {
         trigger: 'axis',
@@ -266,7 +276,7 @@
             },
              iconStyle:{
                     normal:{
-                      color:colors[3],//设置颜色
+                      color:colors[5],//设置颜色
                     }
                 }
         },
@@ -348,6 +358,7 @@
                 name: '未来一周',
                 type: 'line',
                 smooth: true,
+                color: colors[2],
                 lineStyle: {
                         color: colors[2],
                         width: 4,
@@ -403,6 +414,7 @@
                 {
                     name: '近10年同一天',
                     type: 'line',
+                    color: colors[1],
                     lineStyle: {
                         color: colors[1],
                         width: 4,

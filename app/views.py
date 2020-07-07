@@ -1,4 +1,5 @@
 import os, django
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Weather.settings")  # project_name 项目名称
 django.setup()
 import logging
@@ -29,6 +30,7 @@ from app.models import Weather
 from rest_framework.decorators import api_view
 from django.utils import timezone
 
+
 # import os, django
 #
 # os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Weather.settings")
@@ -36,8 +38,6 @@ from django.utils import timezone
 
 class EventsForm(object):
     pass
-
-
 
 
 def response_as_json(data):
@@ -53,14 +53,9 @@ def response_as_json(data):
 def home_index(request):
     return render(request, 'app/home-index.html')
 
+
 def beijingweather(request):
     return render(request, 'app/beijingweather.html')
-
-
-
-
-
-
 
 
 def bar_base() -> Bar:
@@ -120,11 +115,13 @@ def index(request):
     predict_queryset = models.PredictData.objects.all()
     print('predict_queryset:')
     print(predict_queryset)
-    everyyeartodaystart = datetime(datenow.year-10, 1, 1)
-    everyyeartodayhistory = models.HistoryData.objects.filter(date__range=[everyyeartodaystart, datenow], date__month=datenow.month, date__day=datenow.day)
+    everyyeartodaystart = datetime(datenow.year - 10, 1, 1)
+    everyyeartodayhistory = models.HistoryData.objects.filter(date__range=[everyyeartodaystart, datenow],
+                                                              date__month=datenow.month, date__day=datenow.day)
     print('everyyeartodayhistory:')
     print(everyyeartodayhistory)
-    return render(request, 'app/index.html', {'queryset': queryset, 'predict_queryset': predict_queryset, 'everyyeartodayhistory': everyyeartodayhistory})
+    return render(request, 'app/index.html', {'queryset': queryset, 'predict_queryset': predict_queryset,
+                                              'everyyeartodayhistory': everyyeartodayhistory})
 
 
 def get_test(request):
@@ -177,6 +174,7 @@ def history_page(request):
     print(History_data)
     return render(request, 'app/search-history.html', {'History_data': History_data})
 
+
 def transfer_history(request):
     city = request.GET.get('CC')
     year = request.GET.get('YYYY')
@@ -195,7 +193,8 @@ def transfer_history(request):
             if day == '0':
                 History_data = models.HistoryData.objects.filter(date__year=year, date__month=mon).values()
             else:
-                History_data = models.HistoryData.objects.filter(date__year=year, date__month=mon, date__day=day).values()
+                History_data = models.HistoryData.objects.filter(date__year=year, date__month=mon,
+                                                                 date__day=day).values()
     print(History_data)
     return render(request, 'app/search-history.html', {'History_data': History_data})
 
@@ -227,7 +226,7 @@ def send_email(email, code):
                     这里是Django学习技术的分享！</p>
                     <p>请点击站点链接完成注册确认！</p>
                     <p>此链接有效期为{2}天！</p>
-                    """.format('127.0.0.1:8000', code, settings.CONFIRM_DAYS)
+                    """.format('0.0.0.0:8000', code, settings.CONFIRM_DAYS)
     msg = EmailMultiAlternatives(subject, text_content, settings.EMAIL_HOST_USER, [email])
     msg.attach_alternative(html_content, "text/html")
     msg.send()
@@ -236,7 +235,21 @@ def send_email(email, code):
 def login(request):
     print('进入login视图函数')
     if request.session.get('is_login', None):
-        return render(request, 'app/index.html', {'has_login': True})
+        datenow = timezone.now()
+        queryset = models.HistoryData.objects.filter(date=datenow).values()
+        print('queryset:')
+        print(queryset)
+        predict_queryset = models.PredictData.objects.all()
+        print('predict_queryset:')
+        print(predict_queryset)
+        everyyeartodaystart = datetime(datenow.year - 10, 1, 1)
+        everyyeartodayhistory = models.HistoryData.objects.filter(date__range=[everyyeartodaystart, datenow],
+                                                                  date__month=datenow.month, date__day=datenow.day)
+        print('everyyeartodayhistory:')
+        print(everyyeartodayhistory)
+        return render(request, 'app/index.html',
+                      {'has_login': True, 'queryset': queryset, 'predict_queryset': predict_queryset,
+                       'everyyeartodayhistory': everyyeartodayhistory})
     if request.method == "POST":
         login_form = forms.UserForm(request.POST)
         message = '请检查填写内容!'
@@ -258,7 +271,22 @@ def login(request):
                 request.session['is_login'] = True
                 request.session['user_id'] = user.id
                 request.session['user_name'] = user.name
-                return render(request, 'app/index.html', {'has_login': True})
+                datenow = timezone.now()
+                queryset = models.HistoryData.objects.filter(date=datenow).values()
+                print('queryset:')
+                print(queryset)
+                predict_queryset = models.PredictData.objects.all()
+                print('predict_queryset:')
+                print(predict_queryset)
+                everyyeartodaystart = datetime(datenow.year - 10, 1, 1)
+                everyyeartodayhistory = models.HistoryData.objects.filter(date__range=[everyyeartodaystart, datenow],
+                                                                          date__month=datenow.month,
+                                                                          date__day=datenow.day)
+                print('everyyeartodayhistory:')
+                print(everyyeartodayhistory)
+                return render(request, 'app/index.html',
+                              {'has_login': True, 'queryset': queryset, 'predict_queryset': predict_queryset,
+                               'everyyeartodayhistory': everyyeartodayhistory})
             else:
                 message = '密码不正确!'
                 return render(request, 'app/login.html', locals())
@@ -266,7 +294,7 @@ def login(request):
         else:
             return render(request, 'app/login.html', locals())
     login_form = forms.UserForm()
-    return render(request, 'app/login.html',locals())
+    return render(request, 'app/login.html', locals())
 
 
 def register(request):
