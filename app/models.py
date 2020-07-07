@@ -72,3 +72,11 @@ class PredictData(models.Model):
 
     def __str__(self):
         return str(self.date)
+
+class Memorandum(models.Model):
+    name = models.CharField(max_length=128, unique=True)
+    email = models.EmailField(unique=True)
+    time = models.DateTimeField()
+    eventContent = models.CharField(max_length=128)
+    def __str__(self):
+        return str(self.eventContent)

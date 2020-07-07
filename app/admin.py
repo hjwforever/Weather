@@ -18,4 +18,5 @@ admin.site.register(ConfirmString)
 admin.site.register(HistoryData, HistoryDateAdmin)
 admin.site.register(PredictData, PredictDataAdmin)
 admin.site.register(Weather)
+admin.site.register(Memorandum)
 

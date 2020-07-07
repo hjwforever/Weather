@@ -14,7 +14,7 @@ from django.utils import timezone
 
 
 datenow = timezone.now()
-models.PredictData.objects.filter(date__year=datenow.year, date__month=datenow.month,date__day=datenow.day)
+models.PredictData.objects.filter(date__year=datenow.year, date__month=datenow.month,date__day=datenow.day).delete()
 startTime = datetime(datenow.year,datenow.month,1).strftime("%Y-%m-%d")
 endTime=datetime(datenow.year,datenow.month,1).strftime("%Y-%m-%d")
 
