@@ -9,23 +9,37 @@ from datetime import datetime
 from app.mod_timeseries.analyzeData import analyzeData
 from django.utils import timezone
 
+from app.mod_timeseries.WebCrawler import *
+
+# webCrawler(cityCode='58927', startYear=2000, endYear=2020)
+main()
+
 # cld= DataClean()
 # cld.cleanData(startTime='1980-01-01', endTime='2020-12-31', needAllData=True,isChooseDay=False,resultFileName='historyData.csv')
 
+#
+# datenow = timezone.now()
+# models.PredictData.objects.filter(date__year=datenow.year, date__month=datenow.month,date__day=datenow.day).delete()
+# startTime = datetime(datenow.year,datenow.month,1).strftime("%Y-%m-%d")
+# endTime=datetime(datenow.year,datenow.month,1).strftime("%Y-%m-%d")
+#
+# print(startTime)
+# print(endTime)
+#
+# i=datenow.day
+# i=i+7
+# p= ArimaMethod()
+# p.predict(dataType='tavg', startTime=startTime, endTime=endTime, preDay=str(i))
 
-datenow = timezone.now()
-models.PredictData.objects.filter(date__year=datenow.year, date__month=datenow.month,date__day=datenow.day).delete()
-startTime = datetime(datenow.year,datenow.month,1).strftime("%Y-%m-%d")
-endTime=datetime(datenow.year,datenow.month,1).strftime("%Y-%m-%d")
 
-print(startTime)
-print(endTime)
 
-i=datenow.day
-p= ArimaMethod()
-# for n in range(0,7):
-i=i+7
-p.predict(dataType='tavg', startTime=startTime, endTime=endTime, preDay=str(i))
+
+
+
+
+
+
+
 
 # data=models.HistoryData.objects.filter(date__year=2010, date__month=3).values()
 # print(data)
