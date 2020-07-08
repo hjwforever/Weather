@@ -75,9 +75,20 @@
                     {#displaytext += data1.data +"<br>";#}
                     {#var finddiv = document.getElementById("todayweather");//寻找显示容器#}
                     {#finddiv.innerHTML = displaytext;//引用解析好了的数据#}
+                    {#document.getElementById('todayweather').innerText= result ;#}
+                    var jsonObj;
+                    var s;
+                    s=xmlhttp.responseText;
+                    s=s.substring(1,s.length-1)
+                    {#alert(s)#}
+                    jsonObj=JSON.parse(s);
+                    document.getElementById("selectcity").innerHTML=jsonObj.fields.city;
+                    document.getElementById("tvalue").innerHTML = jsonObj.fields.tavg;
+                    {#var str = '{"name":"hello"}'#}
+                    {#var json  = JSON.parse(str);#}
+                    {#alert(json.name);#}
+                    {#document.getElementById("todayweather").innerHTML =json.name;#}
 
-                    var result = JSON.stringify(JSON.parse(xmlhttp.responseFields), null, 2);//将字符串转换成json对象
-                    document.getElementById('todayweather').innerText= result ;
                 }
             }
             xmlhttp.open("GET", "/app/selectcity?city=" + str, true);
@@ -134,7 +145,7 @@
             <form action="{% url 'index' %}" method="GET">
                 <select type="text" name="CITY" onChange="showcity(this.value)"
                         style="width: auto;height: 27px;float: right;font-size: 25px;color: orange;margin-top:10px;background: none">
-                    <option value="beijing" style="background-color: #FFEFD5">北京</option>
+                    <option value="beijing" style="background-color: #FFEFD5" selected>北京</option>
                     <option value="zhengzhou" style="background-color: #FFEFD5">郑州</option>
                     <option value="longyan" style="background-color: #FFEFD5">龙岩</option>
                     <option value="tianjin" style="background-color: #FFEFD5">天津</option>
@@ -147,8 +158,12 @@
                 <div class="real-time-box">
                     <div class="icon icon-w w-00"></div>
                     <div class="text"><span id="selectcity" style="font-size: 35px">北京</span><span class="label">&nbsp;今日天气</span>
-                        <div class="temperature"><span style="font-size: 5px" id="todayweather" class="num" id="tvalue">
-                        </span><span class="symbol">℃</span></div>
+                        <div class="temperature">
+                            <span  class="num" id="tvalue">
+                                {{ queryset.0.tavg|floatformat:0 }}
+                            </span>
+                            <span class="symbol">℃</span>
+                        </div>
                         <div class="others">
                             <div class="line-1"><span>晴</span><span>空气质量良</span></div>
                             <div class="line-2"><span>PM2.5 : 74</span><span>气压 : 991</span><span>湿度 : 46</span></div>

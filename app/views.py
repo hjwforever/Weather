@@ -45,16 +45,21 @@ def selectcity(request):
     city = request.GET.get('city')
     print(city)
 
-    datenow = timezone.now()
+    # datenow = timezone.now()
+    datenow=datetime(2020, 7, 8)
     queryset = models.HistoryData.objects.filter(date=datenow,city=city)
-    print('queryset:')
-    print(queryset.values())
+
+    # print('queryset:')
+    # print(queryset.values())
 
     data = serializers.serialize("json", queryset)
+    queryset = json.loads(data)
     print('data:')
     print(data)
-    return JsonResponse(data, safe=False)
-
+    # return JsonResponse(data, safe=False)
+    print('queryset::::::::')
+    print(queryset)
+    return JsonResponse(queryset, json_dumps_params={'ensure_ascii': False}, safe=False)
 
 
 def response_as_json(data):
