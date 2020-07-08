@@ -29,6 +29,7 @@ from pyecharts import options as opts
 from app.models import Weather
 from rest_framework.decorators import api_view
 from django.utils import timezone
+from django.core import serializers
 
 
 # import os, django
@@ -38,6 +39,22 @@ from django.utils import timezone
 
 class EventsForm(object):
     pass
+
+
+def selectcity(request):
+    city = request.GET.get('city')
+    print(city)
+
+    datenow = timezone.now()
+    queryset = models.HistoryData.objects.filter(date=datenow,city=city)
+    print('queryset:')
+    print(queryset.values())
+
+    data = serializers.serialize("json", queryset)
+    print('data:')
+    print(data)
+    return JsonResponse(data, safe=False)
+
 
 
 def response_as_json(data):

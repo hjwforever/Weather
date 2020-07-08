@@ -3,7 +3,7 @@ from app import views
 from django.urls import include
 
 urlpatterns = [
-    # path('', views.html, name='html'),
+    path('selectcity/', views.selectcity, name='selectcity'),
     path('', views.index, name='index'),
     path('home/', views.home, name='home'),
     # path('index/', views.IndexView.as_view(), name='demo'),
