@@ -17,7 +17,7 @@ class ArimaMethod:
     def __init__(self):
         pass
 
-    def predict(self, dataType='tmin', startTime='1991-01-01', endTime='1991-12-31', preDay='01'):
+    def predict(self,cityName='beijing', dataType='tmin', startTime='1991-01-01', endTime='1991-12-31', preDay='01'):
         preSatrtYear = startTime[:4]
         trainStartYear = str(int(preSatrtYear) - 10)
         trainStartTime = trainStartYear + '-01-01'
@@ -32,13 +32,13 @@ class ArimaMethod:
 
         cld= DataClean()
         if dataType=='tmin':
-            cld.cleanData(startTime=str(trainStartTime), endTime=str(startTime), day=preDay,justNeedTmin=True)
+            cld.cleanData(cityName=cityName, startTime=str(trainStartTime), endTime=str(startTime), day=preDay,justNeedTmin=True)
         elif dataType=='tmax':
-            cld.cleanData(startTime=str(trainStartTime), endTime=str(startTime), day=preDay, justNeedTmax=True)
+            cld.cleanData(cityName=cityName, startTime=str(trainStartTime), endTime=str(startTime), day=preDay, justNeedTmax=True)
         elif dataType=='tavg':
-            cld.cleanData(startTime=str(trainStartTime), endTime=str(startTime), day=preDay, justNeedTavg=True)
+            cld.cleanData(cityName=cityName, startTime=str(trainStartTime), endTime=str(startTime), day=preDay, justNeedTavg=True)
         elif dataType=='prcp':
-            cld.cleanData(startTime=str(trainStartTime), endTime=str(startTime), day=preDay, justNeedPrcp=True)
+            cld.cleanData(cityName=cityName, startTime=str(trainStartTime), endTime=str(startTime), day=preDay, justNeedPrcp=True)
 
 
         # Defaults
@@ -146,31 +146,23 @@ class ArimaMethod:
         for date_0, value in data2.iteritems():
             value = round(value)
             date = datetime(date_0.year, date_0.month, int(preDay))
-            # print(isinstance(date, datetime))
-            # print(date.day)
 
-            # print(getattr(row, 'c1'), getattr(row, 'c2'))  # 输出每一行
-            # models.HistoryData.objects.
-            queryset = models.PredictData.objects.filter(date=date)
-            # if models.PredictData.objects.filter(date=date):
+
+            queryset = models.PredictData.objects.filter(date=date,city=cityName)
             if queryset.exists():
                 if dataType=='tmin':
-                    models.PredictData.objects.filter(date=date).update(tmin=value)
+                    models.PredictData.objects.filter(date=date,city=cityName).update(tmin=value)
                 elif dataType=='tmax':
-                    models.PredictData.objects.filter(date=date).update(tmax=value)
+                    models.PredictData.objects.filter(date=date,city=cityName).update(tmax=value)
                 elif dataType=='tavg':
-                    models.PredictData.objects.filter(date=date).update(tavg=value)
-                elif dataType=='prcp':
-                    models.PredictData.objects.filter(date=date).update(prcp=value)
+                    models.PredictData.objects.filter(date=date,city=cityName).update(tavg=value)
             else:
                 if dataType=='tmin':
-                    models.PredictData.objects.create(date=date, tmin=value)#, tmax=0, tavg=0, prcp=0)
+                    models.PredictData.objects.create(date=date, tmin=value,city=cityName)
                 elif dataType=='tmax':
-                    models.PredictData.objects.create(date=date, tmax=value)#,  tmin=0, tavg=0, prcp=0)
+                    models.PredictData.objects.create(date=date, tmax=value,city=cityName)
                 elif dataType=='tavg':
-                    models.PredictData.objects.create(date=date, tavg=value)#, tmin=0, tmax=0, prcp=0)
-                elif dataType=='prcp':
-                    models.PredictData.objects.create(date=date, prcp=value)#, tmin=0, tmax=0, tavg=0)
+                    models.PredictData.objects.create(date=date, tavg=value,city=cityName)
 
         ax = data.plot(figsize=(20, 16))
         pred2.predicted_mean.plot(ax=ax, label='Dynamic Forecast (get_forecast)')

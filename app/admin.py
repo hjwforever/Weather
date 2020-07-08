@@ -6,11 +6,11 @@ from app.models import *
 
 # admin.site.register(models.User)
 class PredictDataAdmin(admin.ModelAdmin):
-    list_display = ('date', 'tmin', 'tmax', 'tavg', 'prcp')
+    list_display = ('date', 'tmin', 'tmax', 'tavg')
 
 
 class HistoryDateAdmin(admin.ModelAdmin):
-    list_display = ('date', 'tmin', 'tmax', 'tavg', 'prcp')
+    list_display = ('date', 'tmin', 'tmax', 'tavg')
 
 
 admin.site.register(User)

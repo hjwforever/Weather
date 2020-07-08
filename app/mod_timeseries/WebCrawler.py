@@ -12,7 +12,7 @@ def webCrawler(cityName='beijing', startYear=2011, endYear=2012):
                 ur = 'http://lishi.tianqi.com/'+cityName+'/' + str(year) + '0'+str(month) + '.html'
             urls.append(ur)
 
-    file = open(cityName+'_weather.csv', 'w', encoding='gbk')
+    file = open(cityName+'_orgin_weather_data.csv', 'w', encoding='gbk')
     file.write('city,date,tmax,tmin,tavg\n')
     header = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36',
@@ -43,4 +43,4 @@ def webCrawler(cityName='beijing', startYear=2011, endYear=2012):
     file.close()
 
 
-webCrawler(cityName='hulunbeier', startYear=2011, endYear=2020)
+# webCrawler(cityName='hulunbeier', startYear=2011, endYear=2020)

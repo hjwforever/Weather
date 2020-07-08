@@ -11,25 +11,26 @@ from django.utils import timezone
 
 from app.mod_timeseries.WebCrawler import *
 
-# webCrawler(cityCode='58927', startYear=2000, endYear=2020)
-main()
+# models.HistoryData.objects.filter().all().delete()
 
 # cld= DataClean()
-# cld.cleanData(startTime='1980-01-01', endTime='2020-12-31', needAllData=True,isChooseDay=False,resultFileName='historyData.csv')
+# cld.cleanData(cityName='hailar',startTime='1980-01-01', endTime='2020-12-31', needAllData=True,isChooseDay=False,resultFileName='historyData.csv')
 
-#
+# print(models.HistoryData.objects.filter(date__year=1980, date__month=1,date__day=3).values())
+
 # datenow = timezone.now()
 # models.PredictData.objects.filter(date__year=datenow.year, date__month=datenow.month,date__day=datenow.day).delete()
 # startTime = datetime(datenow.year,datenow.month,1).strftime("%Y-%m-%d")
-# endTime=datetime(datenow.year,datenow.month,1).strftime("%Y-%m-%d")
+# endTime=datetime(datenow.year,datenow.month+3,1).strftime("%Y-%m-%d")
 #
 # print(startTime)
 # print(endTime)
 #
-# i=datenow.day
-# i=i+7
+# # i=datenow.day
+# # i=i+3
 # p= ArimaMethod()
-# p.predict(dataType='tavg', startTime=startTime, endTime=endTime, preDay=str(i))
+# for i in range(datenow.day+1,datenow.day+7):
+#     p.predict(cityName='longyan',dataType='tmin', startTime=startTime, endTime=endTime, preDay=str(i))
 
 
 

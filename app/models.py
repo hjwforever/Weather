@@ -54,21 +54,23 @@ class ConfirmString(models.Model):
         verbose_name_plural = "确认码"
 
 class HistoryData(models.Model):
-    date = models.DateField(primary_key=True)
+    # id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
+    city = models.CharField(max_length=128)
+    date = models.DateField(unique_for_date=False)
     tmin = models.FloatField()
     tmax = models.FloatField()
     tavg = models.FloatField()
-    prcp = models.FloatField()
 
     def __str__(self):
         return str(self.date)
 
 class PredictData(models.Model):
-    date = models.DateField(primary_key=True)
+    # id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
+    city = models.CharField(max_length=128)
+    date = models.DateField(unique_for_date=False)#primary_key=True,
     tmin = models.FloatField(null=True)
     tmax = models.FloatField(null=True)
     tavg = models.FloatField(null=True)
-    prcp = models.FloatField(null=True)
 
     def __str__(self):
         return str(self.date)
