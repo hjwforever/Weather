@@ -1,51 +1,42 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="zxx">
 <head>
     <title>Six Single Dogs History Weather</title>
-    <!--引入echarts.js-->
-    <script src="{% static 'echarts.min.js' %}"></script>
-    <link href="{% static 'img/favicon.ico' %}" rel="shortcut icon"/>
-    <link href="{% static 'html/css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all"/>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="{% static 'html/js/jquery.min.js' %}"></script>
-    <!-- Custom Theme files -->
-    <!--theme-style-->
-    <link href="{% static 'html/css/style.css' %}" rel="stylesheet" type="text/css" media="all"/>
-    <link rel="stylesheet" href="{% static 'html/css/chocolat.css' %}" type="text/css">
-
-    <!--//theme-style-->
+    <!-- 网页元数据 -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta property="og:title" content="Vide"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="keywords" content="Trip Guide Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"/>
-    <script type="application/x-javascript"> addEventListener("load", function () {
-        setTimeout(hideURLbar, 0);
-    }, false);
-
-    function hideURLbar() {
-        window.scrollTo(0, 1);
-    } </script>
-    <!---->
-    <script src="{% static 'html/js/bootstrap.min.js' %}"></script>
-    <!---->
+    <!-- 网页标签图片 -->
+    <link href="{% static 'img/favicon.ico' %}" rel="shortcut icon"/>
+    <!-- Google字体 -->
     <link href='//fonts.googleapis.com/css?family=Questrial' rel='stylesheet' type='text/css'>
     <link href='//fonts.googleapis.com/css?family=Open+Sans:400,800italic,800,700italic,700,600italic,600,400italic,300italic,300'
           rel='stylesheet' type='text/css'>
+    <!-- .css包 -->
+    <link href="{% static 'html/css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all"/>
+    <link href="{% static 'html/css/style.css' %}" rel="stylesheet" type="text/css" media="all"/>
+    <link rel="stylesheet" href="{% static 'html/css/chocolat.css' %}" type="text/css">
+    <!-- 图表echarts资源包 -->
+    <script src="{% static 'echarts.min.js' %}"></script>
+    <!-- .js包 -->
+    <script src="{% static 'html/js/jquery.min.js' %}"></script>
+    <script src="{% static 'html/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'html/js/jquery.chocolat.js' %}"></script>
-    <!--lightboxfiles-->
+    <script type="text/javascript" src="{% static 'html/js/move-top.js' %}"></script>
+    <script type="text/javascript" src="{% static 'html/js/easing.js' %}"></script>
+    <script src="{% static 'html/js/modernizr.custom.97074.js' %}"></script>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
     <script type="text/javascript">
         $(function () {
             $('.gallery a').Chocolat();
         });
     </script>
-    <!--script-->
-    <!--startsmothscrolling-->
-    <script type="text/javascript" src="{% static 'html/js/move-top.js' %}"></script>
-    <script type="text/javascript" src="{% static 'html/js/easing.js' %}"></script>
     <script type="text/javascript">
         jQuery(document).ready(function ($) {
             $(".scroll").click(function (event) {
@@ -54,10 +45,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             });
         });
     </script>
-
-    <script src="{% static 'html/js/modernizr.custom.97074.js' %}"></script>
 </head>
+
 <body>
+<!-- 页眉 -->
 <div class="header" style=" height: 75px; background-color: #ffb320;">
     <div class="hhhh" style="background-color: black;height: 73px;">
         <div class="container" style="background-color: black;height: 73px;">
@@ -114,6 +105,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
     </div>
 </div>
+<!-- 页眉 end -->
+<!-- 搜索框 -->
 <div class="banner-section">
     <div class="container">
         <div class="banner-heder">
@@ -160,6 +153,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
     </div>
 </div>
+<!-- 搜索框 end -->
+<!-- 历史数据图表 -->
 <!--为ECharts准备一个具备大小的Dom-->
 {#background:url({% static 'img/pattern.png' %});#}
 <div id="main" style="background:url({% static 'img/pattern.png' %});width: 100%;height: 500%;" align="middle"></div>
@@ -355,6 +350,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     // 使用刚指定的配置项和数据显示图表。
     myChart.setOption(option);
 </script>
+<!-- 历史数据图表 end -->
 {#<table border="1">#}
 {#    <thead>#}
 {#    <tr>#}
@@ -449,6 +445,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         e.options.length = 1;
     }
 </script>
+<!-- 计算年月日函数 end -->
+<!-- 行程指南 -->
 <div class="content" style="background:url({% static 'img/pattern.png' %});">
     <div class="promotions" id="guides" style="background:url({% static 'img/pattern.png' %});">
         <div class="container" style="background:url({% static 'img/pattern.png' %});">
@@ -718,6 +716,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
     <!--about--->
 </div>
+<!-- 行程指南 end -->
+<!-- 返回顶部按钮 -->
 <script type="text/javascript">
     $(document).ready(function () {
         /*
@@ -733,6 +733,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
     });
 </script>
+<!-- 返回顶部按钮 end -->
 <a href="#" id="home" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
 <div class="modal fade" id="myModal1" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
@@ -744,7 +745,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
             <div class="modal-body">
                 <div class="news-gr">
-                    <img src="{% static 'html/images/p6.jpg' %}" class="img-responsive"/>
+                    <img src="{% static 'html/images/p6.jpg' %}" class="img-responsive" alt=""/>
                     <h3 class="tittle1">Trip Guide</h3>
                     <p>Nam aliquam pretium feugiat. Duis sem est, viverra eu interdum ac, suscipit nec mauris.
                         Suspendisse commodo tempor sagittis! In justo est, sollicitudin eu scelerisque pretium,

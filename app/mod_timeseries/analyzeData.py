@@ -69,6 +69,11 @@ class analyzeData:
                 avgmin[m] += min / len(data)
             avgmin[m] = avgmin[m] / 30
         return avgmin
+    
+    def getcitydata(self,year='1980'):
+        data=models.HistoryData.objects.filter(date__year=year).values()
+        return data
+
 
 
     # def MonthTmaxData(self, year=2010, month=3,gap=5):
