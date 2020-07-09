@@ -36,6 +36,8 @@ from django.core import serializers
 #
 # os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Weather.settings")
 # django.setup()
+global city
+
 
 class EventsForm(object):
     pass
@@ -49,8 +51,30 @@ def selectcity(request):
     datenow=datetime(2020, 7, 8)
     queryset = models.HistoryData.objects.filter(date__year=2020,date__month=7,city=city)
 
+
     # print('queryset:')
     # print(queryset.values())
+
+    data = serializers.serialize("json", queryset)
+    queryset = json.loads(data)
+    print('data:')
+    print(data)
+    # return JsonResponse(data, safe=False)
+    print('queryset::::::::')
+    print(queryset)
+    return JsonResponse(queryset, json_dumps_params={'ensure_ascii': False}, safe=False)
+
+
+def changechart(request):
+    city = request.GET.get('city')
+    print(city)
+
+    # datenow = timezone.now()
+    datenow=datetime(2020, 7, 8)
+    queryset = models.HistoryData.objects.filter(date__year=2020,date__month=4,city=city)
+    # print('queryset:')
+    # print(queryset.values())
+
 
     data = serializers.serialize("json", queryset)
     queryset = json.loads(data)
