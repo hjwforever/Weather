@@ -3,15 +3,16 @@ from app import views
 from django.urls import include
 
 urlpatterns = [
-    #ajax
+    # ajax获取数据
     path('selectcity/', views.selectcity, name='selectcity'),
-    path('changechart/',views.changechart, name='changechart'),
+    path('changechart/', views.changechart, name='changechart'),
+    path('getcalendar/', views.get_calendar, name='getcalendar'),
     path('selecthistorycity/', views.selecthistorycity, name='selecthistorycity'),
 
     path('', views.index, name='index'),
     path('home/', views.home, name='home'),
     # path('index/', views.IndexView.as_view(), name='demo'),
-    #登陆注册
+    # 登陆注册
     path('login/', views.login, name='login'),
     path('register/', views.register, name='register'),
 

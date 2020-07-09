@@ -32,7 +32,6 @@ from rest_framework.decorators import api_view
 from django.utils import timezone
 from django.core import serializers
 
-
 # import os, django
 #
 # os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Weather.settings")
@@ -89,12 +88,14 @@ def selecthistorycity(request):
 
 
 
+
 def model2jsonArr(data):
     rData = {}
     for p in data:
-        p.__dict__.pop("_state") # 除去'model、pk'
+        p.__dict__.pop("_state")  # 除去'model、pk'
         rData.append(p.__dict__)
     return rData
+
 
 def changechart(request):
     city = request.GET.get('city')
@@ -112,15 +113,30 @@ def changechart(request):
     yesterday = datenow - timedelta(days=1)
     everyyeartodaystart = datetime(datenow.year - 10, 1, 1)
     everyyeartodayhistory = models.HistoryData.objects.filter(date__range=[everyyeartodaystart, yesterday],
-                                                              date__month=datenow.month, date__day=datenow.day, city=city).order_by('date')
+                                                              date__month=datenow.month, date__day=datenow.day,
+                                                              city=city).order_by('date')
     # queryset = predict_queryset|everyyeartodayhistory
-    queryset = chain(everyyeartodayhistory,predict_queryset)
+    queryset = chain(everyyeartodayhistory, predict_queryset)
     data = serializers.serialize("json", queryset)
     aqueryset = json.loads(data)
     print(aqueryset)
     # data = model2jsonArr(findwell)
     # return JsonResponse(data, safe=False)
     return JsonResponse(aqueryset, json_dumps_params={'ensure_ascii': False}, safe=False)
+
+
+def get_calendar(request):
+    name = request.GET.get('name')
+    print("calendar:")
+    print(name)
+    queryset = models.Memorandum.objects.filter(name=name).order_by('time')
+    data = serializers.serialize("json", queryset)
+    queryset = json.loads(data)
+    print('calendar_data:')
+    print(data)
+    print('calendar_queryset')
+    print(queryset)
+    return JsonResponse(queryset, json_dumps_params={'ensure_ascii': False}, safe=False)
 
 
 def response_as_json(data):
@@ -200,11 +216,17 @@ def index(request):
     print(predict_queryset)
     everyyeartodaystart = datetime(datenow.year - 10, 1, 1)
     everyyeartodayhistory = models.HistoryData.objects.filter(date__range=[everyyeartodaystart, datenow],
-                                                              date__month=datenow.month, date__day=datenow.day).order_by('date')
+                                                              date__month=datenow.month,
+                                                              date__day=datenow.day).order_by('date')
     print('everyyeartodayhistory:')
     print(everyyeartodayhistory)
-    return render(request, 'app/index.html', {'queryset': queryset, 'predict_queryset': predict_queryset,
-                                              'everyyeartodayhistory': everyyeartodayhistory})
+    if request.session.get('is_login', None):
+        return render(request, 'app/index.html', {'queryset': queryset, 'predict_queryset': predict_queryset,
+                                                  'everyyeartodayhistory': everyyeartodayhistory, 'has_login': True,
+                                                  'login_user_name': request.session['user_name']})
+    else:
+        return render(request, 'app/index.html', {'queryset': queryset, 'predict_queryset': predict_queryset,
+                                                  'everyyeartodayhistory': everyyeartodayhistory, 'has_login': False})
 
 
 def get_test(request):
@@ -331,7 +353,7 @@ def login(request):
         print(everyyeartodayhistory)
         return render(request, 'app/index.html',
                       {'has_login': True, 'queryset': queryset, 'predict_queryset': predict_queryset,
-                       'everyyeartodayhistory': everyyeartodayhistory})
+                       'everyyeartodayhistory': everyyeartodayhistory, 'login_user_name': request.session['user_name']})
     if request.method == "POST":
         login_form = forms.UserForm(request.POST)
         message = '请检查填写内容!'
@@ -367,7 +389,8 @@ def login(request):
                 print('everyyeartodayhistory:')
                 print(everyyeartodayhistory)
                 return render(request, 'app/index.html',
-                              {'has_login': True, 'queryset': queryset, 'predict_queryset': predict_queryset,
+                              {'has_login': True, 'login_user_name': user.name, 'queryset': queryset,
+                               'predict_queryset': predict_queryset,
                                'everyyeartodayhistory': everyyeartodayhistory})
             else:
                 message = '密码不正确!'

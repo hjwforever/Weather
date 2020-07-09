@@ -1,5 +1,6 @@
 import os, django
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Weather.settings")# project_name 项目名称
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Weather.settings")  # project_name 项目名称
 django.setup()
 from app import models
 from app.mod_timeseries.arimaMethod import ArimaMethod
@@ -35,7 +36,7 @@ from app.mod_timeseries.WebCrawler import *
 #     p.predict(cityName='hailar',dataType='tmax', startTime=startTime, endTime=endTime, preDay=str(i))
 
 
-#爬取当天数据并存入数据库
+# 爬取当天数据并存入数据库
 # todayWeather = today_webCrawler(cityName='beijing')
 # tavg=round((todayWeather[1]+todayWeather[0])/2)
 # queryset = models.PredictData.objects.filter(date=datenow,city='beijing')
@@ -58,7 +59,6 @@ from app.mod_timeseries.WebCrawler import *
 #         print(weather[1])
 
 
-
 # 计算预测天气的平均气温并填入数据库
 # models.PredictData.objects.all()
 
@@ -77,3 +77,9 @@ from app.mod_timeseries.WebCrawler import *
 #     print(element)
 # for element in q.MonthTmaxData(1990,7):
 #     print(element)
+
+# 创建日程
+# models.Memorandum.objects.create(name='cfx', email='123456789@qq.com', eventContent='告诉黄琳棠他是陈庆洋的儿子', isAllDay=True,
+#                                  time='2020-07-09 12:00:00')
+# models.Memorandum.objects.create(name='hjh', email='965195910@qq.com', eventContent='告诉黄琳棠他是所有人的儿子', isAllDay=True,
+#                                  time='2020-07-09 13:00:00')

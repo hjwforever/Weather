@@ -15,7 +15,6 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}"/>
-    {#    <link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}"/>#}
     <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/animate.css' %}"/>
     <!--[if lt IE 9]>
@@ -56,8 +55,6 @@
             });
             $('#myId3').jalendar();
         });
-
-
     </script>
     <script type="text/javascript">
         function showcity(str) {
@@ -113,8 +110,63 @@
             xmlhttp.send();
         }
     </script>
+    <script type="text/javascript">
+        function getcalendar(username) {
+            var xmlhttp;
+            if (username == "") {
+                alert("空值异常")
+                return;
+            }
+            if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            } else {// code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    var originaldata;
+                    originaldata = xmlhttp.responseText;
+                    var myobj = eval(originaldata);
+                    alert(username);
+                    {#var title = myobj[0].fields;#}
+                    {#var isAllDay = $(this).parents('.add-new').find('.all-day fieldset').attr('data-type');#}
+                    {#var isAllDayText = $(this).parents('.add-new').find('.all-day fieldset label').text();#}
+                    {#var thisDay = $this.find('.day.this-month.selected').attr('data-date');#}
+                    {#var time;#}
+                    {#if (isAllDay == 'disabled') {time = hour + ':' + min;} else {time = isAllDayText;}#}
+                }
+            }
+            {#$this.prepend(div('div', 'added-event').attr({#}
+            {#        'data-date': thisDay,#}
+            {#        'data-time': time,#}
+            {#        'data-title': title,#}
+            {#        'data-id': dataId#}
+            {#    })#}
+            {#);#}
+            {#$this.find('.day.this-month.selected').prepend(#}
+            {#    div('div', 'event-single').attr('data-id', dataId).append(#}
+            {#        div('p', '').text(title),#}
+            {#        div('div', 'details').append(#}
+            {#            div('div', 'clock').text(time),#}
+            {#            div('div', 'erase')#}
+            {#        )#}
+            {#    )#}
+            {#);#}
+            {#$this.find('.day').has('.event-single').addClass('have-event').prepend(div('i', ''));#}
+            {#$this.find('.events-list').html($this.find('.day.this-month.selected .event-single').clone())#}
+            {#$this.find('.events-list .event-single').eq(0).hide().slideDown();#}
+            {#calcTotalDayAgain();#}
+            {#calcScroll();#}
+            {#// scrolltop after adding new event#}
+            {#$this.find('.events-list').scrollTop(0);#}
+            {#// form reset#}
+            {#$this.find('.add-new > input[type="text"]').val(lAddEvent[settings.lang]).select();#}
+            {#dataId++;#}
+            xmlhttp.open("GET", "/app/getcalendar?name=" + username, true);
+            xmlhttp.send();
+        }
+    </script>
 </head>
-
 <!-- body start -->
 <body>
 <!-- Page Preloder -->
@@ -160,17 +212,23 @@
 <div class="page-layer status-day">
     <div class="header-layer">
         <div class="weather-info-layer">
-            <form action="{% url 'index' %}" method="GET">
-                <select id="choosecity" type="text" name="CITY" onChange="showcity(this.value);changechart(this.value)"
-                        style="width: auto;height: 27px;float: right;font-size: 25px;color: orange;margin-top:10px;background: none">
-                    <option value="beijing" style="background-color: #FFEFD5" selected>北京</option>
-                    <option value="zhengzhou" style="background-color: #FFEFD5">郑州</option>
-                    <option value="longyan" style="background-color: #FFEFD5">龙岩</option>
-                    <option value="tianjin" style="background-color: #FFEFD5">天津</option>
-                    <option value="fengcheng" style="background-color: #FFEFD5">丰城</option>
-                    <option value="xiangyang" style="background-color: #FFEFD5">襄阳</option>
-                    <option value="hailar" style="background-color: #FFEFD5">海拉尔</option>
-                </select>
+            <form action="{% url 'index' %}" method="GET" style="padding-top: 10px">
+                {% if has_login %}
+                    <span style="font-size: 25px;color: orange">欢迎您，{{ login_user_name }}</span>
+                {% endif %}
+                <label style="float: right">
+                    <select id="choosecity" type="text" name="CITY"
+                            onChange="showcity(this.value);changechart(this.value)"
+                            style="width: auto;height: 27px;font-size: 25px;color: orange;background: none">
+                        <option value="beijing" style="background-color: #FFEFD5" selected>北京</option>
+                        <option value="zhengzhou" style="background-color: #FFEFD5">郑州</option>
+                        <option value="longyan" style="background-color: #FFEFD5">龙岩</option>
+                        <option value="tianjin" style="background-color: #FFEFD5">天津</option>
+                        <option value="fengcheng" style="background-color: #FFEFD5">丰城</option>
+                        <option value="xiangyang" style="background-color: #FFEFD5">襄阳</option>
+                        <option value="hailar" style="background-color: #FFEFD5">海拉尔</option>
+                    </select>
+                </label>
             </form>
             <div class="weather-info-inner">
                 <div class="real-time-box">
@@ -190,7 +248,7 @@
                     <div class="forecast-item">
                         <div class="info">
                             <div class="icon icon-w w-01"><i class="icon-date ming"></i></div>
-                            <div class="temp">
+                            <div class="temp" >
                                 <span class="num" id="tomorrow"></span>
                                 <span class="symbol">℃</span>
                             </div>
@@ -201,7 +259,7 @@
                         <div class="info">
                             <div class="icon icon-w w-08"><i class="icon-date hou"></i></div>
                             {#07 08 09 分别对应小雨中雨大雨#}
-                            <div class="temp">
+                            <div class="temp" >
                                 <span class="num" id="nexttomorrow"></span>
                                 <span class="symbol">℃</span>
                             </div>
@@ -726,11 +784,8 @@
 <!-- 日程表 -->
 <article style="background: url({% static 'img/pattern.png' %})">
     <p style="font-size: 40px;color: orange;text-align: center;"><b>日程表</b></p>
-    <div id="myId3" class="jalendar mid" style="width: 420px;">
-        {#        <div class="added-event" data-date="9/8/2013" data-time="Tüm Gün"#}
-        {#             data-title="WWDC 13 on San Francisco, LA"></div>#}
-        {#        <div class="added-event" data-date="16/8/2013" data-time="20:45"#}
-        {#             data-title="Tarkan İstanbul Concert on Harbiye Açık Hava Tiyatrosu"></div>#}
+    <div id="myId3" class="jalendar mid" style="width: 420px;" onload="getcalendar({{ login_user_name }})">
+        {#        <div class="added-event" data-date="16/8/2013" data-time="20:45" data-title="Tarkan İstanbul Concert on Harbiye Açık Hava Tiyatrosu"></div>#}
         {#        <div class="added-event" data-date="17/8/2013" data-time="21:00"#}
         {#             data-title="CodeCanyon İstanbul Meeting on Starbucks, Kadıköy"></div>#}
         {#        <div class="added-event" data-date="17/8/2013" data-time="22:00"#}
