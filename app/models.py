@@ -60,6 +60,7 @@ class HistoryData(models.Model):
     tmin = models.FloatField()
     tmax = models.FloatField()
     tavg = models.FloatField()
+    weather = models.CharField(max_length=128, null=True)
 
     def __str__(self):
         return str(self.date)
