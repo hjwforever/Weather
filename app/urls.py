@@ -3,8 +3,11 @@ from app import views
 from django.urls import include
 
 urlpatterns = [
+    #ajax
     path('selectcity/', views.selectcity, name='selectcity'),
     path('changechart/',views.changechart, name='changechart'),
+    path('selecthistorycity/', views.selecthistorycity, name='selecthistorycity'),
+
     path('', views.index, name='index'),
     path('home/', views.home, name='home'),
     # path('index/', views.IndexView.as_view(), name='demo'),

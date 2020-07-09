@@ -61,6 +61,34 @@ def selectcity(request):
     print(queryset)
     return JsonResponse(queryset, json_dumps_params={'ensure_ascii': False}, safe=False)
 
+def selecthistorycity(request):
+    city = request.GET.get('city')
+    year = request.GET.get('year')
+    month = request.GET.get('month')
+    day = request.GET.get('day')
+    print(city)
+    print(year+month+day)
+
+    if year == '0':
+        History_data = models.HistoryData.objects.filter(city=city).order_by('date')
+    else:
+        if month == '0':
+            History_data = models.HistoryData.objects.filter(date__year=year,city=city).order_by('date')
+        else:
+            if day == '0':
+                History_data = models.HistoryData.objects.filter(date__year=year, date__month=month,city=city).order_by('date')
+            else:
+                History_data = models.HistoryData.objects.filter(date__year=year, date__month=month, date__day=day,city=city).order_by('date')
+    data = serializers.serialize("json", History_data)
+    queryset = json.loads(data)
+    print('data:')
+    print(data)
+    print('querysethistory')
+    print(queryset)
+    return JsonResponse(queryset, json_dumps_params={'ensure_ascii': False}, safe=False)
+
+
+
 def model2jsonArr(data):
     rData = {}
     for p in data:
@@ -231,27 +259,27 @@ def history_page(request):
 
 
 def transfer_history(request):
-    city = request.GET.get('CC')
-    year = request.GET.get('YYYY')
-    mon = request.GET.get('MM')
-    day = request.GET.get('DD')
-    print(city)
-    print(year)
-    print(mon)
-    print(day)
-    if year == '0':
-        History_data = models.HistoryData.objects.filter().values()
-    else:
-        if mon == '0':
-            History_data = models.HistoryData.objects.filter(date__year=year).values()
-        else:
-            if day == '0':
-                History_data = models.HistoryData.objects.filter(date__year=year, date__month=mon).values()
-            else:
-                History_data = models.HistoryData.objects.filter(date__year=year, date__month=mon,
-                                                                 date__day=day).values()
-    print(History_data)
-    return render(request, 'app/search-history.html', {'History_data': History_data})
+    # city = request.GET.get('CC')
+    # year = request.GET.get('YYYY')
+    # mon = request.GET.get('MM')
+    # day = request.GET.get('DD')
+    # print(city)
+    # print(year)
+    # print(mon)
+    # print(day)
+    # if year == '0':
+    #     History_data = models.HistoryData.objects.filter().values()
+    # else:
+    #     if mon == '0':
+    #         History_data = models.HistoryData.objects.filter(date__year=year).values()
+    #     else:
+    #         if day == '0':
+    #             History_data = models.HistoryData.objects.filter(date__year=year, date__month=mon).values()
+    #         else:
+    #             History_data = models.HistoryData.objects.filter(date__year=year, date__month=mon,
+    #                                                              date__day=day).values()
+    # print(History_data)
+    return render(request, 'app/search-history.html')
 
 
 def hash_code(s, salt=settings.SECRET_KEY):
