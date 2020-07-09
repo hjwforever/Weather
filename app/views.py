@@ -48,13 +48,9 @@ def selectcity(request):
     city = request.GET.get('city')
     print(city)
 
-    # datenow = timezone.now()
-    datenow=datetime(2020, 7, 8)
-    queryset = models.HistoryData.objects.filter(date__year=2020,date__month=7,city=city)
-
-
-    # print('queryset:')
-    # print(queryset.values())
+    datenow = timezone.now()
+    # datenow=datetime(2020, 7, 8)
+    queryset = models.PredictData.objects.filter(city=city).order_by('date')
 
     data = serializers.serialize("json", queryset)
     queryset = json.loads(data)

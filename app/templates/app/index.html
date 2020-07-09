@@ -100,18 +100,14 @@
                         default:city='北京';
                     }
                     document.getElementById("selectcity").innerHTML=city;
+                    document.getElementById("today").innerHTML=myobj[0].fields.tavg;
+                    document.getElementById("tomorrow").innerHTML=myobj[1].fields.tavg;
+                    document.getElementById("nexttomorrow").innerHTML=myobj[2].fields.tavg;
                 }
             }
             xmlhttp.open("GET", "/app/selectcity?city=" + str, true);
             xmlhttp.send();
         }
-
-
-
-
-
-
-
     </script>
 </head>
 
@@ -177,9 +173,7 @@
                     <div class="icon icon-w w-00"></div>
                     <div class="text"><span id="selectcity" style="font-size: 35px">北京</span><span class="label">&nbsp;今日天气</span>
                         <div class="temperature">
-                            <span class="num" id="tvalue">
-                                {{ queryset.0.tavg|floatformat:0 }}
-                            </span>
+                            <span class="num" id="today"></span>
                             <span class="symbol">℃</span>
                         </div>
                         <div class="others">
@@ -192,7 +186,9 @@
                     <div class="forecast-item">
                         <div class="info">
                             <div class="icon icon-w w-01"><i class="icon-date ming"></i></div>
-                            <div class="temp">{{ predict_queryset.0.tavg | floatformat:0 }}<span class="symbol">℃</span>
+                            <div class="temp" >
+                                <span class="num" id="tomorrow"></span>
+                                <span class="symbol">℃</span>
                             </div>
                         </div>
                         <div class="text">多云&nbsp;&nbsp;微风&nbsp;&nbsp;空气质量优</div>
@@ -201,7 +197,9 @@
                         <div class="info">
                             <div class="icon icon-w w-08"><i class="icon-date hou"></i></div>
                             {#07 08 09 分别对应小雨中雨大雨#}
-                            <div class="temp">{{ predict_queryset.1.tavg | floatformat:0 }}<span class="symbol">℃</span>
+                            <div class="temp" >
+                                <span class="num" id="nexttomorrow"></span>
+                                <span class="symbol">℃</span>
                             </div>
                         </div>
                         <div class="text">中雨&nbsp;&nbsp;微风&nbsp;&nbsp;空气质量优</div>
@@ -298,9 +296,9 @@
     <div class="ln-title" style="font-size: 30px;padding-top: 23px">当日天气</div>
     <div class="news-ticker">
         <div class="news-ticker-contant">
-            <div class="nt-item" style="font-size: 20px"><span class="new" style="font-size: 20px">北京</span>31℃&nbsp;晴&nbsp;空气质量优
+            <div class="nt-item" style="font-size: 20px"><span class="new" style="font-size: 20px">北京</span><span id="abeijing"></span>31℃&nbsp;晴&nbsp;空气质量优
             </div>
-            <div class="nt-item" style="font-size: 20px"><span class="strategy" style="font-size: 20px">天津</span>22℃&nbsp;晴&nbsp;空气质量优
+            <div class="nt-item" style="font-size: 20px"><span class="strategy" style="font-size: 20px">天津</span>22<span id="atianjin"></span>℃&nbsp;晴&nbsp;空气质量优
             </div>
             <div class="nt-item" style="font-size: 20px"><span class="racing" style="font-size: 20px">湖北</span>35℃&nbsp;晴&nbsp;空气质量优
             </div>
