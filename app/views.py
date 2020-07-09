@@ -47,7 +47,7 @@ def selectcity(request):
 
     # datenow = timezone.now()
     datenow=datetime(2020, 7, 8)
-    queryset = models.HistoryData.objects.filter(date=datenow,city=city)
+    queryset = models.HistoryData.objects.filter(date__year=2020,date__month=7,city=city)
 
     # print('queryset:')
     # print(queryset.values())

@@ -76,18 +76,25 @@
                     {#var finddiv = document.getElementById("todayweather");//寻找显示容器#}
                     {#finddiv.innerHTML = displaytext;//引用解析好了的数据#}
                     {#document.getElementById('todayweather').innerText= result ;#}
+
                     var jsonObj;
                     var s;
                     s=xmlhttp.responseText;
-                    s=s.substring(1,s.length-1)
-                    {#alert(s)#}
-                    jsonObj=JSON.parse(s);
-                    document.getElementById("selectcity").innerHTML=jsonObj.fields.city;
-                    document.getElementById("tvalue").innerHTML = jsonObj.fields.tavg;
-                    {#var str = '{"name":"hello"}'#}
-                    {#var json  = JSON.parse(str);#}
-                    {#alert(json.name);#}
-                    {#document.getElementById("todayweather").innerHTML =json.name;#}
+                    {#s=s.substring(1,s.length-1)#}
+                    alert(s)
+                    {#jsonObj=JSON.parse(s);#}
+                    {#document.getElementById("selectcity").innerHTML=jsonObj.fields.city;#}
+                    {#document.getElementById("tvalue").innerHTML = jsonObj.fields.tavg;#}
+
+                    var myobj=eval(s);
+                    {#for(var i=0;i<myobj.length;i++){#}
+                        {#alert(myobj[i].fields.city);#}
+                        {#alert(myobj[i].fields.tavg);#}
+                    {#    document.getElementById("selectcity").innerHTML=jsonObj.fields.city;#}
+                    {#    document.getElementById("tvalue").innerHTML = jsonObj.fields.tavg;#}
+                    {#}#}
+
+                    document.getElementById("selectcity").innerHTML=myobj[3].fields.city;
 
                 }
             }
