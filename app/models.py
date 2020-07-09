@@ -71,6 +71,7 @@ class PredictData(models.Model):
     tmin = models.FloatField(null=True)
     tmax = models.FloatField(null=True)
     tavg = models.FloatField(null=True)
+    weather = models.CharField(max_length=128,null=True)
 
     def __str__(self):
         return str(self.date)
@@ -78,7 +79,8 @@ class PredictData(models.Model):
 class Memorandum(models.Model):
     name = models.CharField(max_length=128, unique=True)
     email = models.EmailField(unique=True)
-    time = models.DateTimeField()
+    time = models.DateTimeField(null=True)
+    isAllDay = models.BooleanField(default=False)
     eventContent = models.CharField(max_length=128)
     def __str__(self):
         return str(self.eventContent)
