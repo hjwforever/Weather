@@ -162,5 +162,5 @@ def sevenDaywebCrawler(cityName='beijing'):
    html = get_page(url)
    wea_list = []
    parse_page(html, wea_list)
-   print_res(wea_list)
+   # print_res(wea_list)
    return wea_list

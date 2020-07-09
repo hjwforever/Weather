@@ -31,10 +31,12 @@
             {% if has_login %}
                 <a href="{% url 'logout' %}" style="font-size: 20px;color: white">
                     {{ "登出" }}
+                    <script></script>
                 </a>
             {% else %}
                 <a href="{% url 'login' %}" style="font-size: 20px;color: white">
                     {{ "登录" }}
+
                 </a>
                 <a href="{% url 'register' %}" style="color: white;font-size: 20px"> / 注册</a>
             {% endif %}
