@@ -1,4 +1,5 @@
 import os, django
+from itertools import chain
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Weather.settings")  # project_name 项目名称
 django.setup()
@@ -64,26 +65,38 @@ def selectcity(request):
     print(queryset)
     return JsonResponse(queryset, json_dumps_params={'ensure_ascii': False}, safe=False)
 
+def model2jsonArr(data):
+    rData = {}
+    for p in data:
+        p.__dict__.pop("_state") # 除去'model、pk'
+        rData.append(p.__dict__)
+    return rData
 
 def changechart(request):
     city = request.GET.get('city')
     print(city)
-
-    # datenow = timezone.now()
-    datenow=datetime(2020, 7, 8)
-    queryset = models.HistoryData.objects.filter(date__year=2020,date__month=4,city=city)
+    # datenow=datetime(2020, 7, 8)
+    # queryset = models.HistoryData.objects.filter(date__year=datenow.year,date__month=datenow.month,city=city).order_by('date')
     # print('queryset:')
     # print(queryset.values())
 
+    datenow = timezone.now()
+    predict_queryset = models.PredictData.objects.filter(city=city).order_by('date')
 
+    datenow = timezone.now()
+    # today = datetime.date.today()
+    yesterday = datenow - timedelta(days=1)
+    everyyeartodaystart = datetime(datenow.year - 10, 1, 1)
+    everyyeartodayhistory = models.HistoryData.objects.filter(date__range=[everyyeartodaystart, yesterday],
+                                                              date__month=datenow.month, date__day=datenow.day, city=city).order_by('date')
+    # queryset = predict_queryset|everyyeartodayhistory
+    queryset = chain(everyyeartodayhistory,predict_queryset)
     data = serializers.serialize("json", queryset)
-    queryset = json.loads(data)
-    print('data:')
-    print(data)
+    aqueryset = json.loads(data)
+    print(aqueryset)
+    # data = model2jsonArr(findwell)
     # return JsonResponse(data, safe=False)
-    print('queryset::::::::')
-    print(queryset)
-    return JsonResponse(queryset, json_dumps_params={'ensure_ascii': False}, safe=False)
+    return JsonResponse(aqueryset, json_dumps_params={'ensure_ascii': False}, safe=False)
 
 
 def response_as_json(data):
@@ -155,15 +168,15 @@ def home(request):
 
 def index(request):
     datenow = timezone.now()
-    queryset = models.HistoryData.objects.filter(date=datenow).values()
+    queryset = models.HistoryData.objects.filter(date=datenow).values().order_by('date')
     print('queryset:')
     print(queryset)
-    predict_queryset = models.PredictData.objects.all()
+    predict_queryset = models.PredictData.objects.all().order_by('date')
     print('predict_queryset:')
     print(predict_queryset)
     everyyeartodaystart = datetime(datenow.year - 10, 1, 1)
     everyyeartodayhistory = models.HistoryData.objects.filter(date__range=[everyyeartodaystart, datenow],
-                                                              date__month=datenow.month, date__day=datenow.day)
+                                                              date__month=datenow.month, date__day=datenow.day).order_by('date')
     print('everyyeartodayhistory:')
     print(everyyeartodayhistory)
     return render(request, 'app/index.html', {'queryset': queryset, 'predict_queryset': predict_queryset,

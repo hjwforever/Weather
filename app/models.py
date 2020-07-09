@@ -57,9 +57,9 @@ class HistoryData(models.Model):
     # id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
     city = models.CharField(max_length=128)
     date = models.DateField(unique_for_date=False)
-    tmin = models.FloatField()
-    tmax = models.FloatField()
-    tavg = models.FloatField()
+    tmin = models.FloatField(null=True)
+    tmax = models.FloatField(null=True)
+    tavg = models.FloatField(null=True)
     weather = models.CharField(max_length=128, null=True)
 
     def __str__(self):

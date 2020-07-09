@@ -52,6 +52,13 @@
             });
             $('#myId3').jalendar();
         });
+
+
+
+
+
+
+
     </script>
     <script type="text/javascript">
         function showcity(str) {
@@ -80,27 +87,31 @@
                     var jsonObj;
                     var s;
                     s=xmlhttp.responseText;
-                    {#s=s.substring(1,s.length-1)#}
-{#                    alert(s)#}
-                    {#jsonObj=JSON.parse(s);#}
-                    {#document.getElementById("selectcity").innerHTML=jsonObj.fields.city;#}
-                    {#document.getElementById("tvalue").innerHTML = jsonObj.fields.tavg;#}
-
                     var myobj=eval(s);
-                    {#for(var i=0;i<myobj.length;i++){#}
-                        {#alert(myobj[i].fields.city);#}
-                        {#alert(myobj[i].fields.tavg);#}
-                    {#    document.getElementById("selectcity").innerHTML=jsonObj.fields.city;#}
-                    {#    document.getElementById("tvalue").innerHTML = jsonObj.fields.tavg;#}
-                    {#}#}
-
-                    document.getElementById("selectcity").innerHTML=myobj[3].fields.city;
-
+                    city='';
+                    switch(myobj[0].fields.city){
+                        case 'bejing':city='北京';break;
+                        case 'zhengzhou':city='郑州';break;
+                        case 'longyan':city='龙岩';break;
+                        case 'tianjin':city='天津';break;
+                        case 'xiangyang':city='襄阳';break;
+                        case 'fengcheng':city='丰城';break;
+                        case 'hailar':city='海拉尔';break;
+                        default:city='北京';
+                    }
+                    document.getElementById("selectcity").innerHTML=city;
                 }
             }
             xmlhttp.open("GET", "/app/selectcity?city=" + str, true);
             xmlhttp.send();
         }
+
+
+
+
+
+
+
     </script>
 </head>
 
@@ -166,7 +177,7 @@
                     <div class="icon icon-w w-00"></div>
                     <div class="text"><span id="selectcity" style="font-size: 35px">北京</span><span class="label">&nbsp;今日天气</span>
                         <div class="temperature">
-                            <span  class="num" id="tvalue">
+                            <span class="num" id="tvalue">
                                 {{ queryset.0.tavg|floatformat:0 }}
                             </span>
                             <span class="symbol">℃</span>
@@ -313,10 +324,19 @@
     var city="";
     var xarr=[];
     var yarr=[];
+    var tenyearx = [];
+    var tenyeartmax = [];
+    var tenyeartmin = [];
+    var tenyeartavg = [];
 
     function changechart(str) {
             xarr=[];
             yarr=[];
+            tenyearx=[];
+            tenyeartmax=[];
+            tenyeartmin=[];
+            tenyeartavg=[];
+
             var xmlhttp;
             if (str == "") {
                 alert("下拉选项空值异常");
@@ -331,24 +351,39 @@
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                     var jsonObj;
                     var s;
+
                     s=xmlhttp.responseText;
                     {#s=s.substring(1,s.length-1)#}
 {#                    alert("ok")#}
-
+{#                    alert(s);#}
                     var myobj=eval(s);
-
-                    {#for(var i=0;i<myobj.length;i++){#}
-                        {#alert(myobj[i].fields.city);#}
-                        {#alert(myobj[i].fields.tavg);#}
-
-                    for(i=0;i<myobj.length;i++){
-				        yarr.push(parseInt(myobj[i].fields.tavg));
-			        }
-
+{#                    alert(predict_queryset);#}
+                    var currentDateLong = new Date('{{ predict_queryset.0.date|safe }}'.replace(new RegExp("-","gm"),"/")).getTime();
+{#                    alert('{{ predict_queryset.0.date|safe }}'+"   "+currentDateLong);#}
+{#                    xarr.push('{{ queryset.0.date|safe }}');#}
+{#                    yarr.push({{ queryset.0.tavg|safe }});#}
 			        for(i=0;i<myobj.length;i++){
-                        xarr.push(myobj[i].fields.date);
+			            var DateLong = new Date(myobj[i].fields.date.replace(new RegExp("-","gm"),"/")).getTime()
+{#                        alert(myobj[i].fields.date+"   "+DateLong);#}
+                        if( DateLong <= currentDateLong ){
+                            tenyearx.push(myobj[i].fields.date);
+                            tenyeartmax.push(myobj[i].fields.tmax);
+                            tenyeartmin.push(myobj[i].fields.tmin);
+                            tenyeartavg.push(myobj[i].fields.tavg);
+                           }
+{#                       if( DateLong == currentDateLong ){#}
+{#                            alert("==");#}
+{#                            xarr.push(myobj[i].fields.date);#}
+{#                            yarr.push(parseInt(myobj[i].fields.tavg));#}
+{#                           }#}
+                       if( DateLong >= currentDateLong ){
+{#                            alert(i);#}
+                            xarr.push(myobj[i].fields.date);
+                            yarr.push(parseInt(myobj[i].fields.tavg));
+                           }
 			         }
-                      // 基于准备好的dom，初始化echarts实例
+
+      // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('main'));
     //获取当前城市名
     var obj = document.getElementById("choosecity");
@@ -357,8 +392,7 @@
     // 指定图表的配置项和数据
     var colors = ['red', '#5793f3', '#ffb320', 'orange', 'white', 'pink'];
 
-    var tenyearx = [];
-    var tenyeary = [];
+
 {#    for(i=0;i< 10 ;i++){#}
 {#        {{ everyyeartodayhistory }}#}
 {#	}#}
@@ -472,6 +506,7 @@
                 {
                     'type': 'category',
                     'axisLabel': {
+{#                        'interval': 0,#}
                         onZero: false,
                     },
                     splitLine: {show: false}
@@ -593,14 +628,15 @@
                 },
                 xAxis: [
                     {
-                        'data': [
-                            {% for row in everyyeartodayhistory %}
+                        'data': tenyearx,
+{#                        [#}
+{#                            {% for row in everyyeartodayhistory %}#}
 {#                                {% if row.city == city%}#}
-                                "{{ row.date }}",
+{#                                "{{ row.date }}",#}
 {#                                {% endif %}#}
-                            {% endfor %}
-
-                        ],
+{#                            {% endfor %}#}
+{##}
+{#                        ],#}
                         axisLine: {
                             lineStyle: {
                                 color: colors[1]
@@ -628,11 +664,12 @@
                             width: 4,
                         },
                         smooth: true,
-                        data: [
-                            {% for row in everyyeartodayhistory %}
-                                "{{ row.tmax | floatformat:0}}",
-                            {% endfor %}
-                        ],
+                        data: tenyeartmax,
+{#                        [#}
+{#                            {% for row in everyyeartodayhistory %}#}
+{#                                "{{ row.tmax | floatformat:0}}",#}
+{#                            {% endfor %}#}
+{#                        ],#}
                     },
                     {
                         name: '最低温度',
@@ -643,11 +680,12 @@
                             width: 4,
                         },
                         smooth: true,
-                        data: [
-                            {% for row in everyyeartodayhistory %}
-                                "{{ row.tmin | floatformat:0}}",
-                            {% endfor %}
-                        ],
+                        data:tenyeartmin,
+{#                         [#}
+{#                            {% for row in everyyeartodayhistory %}#}
+{#                                "{{ row.tmin | floatformat:0}}",#}
+{#                            {% endfor %}#}
+{#                        ],#}
                     },
                     {
                         name: '平均温度',
@@ -658,11 +696,12 @@
                             width: 4,
                         },
                         smooth: true,
-                        data: [
-                            {% for row in everyyeartodayhistory %}
-                                "{{ row.tavg | floatformat:0}}",
-                            {% endfor %}
-                        ],
+                        data: tenyeartavg,
+{#                        [#}
+{#                            {% for row in everyyeartodayhistory %}#}
+{#                                "{{ row.tavg | floatformat:0}}",#}
+{#                            {% endfor %}#}
+{#                        ],#}
                     },
                 ]
             },
@@ -678,6 +717,13 @@
             xmlhttp.open("GET", "/app/changechart?city=" + str, true);
             xmlhttp.send();
         }
+
+
+
+
+
+
+
 </script>
 <!-- ECharts图表 end -->
 <!-- 日程表 -->
@@ -803,5 +849,12 @@
 var obj = document.getElementById("choosecity");
 window.onload = showcity(obj.options[obj.selectedIndex].value);
 window.onload = changechart(obj.options[obj.selectedIndex].value);
+
+
+
+
+
+
+
 </script>
 </html>
