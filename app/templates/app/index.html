@@ -81,7 +81,7 @@
                     var s;
                     s=xmlhttp.responseText;
                     {#s=s.substring(1,s.length-1)#}
-                    alert(s)
+{#                    alert(s)#}
                     {#jsonObj=JSON.parse(s);#}
                     {#document.getElementById("selectcity").innerHTML=jsonObj.fields.city;#}
                     {#document.getElementById("tvalue").innerHTML = jsonObj.fields.tavg;#}
@@ -150,7 +150,7 @@
     <div class="header-layer">
         <div class="weather-info-layer">
             <form action="{% url 'index' %}" method="GET">
-                <select type="text" name="CITY" onChange="showcity(this.value)"
+                <select id="choosecity" type="text" name="CITY" onChange="showcity(this.value);changechart(this.value)"
                         style="width: auto;height: 27px;float: right;font-size: 25px;color: orange;margin-top:10px;background: none">
                     <option value="beijing" style="background-color: #FFEFD5" selected>北京</option>
                     <option value="zhengzhou" style="background-color: #FFEFD5">郑州</option>
@@ -309,10 +309,59 @@
 <!--为ECharts准备一个具备大小的Dom-->
 <div id="main" style="background:url({% static 'img/pattern.png' %});width: 100%;height: 80%;"></div>
 <script type="text/javascript">
-    // 基于准备好的dom，初始化echarts实例
+    //获取数据
+    var city="";
+    var xarr=[];
+    var yarr=[];
+
+    function changechart(str) {
+            xarr=[];
+            yarr=[];
+            var xmlhttp;
+            if (str == "") {
+                alert("下拉选项空值异常");
+                return;
+            }
+            if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            } else {// code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    var jsonObj;
+                    var s;
+                    s=xmlhttp.responseText;
+                    {#s=s.substring(1,s.length-1)#}
+{#                    alert("ok")#}
+
+                    var myobj=eval(s);
+
+                    {#for(var i=0;i<myobj.length;i++){#}
+                        {#alert(myobj[i].fields.city);#}
+                        {#alert(myobj[i].fields.tavg);#}
+
+                    for(i=0;i<myobj.length;i++){
+				        yarr.push(parseInt(myobj[i].fields.tavg));
+			        }
+
+			        for(i=0;i<myobj.length;i++){
+                        xarr.push(myobj[i].fields.date);
+			         }
+                      // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('main'));
+    //获取当前城市名
+    var obj = document.getElementById("choosecity");
+    var city = obj.options[obj.selectedIndex].value;
+{#    alert(city);#}
     // 指定图表的配置项和数据
     var colors = ['red', '#5793f3', '#ffb320', 'orange', 'white', 'pink'];
+
+    var tenyearx = [];
+    var tenyeary = [];
+{#    for(i=0;i< 10 ;i++){#}
+{#        {{ everyyeartodayhistory }}#}
+{#	}#}
     var option = {
         baseOption: {
             timeline: {
@@ -473,12 +522,13 @@
                 },
                 xAxis: [
                     {
-                        'data': [
-                            "{{ queryset.0.date }}",
-                            {% for row in predict_queryset %}
-                                "{{ row.date }}",
-                            {% endfor %}
-                        ],
+                        'data':xarr,
+{#                         [#}
+{#                            "{{ queryset.0.date }}",#}
+{#                            {% for row in predict_queryset %}#}
+{#                                "{{ row.date }}",#}
+{#                            {% endfor %}#}
+{#                        ],#}
                         axisLine: {
                             lineStyle: {
                                 color: colors[2]
@@ -509,11 +559,12 @@
                             color: colors[2],
                             width: 4,
                         },
-                        data: ["{{ queryset.0.tavg | floatformat:0 }}",
-                            {% for row in predict_queryset %}
-                                "{{ row.tavg | floatformat:0}}",
-                            {% endfor %}
-                        ],
+                        data: yarr,
+{#                        ["{{ queryset.0.tavg | floatformat:0 }}",#}
+{#                            {% for row in predict_queryset %}#}
+{#                                "{{ row.tavg | floatformat:0}}",#}
+{#                            {% endfor %}#}
+{#                        ],#}
                     },
                     {
                         name: '最低温度',
@@ -545,8 +596,11 @@
                     {
                         'data': [
                             {% for row in everyyeartodayhistory %}
+{#                                {% if row.city == city%}#}
                                 "{{ row.date }}",
+{#                                {% endif %}#}
                             {% endfor %}
+
                         ],
                         axisLine: {
                             lineStyle: {
@@ -619,6 +673,12 @@
 
     // 使用刚指定的配置项和数据显示图表。
     myChart.setOption(option);
+
+                }
+            }
+            xmlhttp.open("GET", "/app/changechart?city=" + str, true);
+            xmlhttp.send();
+        }
 </script>
 <!-- ECharts图表 end -->
 <!-- 日程表 -->
@@ -740,4 +800,9 @@
 <script src="{% static 'js/jquery.marquee.min.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script>
 </body>
+<script>
+var obj = document.getElementById("choosecity");
+window.onload = showcity(obj.options[obj.selectedIndex].value);
+window.onload = changechart(obj.options[obj.selectedIndex].value);
+</script>
 </html>
