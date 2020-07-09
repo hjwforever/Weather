@@ -258,7 +258,7 @@ def history_page(request):
     return render(request, 'app/search-history.html', {'History_data': History_data})
 
 
-def transfer_history(request):
+# def transfer_history(request):
     # city = request.GET.get('CC')
     # year = request.GET.get('YYYY')
     # mon = request.GET.get('MM')
@@ -279,7 +279,7 @@ def transfer_history(request):
     #             History_data = models.HistoryData.objects.filter(date__year=year, date__month=mon,
     #                                                              date__day=day).values()
     # print(History_data)
-    return render(request, 'app/search-history.html')
+    # return render(request, 'app/search-history.html')
 
 
 def hash_code(s, salt=settings.SECRET_KEY):

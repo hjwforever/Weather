@@ -18,7 +18,7 @@
     <link href="{% static 'html/css/style.css' %}" rel="stylesheet" type="text/css" media="all"/>
     <link rel="stylesheet" href="{% static 'html/css/chocolat.css' %}" type="text/css">
     <!-- 图表echarts资源包 -->
-    <script src="{% static 'echarts.min.js' %}"></script>
+    <script src="{% static 'echarts.js' %}"></script>
     <!-- .js包 -->
     <script src="{% static 'html/js/jquery.min.js' %}"></script>
     <script src="{% static 'html/js/bootstrap.min.js' %}"></script>
@@ -49,7 +49,7 @@
 
 </head>
 
-<body>
+<body >
 <!-- 页眉 -->
 <div class="header" style=" height: 75px; background-color: #ffb320;">
     <div class="hhhh" style="background-color: black;height: 73px;">
@@ -118,39 +118,38 @@
             {#            <h5>各个时间段</h5> #}
         </div>
         <div class="banner-grids">
-            <form name="reg_testdate">
+            <iframe name="hidden" style="display:none;"></iframe>
+            <form name="reg_testdate" target="hidden">
                 {% csrf_token %}
                 <div class="col-md-2 banner-grid">
                     <select type="text" class="sel" name="CC" id="city">
-                        <option value="">请选择城市</option>
-                        <option value="beijing">北京</option>
+                        <option value="0">请选择城市</option>
+                        <option value="beijing" selected>北京</option>
                         <option value="tianjin">天津</option>
-                        <option value="fujian">胡建</option>
-                        <option value="henan">河兰</option>
-                        <option value="jiangxi">江西</option>
-                        <option value="neimeng">内蒙</option>
-                        <option value="hubei">湖北</option>
+                        <option value="longyan">龙岩</option>
+                        <option value="zhengzhou">郑州</option>
+                        <option value="fengcheng">丰城</option>
+                        <option value="hailar">海拉尔</option>
+                        <option value="xiangyang">襄阳</option>
                     </select>
                 </div>
                 <div class="col-md-2 banner-grid">
                     <select class="sel" name="YYYY" onchange="YYYYDD(this.value)" id="year">
-                        <option value="0">请选择年份</option>
+                        <option value="0" selected>请选择年份</option>
                     </select>
                 </div>
                 <div class="col-md-2 banner-grid">
                     <select class="sel" name="MM" onchange="MMDD(this.value)" id="month">
-                        <option value="0">请选择月份</option>
+                        <option value="0" selected>请选择月份</option>
                     </select>
                 </div>
                 <div class="col-md-2 banner-grid">
                     <select class="sel" name="DD" id="day">
-                        <option value="0">请选择日期</option>
+                        <option value="0" selected>请选择日期</option>
                     </select>
                 </div>
-                <div class="col-md-4 search" onclick="getdata()">
-
-                        <input type="submit" value="查询">
-
+                <div class="col-md-4 search" onclick="getdata()" >
+                    <input type="submit" value="查询">
                 </div>
                 <div class="clearfix"></div>
             </form>
@@ -159,107 +158,11 @@
 </div>
 <!-- 搜索框 end -->
 
-
-<!-- 历史数据图表 end -->
-{#<table border="1">#}
-{#    <thead>#}
-{#    <tr>#}
-{#        <td>日期</td>#}
-{#        <td>最高温度</td>#}
-{#        <td>最低温度</td>#}
-{#        <td>平均温度</td>#}
-{#    </tr>#}
-{#    </thead>#}
-{#    <tbody>#}
-{#    {% for row in History_data %}#}
-{#        <tr>#}
-{#            <td>{{ row.date }}</td>#}
-{#            <td>{{ row.tmax }}</td>#}
-{#            <td>{{ row.tmin }}</td>#}
-{#            <td>{{ row.tavg }}</td>#}
-{#        </tr>#}
-{#    {% endfor %}#}
-{#    </tbody>#}
-{#</table>#}
-<!--计算年月日函数-->
-<script language="JavaScript">
-    var datelist = []
-
-    function YYYYMMDDstart() {
-        MonHead = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-
-        //先给年下拉框赋内容
-        var y = new Date().getFullYear();
-        for (var i = (y - 40); i < (y + 3); i++) //以今年为准，前40年，后2年
-            document.reg_testdate.YYYY.options.add(new Option(i, i));
-        datelist[0] = i;
-        //赋月份的下拉框
-        for (var i = 1; i < 13; i++)
-            document.reg_testdate.MM.options.add(new Option(i, i));
-        datelist[1] = i;
-        document.reg_testdate.YYYY.value = y;
-        document.reg_testdate.MM.value = new Date().getMonth() + 1;
-        var n = MonHead[new Date().getMonth()];
-        if (new Date().getMonth() == 1 && IsPinYear(YYYYvalue)) n++;
-        writeDay(n); //赋日期下拉框Author:meizz
-        datelist[2] = n;
-        document.reg_testdate.DD.value = new Date().getDate();
-    }
-
-    if (document.attachEvent)
-        window.attachEvent("onload", YYYYMMDDstart);
-    else
-        window.addEventListener('load', YYYYMMDDstart, false);
-
-    function YYYYDD(str) //年发生变化时日期发生变化(主要是判断闰平年)
-    {
-        var MMvalue = document.reg_testdate.MM.options[document.reg_testdate.MM.selectedIndex].value;
-        if (MMvalue == "") {
-            var e = document.reg_testdate.DD;
-            optionsClear(e);
-            return;
-        }
-        var n = MonHead[MMvalue - 1];
-        if (MMvalue == 2 && IsPinYear(str)) n++;
-        datelist = n;
-        writeDay(n)
-    }
-
-    function MMDD(str)   //月发生变化时日期联动
-    {
-        var YYYYvalue = document.reg_testdate.YYYY.options[document.reg_testdate.YYYY.selectedIndex].value;
-        if (YYYYvalue == "") {
-            var e = document.reg_testdate.DD;
-            optionsClear(e);
-            return;
-        }
-        var n = MonHead[str - 1];
-        if (str == 2 && IsPinYear(YYYYvalue)) n++;
-        writeDay(n)
-    }
-
-    function writeDay(n)   //据条件写日期的下拉框
-    {
-        var e = document.reg_testdate.DD;
-        optionsClear(e);
-        for (var i = 1; i < (n + 1); i++)
-            e.options.add(new Option(i, i));
-    }
-
-    function IsPinYear(year)//判断是否闰平年
-    {
-        return (0 == year % 4 && (year % 100 != 0 || year % 400 == 0));
-    }
-
-    function optionsClear(e) {
-        e.options.length = 1;
-    }
-</script>
-<!-- 计算年月日函数 end -->
 <!-- 历史数据图表 -->
 <!--为ECharts准备一个具备大小的Dom-->
 <div id="main" style="background:url({% static 'img/pattern.png' %});width: 100%;height: 500%;" align="middle"></div>
 <script type="text/javascript">
+    this.toolTip1.Active = false;
     var xarr = [];
     var yarrtmax = [];
     var yarrtmin = [];
@@ -271,7 +174,7 @@
         yarrtmax = [];
         yarrtmin = [];
         yarrtavg = [];
-        alert('111');
+        {#alert('111');#}
         var xmlhttp;
         if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
@@ -284,14 +187,16 @@
                 var s;
                 s = xmlhttp.responseText;
                 var myobj = eval(s);
-                alert('hhhhh')
+                {#alert('hhhhh')#}
                 for (i = 0; i < myobj.length; i++) {
                     xarr.push(myobj[i].fields.date);
-                    alert(xarr);
+                    {#alert(xarr);#}
                     yarrtmin.push(myobj[i].fields.tmin);
-                    alert(yarrtmin);
+                    {#alert(yarrtmin);#}
                     yarrtmax.push(myobj[i].fields.tmax);
+                    {#alert(yarrtmax);#}
                     yarrtavg.push(myobj[i].fields.tavg);
+                    {#alert(yarrtavg);#}
                 }
                 var myChart = echarts.init(document.getElementById('main'));
                 var colors = ['orange'];
@@ -457,7 +362,7 @@
                         }
                     ]
                 };
-                alert('aaaa');
+                {#alert('aaaa');#}
                 // 使用刚指定的配置项和数据显示图表。
                 myChart.setOption(option);
 
@@ -471,12 +376,87 @@
         var selectyear = year.options[year.selectedIndex].value;
         var selectmonth = month.options[month.selectedIndex].value;
         var selectday = day.options[day.selectedIndex].value;
-        alert(selectcity)
-        alert(selectyear)
+        {#alert(selectcity)#}
+        {#alert(selectyear)#}
         xmlhttp.open("GET", "/app/selecthistorycity?city=" + selectcity + "&year=" + selectyear + "&month=" + selectmonth + "&day=" + selectday, false);
         xmlhttp.send();
     }
 </script>
+<!--计算年月日函数-->
+<script language="JavaScript">
+    var datelist = []
+
+    function YYYYMMDDstart() {
+        MonHead = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+        //先给年下拉框赋内容
+        var y = new Date().getFullYear();
+        for (var i = (y - 40); i < (y + 3); i++) //以今年为准，前40年，后2年
+            document.reg_testdate.YYYY.options.add(new Option(i, i));
+        datelist[0] = i;
+        //赋月份的下拉框
+        for (var i = 1; i < 13; i++)
+            document.reg_testdate.MM.options.add(new Option(i, i));
+        datelist[1] = i;
+        document.reg_testdate.YYYY.value = y;
+        document.reg_testdate.MM.value = new Date().getMonth() + 1;
+        var n = MonHead[new Date().getMonth()];
+        if (new Date().getMonth() == 1 && IsPinYear(YYYYvalue)) n++;
+        writeDay(n); //赋日期下拉框Author:meizz
+        datelist[2] = n;
+        document.reg_testdate.DD.value = new Date().getDate();
+    }
+
+    if (document.attachEvent)
+        window.attachEvent("onload", YYYYMMDDstart);
+    else
+        window.addEventListener('load', YYYYMMDDstart, false);
+
+    function YYYYDD(str) //年发生变化时日期发生变化(主要是判断闰平年)
+    {
+        var MMvalue = document.reg_testdate.MM.options[document.reg_testdate.MM.selectedIndex].value;
+        if (MMvalue == "") {
+            var e = document.reg_testdate.DD;
+            optionsClear(e);
+            return;
+        }
+        var n = MonHead[MMvalue - 1];
+        if (MMvalue == 2 && IsPinYear(str)) n++;
+        datelist = n;
+        writeDay(n)
+    }
+
+    function MMDD(str)   //月发生变化时日期联动
+    {
+        var YYYYvalue = document.reg_testdate.YYYY.options[document.reg_testdate.YYYY.selectedIndex].value;
+        if (YYYYvalue == "") {
+            var e = document.reg_testdate.DD;
+            optionsClear(e);
+            return;
+        }
+        var n = MonHead[str - 1];
+        if (str == 2 && IsPinYear(YYYYvalue)) n++;
+        writeDay(n)
+    }
+
+    function writeDay(n)   //据条件写日期的下拉框
+    {
+        var e = document.reg_testdate.DD;
+        optionsClear(e);
+        for (var i = 1; i < (n + 1); i++)
+            e.options.add(new Option(i, i));
+    }
+
+    function IsPinYear(year)//判断是否闰平年
+    {
+        return (0 == year % 4 && (year % 100 != 0 || year % 400 == 0));
+    }
+
+    function optionsClear(e) {
+        e.options.length = 1;
+    }
+</script>
+<!-- 计算年月日函数 end -->
 <!-- 行程指南 -->
 <div class="content" style="background:url({% static 'img/pattern.png' %});">
     <div class="promotions" id="guides" style="background:url({% static 'img/pattern.png' %});">
@@ -791,4 +771,7 @@
     </div>
 </div>
 </body>
+<script>
+    window.onload=getdata();
+</script>
 </html>

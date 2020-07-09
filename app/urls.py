@@ -18,7 +18,7 @@ urlpatterns = [
     path('upload/', views.upload_file, name='upload_file'),
     path('show/', views.get_test, name='get_test'),
     path('history/', views.history_page, name='history'),
-    path('transfer/', views.transfer_history, name='transfer_data'),
+    # path('transfer/', views.transfer_history, name='transfer_data'),
 
     path('logout/', views.logout, name='logout'),
     path('captcha/', include('captcha.urls')),

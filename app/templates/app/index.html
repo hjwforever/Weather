@@ -24,6 +24,10 @@
     <![endif]-->
     <!-- 图表echarts资源包 -->
     <script src="{% static 'echarts.min.js' %}"></script>
+    <script>
+
+    </script>
+
     <!-- hao123资源包 -->
     <noscript>
         <meta http-equiv="refresh" content="0; URL='/tianqi/?__noscript__-=1'"/>
@@ -842,7 +846,5 @@
     var obj = document.getElementById("choosecity");
     window.onload = showcity(obj.options[obj.selectedIndex].value);
     window.onload = changechart(obj.options[obj.selectedIndex].value);
-
-
 </script>
 </html>
