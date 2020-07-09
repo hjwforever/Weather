@@ -315,6 +315,17 @@ $(function () {
                 // form reset
                 $this.find('.add-new > input[type="text"]').val(lAddEvent[settings.lang]).select();
                 dataId++;
+
+
+
+
+
+
+
+
+
+
+
             });
             
             $close.on('click', function(){
