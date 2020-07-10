@@ -48,8 +48,8 @@ def selectcity(request):
     print(city)
 
     datenow = timezone.now()
-    # datenow=datetime(2020, 7, 8)
-    queryset = models.PredictData.objects.filter(city=city).order_by('date')
+    theday = datenow + timedelta(days=2)
+    queryset = models.PredictData.objects.filter(date__range=[datenow, theday], city=city).order_by('date')
 
     data = serializers.serialize("json", queryset)
     queryset = json.loads(data)
@@ -106,7 +106,8 @@ def changechart(request):
     # print(queryset.values())
 
     datenow = timezone.now()
-    predict_queryset = models.PredictData.objects.filter(city=city).order_by('date')
+    theday = datenow + timedelta(days=6)
+    predict_queryset = models.PredictData.objects.filter(date__range=[datenow, theday],city=city).order_by('date')
 
     datenow = timezone.now()
     # today = datetime.date.today()
@@ -220,6 +221,11 @@ def index(request):
                                                               date__day=datenow.day).order_by('date')
     print('everyyeartodayhistory:')
     print(everyyeartodayhistory)
+
+    queryset = predict_queryset.filter(date__day=datenow.day).values().order_by('city')
+    print('queryset:')
+    print(queryset)
+
     if request.session.get('is_login', None):
         return render(request, 'app/index.html', {'queryset': queryset, 'predict_queryset': predict_queryset,
                                                   'everyyeartodayhistory': everyyeartodayhistory, 'has_login': True,
@@ -227,7 +233,6 @@ def index(request):
     else:
         return render(request, 'app/index.html', {'queryset': queryset, 'predict_queryset': predict_queryset,
                                                   'everyyeartodayhistory': everyyeartodayhistory, 'has_login': False})
-
 
 def get_test(request):
     data_set = pd.read_csv("app/static/DataResult.csv")
