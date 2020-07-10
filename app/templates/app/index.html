@@ -55,6 +55,13 @@
             });
             $('#myId3').jalendar();
         });
+
+
+
+
+
+
+
     </script>
     <script type="text/javascript">
         function showcity(str) {
@@ -70,6 +77,16 @@
             }
             xmlhttp.onreadystatechange = function () {
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    {#document.getElementById("todayweather").innerHTML = xmlhttp.responseText;#}
+                    {#eval("var objResults =" + xmlhttp.responseText);#}
+                    {#var obj = eval("("+xmlhttp.responseText+")");#}
+                    {#var data1 = eval("("+obj+")");#}
+                    {#var displaytext = "";#}
+                    {#displaytext += data1.data +"<br>";#}
+                    {#var finddiv = document.getElementById("todayweather");//寻找显示容器#}
+                    {#finddiv.innerHTML = displaytext;//引用解析好了的数据#}
+                    {#document.getElementById('todayweather').innerText= result ;#}
+
                     var jsonObj;
                     var s;
                     s = xmlhttp.responseText;
@@ -370,11 +387,9 @@
     <div class="ln-title" style="font-size: 30px;padding-top: 23px">当日天气</div>
     <div class="news-ticker">
         <div class="news-ticker-contant">
-            <div class="nt-item" style="font-size: 20px"><span class="new" style="font-size: 20px">北京</span><span
-                    id="abeijing"></span>31℃&nbsp;晴&nbsp;空气质量优
+            <div class="nt-item" style="font-size: 20px"><span class="new" style="font-size: 20px" id="abeijing">北京</span>{{ queryset.values.0.tavg|floatformat:0}}℃&nbsp;晴&nbsp;空气质量优
             </div>
-            <div class="nt-item" style="font-size: 20px"><span class="strategy" style="font-size: 20px">天津</span>22<span
-                    id="atianjin"></span>℃&nbsp;晴&nbsp;空气质量优
+            <div class="nt-item" style="font-size: 20px"> <span class="strategy" style="font-size: 20px" id="atianjin">天津</span>{{ queryset.values.4.tavg|floatformat:0}}℃&nbsp;晴&nbsp;空气质量优
             </div>
             <div class="nt-item" style="font-size: 20px"><span class="racing" style="font-size: 20px">湖北</span>35℃&nbsp;晴&nbsp;空气质量优
             </div>
@@ -703,14 +718,6 @@
                             xAxis: [
                                 {
                                     'data': tenyearx,
-                                    {#                        [#}
-                                    {#                            {% for row in everyyeartodayhistory %}#}
-                                    {#                                {% if row.city == city%}#}
-                                    {#                                "{{ row.date }}",#}
-                                    {#                                {% endif %}#}
-                                    {#                            {% endfor %}#}
-                                    {##}
-                                    {#                        ],#}
                                     axisLine: {
                                         lineStyle: {
                                             color: colors[1]
@@ -739,11 +746,6 @@
                                     },
                                     smooth: true,
                                     data: tenyeartmax,
-                                    {#                        [#}
-                                    {#                            {% for row in everyyeartodayhistory %}#}
-                                    {#                                "{{ row.tmax | floatformat:0}}",#}
-                                    {#                            {% endfor %}#}
-                                    {#                        ],#}
                                 },
                                 {
                                     name: '最低温度',
@@ -755,11 +757,6 @@
                                     },
                                     smooth: true,
                                     data: tenyeartmin,
-                                    {#                         [#}
-                                    {#                            {% for row in everyyeartodayhistory %}#}
-                                    {#                                "{{ row.tmin | floatformat:0}}",#}
-                                    {#                            {% endfor %}#}
-                                    {#                        ],#}
                                 },
                                 {
                                     name: '平均温度',
@@ -771,14 +768,274 @@
                                     },
                                     smooth: true,
                                     data: tenyeartavg,
-                                    {#                        [#}
-                                    {#                            {% for row in everyyeartodayhistory %}#}
-                                    {#                                "{{ row.tavg | floatformat:0}}",#}
-                                    {#                            {% endfor %}#}
-                                    {#                        ],#}
                                 },
                             ]
                         },
+
+                    ]
+                };
+      // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+    //获取当前城市名
+    var obj = document.getElementById("choosecity");
+    var city = obj.options[obj.selectedIndex].value;
+    var colors = ['red', '#5793f3', '#ffb320', 'orange', 'white', 'pink'];
+    var option = {
+        baseOption: {
+            timeline: {
+                axisType: 'category',
+                autoPlay: true,
+                // currentIndex: 2,
+                playInterval: 5000,
+                lineStyle: {
+                    color: colors[0],
+                },
+                controlStyle: {
+                    color: colors[0],
+                    borderColor: colors[0],
+                    borderWidth: 2,
+                },
+                label: {
+                    color: 'yellow',
+                },
+                data: [
+                    '未来一周',
+                    {
+                        value: '近十年同一天',
+                        symbol: 'diamond',
+                        symbolSize: 20
+                    },
+                ],
+            },
+            title: {
+                left: '10%',
+                top: '1%',
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross'
+                },
+                right: '20%',
+                top: '3%',
+            },
+            calculable: true,
+            grid: {
+                left: '8%',
+                right: '8%',
+                bottom: '10%',
+                containLabel: true
+            },
+            toolbox: {
+                color: colors[0],
+                show: true,
+                right: '10%',
+                top: '3%',
+                feature: {
+                    dataZoom: {
+                        yAxisIndex: 'none'
+                    },
+                    dataView: {readOnly: false},
+                    {#                dataView: {#}
+                    {#                // 数据视图#}
+                    {#                optionToContent: (opt) => {#}
+                    {#                    var axisData = opt.xAxis[0].data;#}
+                    {#                    var series = opt.series;#}
+                    {#                    var table = `<div class="echartstableview"><table style="width:100%;text-align:center">#}
+                    {#                                    <thead><tr><th>时间</th>`;#}
+                    {#                    series.forEach(( element, index) => {#}
+                    {#                        table += `<th>${element.name}</th>`;#}
+                    {#                    })#}
+                    {#                    table += `</tr></thead><tbody>`;#}
+                    {#                    axisData.forEach(( date, index) => {#}
+                    {#                        table += `<tr><td>${date}</td>`;#}
+                    {#                        series.forEach(( series_, index_) => {#}
+                    {#                            table += `<td>${series_.data[index]}</td>`;#}
+                    {#                        })  #}
+                    {#                        table += `</tr>`;#}
+                    {#                    })#}
+                    {#                    table += '</tbody></table></div>';#}
+                    {#                    return table;#}
+                    {#                },#}
+                    magicType: {type: ['line', 'bar']},
+                    restore: {},
+                    saveAsImage: {},
+                },
+                iconStyle: {
+                    normal: {
+                        color: colors[5],//设置颜色
+                    }
+                }
+            },
+            xAxis: [
+                {
+                    'type': 'category',
+                    'axisLabel': {
+{#                        'interval': 0,#}
+                        onZero: false,
+                    },
+                    splitLine: {show: false}
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    boundaryGap: false,
+                    axisTick: {
+                        alignWithLabel: true
+                    },
+                    axisLine: {
+                        onZero: false,
+                        lineStyle: {
+                            color: colors[2]
+                        }
+                    },
+                    min: function (value) {
+                        return value.min - 10;
+                    },
+                    max: function (value) {
+                        return value.max + 10;
+                    }
+                }
+            ],
+        },
+        options: [
+            {
+                legend: {
+                    top: '3%',
+                    color: colors[2],
+                    textStyle: {
+                        fontSize: 18,
+                        color: colors[2]
+                    },
+                    data: ['平均温度'],
+                    selected: {
+                        '最高温度': false, '最低温度': false,
+                    },
+                },
+                title: {
+                    text: '未来一周',
+                    textStyle: {
+                        color: colors[2],
+                    },
+                },
+                xAxis: [
+                    {
+                        'data':xarr,
+                        axisLine: {
+                            lineStyle: {
+                                color: colors[2]
+                            }
+                        },
+                    }
+                ],
+                yAxis: [
+                    {
+                        axisLine: {
+                            onZero: false,
+                            lineStyle: {
+                                color: colors[2]
+                            }
+                        },
+                    }
+                ],
+                series: [
+                    {
+                        name: '最高温度',
+                        type: 'line',
+                    }, {
+                        name: '平均温度',
+                        type: 'line',
+                        smooth: true,
+                        color: colors[2],
+                        lineStyle: {
+                            color: colors[2],
+                            width: 4,
+                        },
+                        data: yarr,
+                    },
+                    {
+                        name: '最低温度',
+                        type: 'line',
+                    },
+
+                ]
+            },
+            {
+                legend: {
+                    top: '3%',
+                    color: colors[1],
+                    textStyle: {
+                        fontSize: 18,
+                        color: colors[1]
+                    },
+                    data: ['最高温度', '平均温度', '最低温度'],
+                    selected: {
+                        '最高温度': true, '最低温度': true, '平均温度': true,
+                    },
+                },
+                title: {
+                    text: '近10年同一天',
+                    textStyle: {
+                        color: colors[1],
+                    },
+                },
+                xAxis: [
+                    {
+                        'data': tenyearx,
+                        axisLine: {
+                            lineStyle: {
+                                color: colors[1]
+                            }
+                        },
+                    }
+                ],
+                yAxis: [
+                    {
+                        axisLine: {
+                            onZero: false,
+                            lineStyle: {
+                                color: colors[1]
+                            }
+                        },
+                    }
+                ],
+                series: [
+                    {
+                        name: '最高温度',
+                        type: 'line',
+                        color: colors[0],
+                        lineStyle: {
+                            color: colors[0],
+                            width: 4,
+                        },
+                        smooth: true,
+                        data: tenyeartmax,
+                    },
+                    {
+                        name: '最低温度',
+                        type: 'line',
+                        color: colors[1],
+                        lineStyle: {
+                            color: colors[1],
+                            width: 4,
+                        },
+                        smooth: true,
+                        data:tenyeartmin,
+                    },
+                    {
+                        name: '平均温度',
+                        type: 'line',
+                        color: colors[2],
+                        lineStyle: {
+                            color: colors[2],
+                            width: 4,
+                        },
+                        smooth: true,
+                        data: tenyeartavg,
+                    },
+                ]
+            },
 
                     ]
                 };
