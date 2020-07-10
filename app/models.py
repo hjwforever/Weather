@@ -90,6 +90,7 @@ class Memorandum(models.Model):
     time = models.DateTimeField(null=True)
     isAllDay = models.BooleanField(default=False)
     eventContent = models.CharField(max_length=256,unique=False)
+    hasRemind = models.BooleanField(default=False)
     def __str__(self):
         return str(self.eventContent)
     class Meta:
