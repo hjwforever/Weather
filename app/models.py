@@ -3,18 +3,18 @@ from django.db import models
 # Create your models here.
 
 
-class Person(models.Model):
-    name = models.CharField(max_length=30)
-    age = models.IntegerField()
-
-class Weather(models.Model):
-    date = models.DateTimeField(primary_key=True)
-    tmax = models.FloatField()
-    tmin = models.FloatField()
-    tavg = models.FloatField()
-
-    def __str__(self):
-        return str(self.date)
+# class Person(models.Model):
+#     name = models.CharField(max_length=30)
+#     age = models.IntegerField()
+#
+# class Weather(models.Model):
+#     date = models.DateTimeField(primary_key=True)
+#     tmax = models.FloatField()
+#     tmin = models.FloatField()
+#     tavg = models.FloatField()
+#
+#     def __str__(self):
+#         return str(self.date)
 
 
 
@@ -65,6 +65,10 @@ class HistoryData(models.Model):
     def __str__(self):
         return str(self.date)
 
+    class Meta:
+        verbose_name = "历史天气数据"
+        verbose_name_plural = "历史天气数据"
+
 class PredictData(models.Model):
     # id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
     city = models.CharField(max_length=128)
@@ -76,6 +80,9 @@ class PredictData(models.Model):
 
     def __str__(self):
         return str(self.date)
+    class Meta:
+        verbose_name = "预测天气数据"
+        verbose_name_plural = "预测天气数据"
 
 class Memorandum(models.Model):
     name = models.CharField(max_length=128, unique=False)
@@ -85,3 +92,6 @@ class Memorandum(models.Model):
     eventContent = models.CharField(max_length=256,unique=False)
     def __str__(self):
         return str(self.eventContent)
+    class Meta:
+        verbose_name = "备忘录"
+        verbose_name_plural = "备忘录"

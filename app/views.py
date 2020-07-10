@@ -27,7 +27,7 @@ from random import randrange
 from rest_framework.views import APIView
 from pyecharts.charts import Bar, Line
 from pyecharts import options as opts
-from app.models import Weather
+# from app.models import Weather
 from rest_framework.decorators import api_view
 from django.utils import timezone
 from django.core import serializers

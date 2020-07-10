@@ -17,7 +17,7 @@ admin.site.register(User)
 admin.site.register(ConfirmString)
 admin.site.register(HistoryData, HistoryDateAdmin)
 admin.site.register(PredictData, PredictDataAdmin)
-admin.site.register(Weather)
+# admin.site.register(Weather)
 admin.site.register(Memorandum)
 
 admin.site.site_header = 'Six-Single-Dogs天气预测后台管理系统'
