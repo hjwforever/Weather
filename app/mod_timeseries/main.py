@@ -79,7 +79,7 @@ from app.mod_timeseries.WebCrawler import *
 #     print(element)
 
 # 创建日程
-# models.Memorandum.objects.create(name='cfx', email='123456789@qq.com', eventContent='告诉黄琳棠他是陈庆洋的儿子', isAllDay=True,
+# models.Memorandum.objects.create(name='hjh', email='965195910@qq.com', eventContent='事件1', isAllDay=False,
+#                                  time='2020-07-08 12:00:00')
+# models.Memorandum.objects.create(name='hjh', email='965195910@qq.com', eventContent='事件2', isAllDay=True,
 #                                  time='2020-07-09 12:00:00')
-# models.Memorandum.objects.create(name='hjh', email='965195910@qq.com', eventContent='告诉黄琳棠他是所有人的儿子', isAllDay=True,
-#                                  time='2020-07-09 13:00:00')

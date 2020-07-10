@@ -65,24 +65,27 @@ def selectcity(request):
     print(queryset)
     return JsonResponse(queryset, json_dumps_params={'ensure_ascii': False}, safe=False)
 
+
 def selecthistorycity(request):
     city = request.GET.get('city')
     year = request.GET.get('year')
     month = request.GET.get('month')
     day = request.GET.get('day')
     print(city)
-    print(year+month+day)
+    print(year + month + day)
 
     if year == '0':
         History_data = models.HistoryData.objects.filter(city=city).order_by('date')
     else:
         if month == '0':
-            History_data = models.HistoryData.objects.filter(date__year=year,city=city).order_by('date')
+            History_data = models.HistoryData.objects.filter(date__year=year, city=city).order_by('date')
         else:
             if day == '0':
-                History_data = models.HistoryData.objects.filter(date__year=year, date__month=month,city=city).order_by('date')
+                History_data = models.HistoryData.objects.filter(date__year=year, date__month=month,
+                                                                 city=city).order_by('date')
             else:
-                History_data = models.HistoryData.objects.filter(date__year=year, date__month=month, date__day=day,city=city).order_by('date')
+                History_data = models.HistoryData.objects.filter(date__year=year, date__month=month, date__day=day,
+                                                                 city=city).order_by('date')
     data = serializers.serialize("json", History_data)
     queryset = json.loads(data)
     print('data:')
@@ -90,8 +93,6 @@ def selecthistorycity(request):
     print('querysethistory')
     print(queryset)
     return JsonResponse(queryset, json_dumps_params={'ensure_ascii': False}, safe=False)
-
-
 
 
 def model2jsonArr(data):
@@ -112,7 +113,7 @@ def changechart(request):
 
     datenow = timezone.now()
     theday = datenow + timedelta(days=6)
-    predict_queryset = models.PredictData.objects.filter(date__range=[datenow, theday],city=city).order_by('date')
+    predict_queryset = models.PredictData.objects.filter(date__range=[datenow, theday], city=city).order_by('date')
 
     datenow = timezone.now()
     # today = datetime.date.today()
@@ -133,16 +134,45 @@ def changechart(request):
 
 def get_calendar(request):
     name = request.GET.get('name')
-    print("calendar:")
-    print(name)
     queryset = models.Memorandum.objects.filter(name=name).order_by('time')
     data = serializers.serialize("json", queryset)
     queryset = json.loads(data)
-    print('calendar_data:')
-    print(data)
-    print('calendar_queryset')
-    print(queryset)
     return JsonResponse(queryset, json_dumps_params={'ensure_ascii': False}, safe=False)
+
+
+def add_calendar(request):
+    name = request.GET.get('name')
+    time = request.GET.get('time')
+    title = request.GET.get('title')
+    email = models.User.objects.filter(name=name).values()
+    isAllDay = request.GET.get('isAllDay')
+    print(time)
+    if isAllDay == 'true':
+        models.Memorandum.objects.create(name=name, email=email[0]['email'], eventContent=title,
+                                         isAllDay=True, time=time)
+    else:
+        models.Memorandum.objects.create(name=name, email=email[0]['email'], eventContent=title,
+                                         isAllDay=False, time=time)
+    return JsonResponse('ok', json_dumps_params={'ensure_ascii': False}, safe=False)
+
+
+def delete_calendar(request):
+    name = request.GET.get('name')
+    time = request.GET.get('time')
+    title = request.GET.get('title')
+    email = models.User.objects.filter(name=name).values()
+    isAllDay = request.GET.get('isAllDay')
+    if isAllDay == 'true':
+        if models.Memorandum.objects.filter(name=name, email=email[0]['email'], eventContent=title, isAllDay=True,
+                                            time=time).exists():
+            models.Memorandum.objects.filter(name=name, email=email[0]['email'], eventContent=title, isAllDay=True,
+                                             time=time).delete()
+    else:
+        if models.Memorandum.objects.filter(name=name, email=email[0]['email'], eventContent=title, isAllDay=False,
+                                            time=time).exists():
+            models.Memorandum.objects.filter(name=name, email=email[0]['email'], eventContent=title, isAllDay=False,
+                                             time=time).delete()
+    return JsonResponse('ok', json_dumps_params={'ensure_ascii': False}, safe=False)
 
 
 def response_as_json(data):
@@ -240,6 +270,7 @@ def index(request):
         return render(request, 'app/index.html', {'queryset': queryset, 'predict_queryset': predict_queryset,
                                                   'everyyeartodayhistory': everyyeartodayhistory, 'has_login': False})
 
+
 def get_test(request):
     data_set = pd.read_csv("app/static/DataResult.csv")
     p = wm.ProcessData("app/static/DataResult.csv", 10, 'min')
@@ -292,27 +323,27 @@ def history_page(request):
 
 
 # def transfer_history(request):
-    # city = request.GET.get('CC')
-    # year = request.GET.get('YYYY')
-    # mon = request.GET.get('MM')
-    # day = request.GET.get('DD')
-    # print(city)
-    # print(year)
-    # print(mon)
-    # print(day)
-    # if year == '0':
-    #     History_data = models.HistoryData.objects.filter().values()
-    # else:
-    #     if mon == '0':
-    #         History_data = models.HistoryData.objects.filter(date__year=year).values()
-    #     else:
-    #         if day == '0':
-    #             History_data = models.HistoryData.objects.filter(date__year=year, date__month=mon).values()
-    #         else:
-    #             History_data = models.HistoryData.objects.filter(date__year=year, date__month=mon,
-    #                                                              date__day=day).values()
-    # print(History_data)
-    # return render(request, 'app/search-history.html')
+# city = request.GET.get('CC')
+# year = request.GET.get('YYYY')
+# mon = request.GET.get('MM')
+# day = request.GET.get('DD')
+# print(city)
+# print(year)
+# print(mon)
+# print(day)
+# if year == '0':
+#     History_data = models.HistoryData.objects.filter().values()
+# else:
+#     if mon == '0':
+#         History_data = models.HistoryData.objects.filter(date__year=year).values()
+#     else:
+#         if day == '0':
+#             History_data = models.HistoryData.objects.filter(date__year=year, date__month=mon).values()
+#         else:
+#             History_data = models.HistoryData.objects.filter(date__year=year, date__month=mon,
+#                                                              date__day=day).values()
+# print(History_data)
+# return render(request, 'app/search-history.html')
 
 
 def hash_code(s, salt=settings.SECRET_KEY):
@@ -400,7 +431,8 @@ def login(request):
                 print('everyyeartodayhistory:')
                 print(everyyeartodayhistory)
                 return render(request, 'app/index.html',
-                              {'has_login': True, 'login_user_name': user.name, 'queryset': queryset,
+                              {'has_login': True, 'login_user_name': user.name,
+                               'queryset': queryset,
                                'predict_queryset': predict_queryset,
                                'everyyeartodayhistory': everyyeartodayhistory})
             else:

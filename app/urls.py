@@ -7,6 +7,8 @@ urlpatterns = [
     path('selectcity/', views.selectcity, name='selectcity'),
     path('changechart/', views.changechart, name='changechart'),
     path('getcalendar/', views.get_calendar, name='getcalendar'),
+    path('addcalendar/',views.add_calendar,name='addcalendar'),
+    path('deletecalendar/',views.delete_calendar,name='deletecalendar'),
     path('selecthistorycity/', views.selecthistorycity, name='selecthistorycity'),
 
     path('', views.index, name='index'),
