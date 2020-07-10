@@ -100,10 +100,18 @@
                         default:
                             city = '北京';
                     }
+                    var date_0_msg=myobj[3].fields.date+"&nbsp&nbsp&nbsp&nbsp"+ myobj[3].fields.tmin+"~"+myobj[3].fields.tmax+"℃";
+                    var date_1_msg=myobj[4].fields.date+"&nbsp&nbsp&nbsp&nbsp"+ myobj[4].fields.tmin+"~"+myobj[4].fields.tmax+"℃";
+                    var date_2_msg=myobj[5].fields.date+"&nbsp&nbsp&nbsp&nbsp"+ myobj[5].fields.tmin+"~"+myobj[5].fields.tmax+"℃";
+                    var date_3_msg=myobj[6].fields.date+"&nbsp&nbsp&nbsp&nbsp"+ myobj[6].fields.tmin+"~"+myobj[6].fields.tmax+"℃";
                     document.getElementById("selectcity").innerHTML = city;
-                    document.getElementById("today").innerHTML = myobj[0].fields.tavg;
-                    document.getElementById("tomorrow").innerHTML = myobj[1].fields.tavg;
-                    document.getElementById("nexttomorrow").innerHTML = myobj[2].fields.tavg;
+                    document.getElementById("today").innerHTML = myobj[0].fields.tmin;
+                    document.getElementById("tomorrow").innerHTML = myobj[1].fields.tmin+"~"+myobj[0].fields.tmax;
+                    document.getElementById("nexttomorrow").innerHTML = myobj[2].fields.tmin+"~"+myobj[0].fields.tmax;
+                    document.getElementById("date_0").innerHTML =date_0_msg;
+                    document.getElementById("date_1").innerHTML = date_1_msg;
+                    document.getElementById("date_2").innerHTML = date_2_msg;
+                    document.getElementById("date_3").innerHTML = date_3_msg;
                 }
             }
             xmlhttp.open("GET", "/app/selectcity?city=" + str, true);
@@ -272,35 +280,37 @@
                         <div class="slide-inner">
                             <div class="slide-item">
                                 <div class="temp">
-                                    {% if predict_queryset.0.date|date:'m' < 10 %}
-                                        0{{ predict_queryset.0.date|date:'m' }}月
-                                    {% else %}
-                                        {{ predict_queryset.0.date|date:'m' }}月
-                                    {% endif %}
-                                    {% if predict_queryset.0.date|date:'d' < 10 %}
-                                        0{{ predict_queryset.0.date|date:'d' }}日
-                                    {% else %}
-                                        {{ predict_queryset.0.date|date:'d' }}日
-                                    {% endif %}
-                                    &nbsp&nbsp{{ predict_queryset.0.tavg | floatformat:0 }}℃
+                                    <span id="date_0"></span>
+{#                                    {% if predict_queryset.0.date|date:'m' < 10 %}#}
+{#                                        0{{ predict_queryset.0.date|date:'m' }}月#}
+{#                                    {% else %}#}
+{#                                        {{ predict_queryset.0.date|date:'m' }}月#}
+{#                                    {% endif %}#}
+{#                                    {% if predict_queryset.0.date|date:'d' < 10 %}#}
+{#                                        0{{ predict_queryset.0.date|date:'d' }}日#}
+{#                                    {% else %}#}
+{#                                        {{ predict_queryset.0.date|date:'d' }}日#}
+{#                                    {% endif %}#}
+{#                                    &nbsp&nbsp{{ predict_queryset.0.tavg | floatformat:0 }}℃#}
                                 </div>
-                                <div class="weather"><span class="text">雷阵雨</span><i class="icon-air icon-air-1"></i>
+                                <div class="weather"><span class="text">{{ predict_queryset.0.weather }}</span><i class="icon-air icon-air-1"></i>
                                 </div>
                                 <div class="wind">无持续风向&nbsp;微风</div>
                             </div>
                             <div class="slide-item">
                                 <div class="temp">
-                                    {% if predict_queryset.1.date|date:'m' < 10 %}
-                                        0{{ predict_queryset.1.date|date:'m' }}月
-                                    {% else %}
-                                        {{ predict_queryset.1.date|date:'m' }}月
-                                    {% endif %}
-                                    {% if predict_queryset.1.date.day < 10 %}
-                                        0{{ predict_queryset.1.date.day }}日
-                                    {% else %}
-                                        {{ predict_queryset.1.date.day }}日
-                                    {% endif %}
-                                    &nbsp&nbsp{{ predict_queryset.1.tavg | floatformat:0 }}℃
+                                    <span id="date_1"></span>
+{#                                    {% if predict_queryset.1.date|date:'m' < 10 %}#}
+{#                                        0{{ predict_queryset.1.date|date:'m' }}月#}
+{#                                    {% else %}#}
+{#                                        {{ predict_queryset.1.date|date:'m' }}月#}
+{#                                    {% endif %}#}
+{#                                    {% if predict_queryset.1.date.day < 10 %}#}
+{#                                        0{{ predict_queryset.1.date.day }}日#}
+{#                                    {% else %}#}
+{#                                        {{ predict_queryset.1.date.day }}日#}
+{#                                    {% endif %}#}
+{#                                    &nbsp&nbsp{{ predict_queryset.1.tavg | floatformat:0 }}℃#}
                                 </div>
                                 <div class="weather"><span class="text">多云</span><i class="icon-air icon-air-1"></i>
                                 </div>
@@ -308,17 +318,18 @@
                             </div>
                             <div class="slide-item">
                                 <div class="temp">
-                                    {% if predict_queryset.2.date|date:'m' < 10 %}
-                                        0{{ predict_queryset.2.date|date:'m' }}月
-                                    {% else %}
-                                        {{ predict_queryset.2.date|date:'m' }}月
-                                    {% endif %}
-                                    {% if predict_queryset.2.date|date:'d' < 10 %}
-                                        0{{ predict_queryset.2.date|date:'d' }}日
-                                    {% else %}
-                                        {{ predict_queryset.2.date|date:'d' }}日
-                                    {% endif %}
-                                    &nbsp&nbsp{{ predict_queryset.2.tavg | floatformat:0 }}℃
+                                    <span id="date_2"></span>
+{#                                    {% if predict_queryset.2.date|date:'m' < 10 %}#}
+{#                                        0{{ predict_queryset.2.date|date:'m' }}月#}
+{#                                    {% else %}#}
+{#                                        {{ predict_queryset.2.date|date:'m' }}月#}
+{#                                    {% endif %}#}
+{#                                    {% if predict_queryset.2.date|date:'d' < 10 %}#}
+{#                                        0{{ predict_queryset.2.date|date:'d' }}日#}
+{#                                    {% else %}#}
+{#                                        {{ predict_queryset.2.date|date:'d' }}日#}
+{#                                    {% endif %}#}
+{#                                    &nbsp&nbsp{{ predict_queryset.2.tavg | floatformat:0 }}℃#}
                                 </div>
                                 <div class="weather"><span class="text">多云</span><i class="icon-air icon-air-1"></i>
                                 </div>
@@ -326,17 +337,18 @@
                             </div>
                             <div class="slide-item">
                                 <div class="temp">
-                                    {% if predict_queryset.3.date|date:'m' < 10 %}
-                                        0{{ predict_queryset.3.date|date:'m' }}月
-                                    {% else %}
-                                        {{ predict_queryset.3.date|date:'m' }}月
-                                    {% endif %}
-                                    {% if predict_queryset.3.date|date:'d' < 10 %}
-                                        0{{ predict_queryset.3.date|date:'d' }}日
-                                    {% else %}
-                                        {{ predict_queryset.3.date|date:'d' }}日
-                                    {% endif %}
-                                    &nbsp&nbsp{{ predict_queryset.3.tavg | floatformat:0 }}℃
+                                    <span id="date_3"></span>
+{#                                    {% if predict_queryset.3.date|date:'m' < 10 %}#}
+{#                                        0{{ predict_queryset.3.date|date:'m' }}月#}
+{#                                    {% else %}#}
+{#                                        {{ predict_queryset.3.date|date:'m' }}月#}
+{#                                    {% endif %}#}
+{#                                    {% if predict_queryset.3.date|date:'d' < 10 %}#}
+{#                                        0{{ predict_queryset.3.date|date:'d' }}日#}
+{#                                    {% else %}#}
+{#                                        {{ predict_queryset.3.date|date:'d' }}日#}
+{#                                    {% endif %}#}
+{#                                    &nbsp&nbsp{{ predict_queryset.3.tavg | floatformat:0 }}℃#}
                                 </div>
                                 <div class="weather"><span class="text">多云</span><i class="icon-air icon-air-2"></i>
                                 </div>

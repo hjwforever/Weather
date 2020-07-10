@@ -67,7 +67,7 @@ def tick():
 
 if __name__ == '__main__':
     scheduler = BlockingScheduler()
-    scheduler.add_job(tick, 'cron', hour=1, minute=10)
+    scheduler.add_job(tick, 'cron', hour=9, minute=15)
     print('Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C    '))
 
     try:
