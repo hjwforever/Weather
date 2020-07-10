@@ -53,7 +53,7 @@ def selectcity(request):
     print(city)
 
     datenow = timezone.now()
-    theday = datenow + timedelta(days=2)
+    theday = datenow + timedelta(days=6)
     queryset = models.PredictData.objects.filter(date__range=[datenow, theday], city=city).order_by('date')
 
     data = serializers.serialize("json", queryset)
