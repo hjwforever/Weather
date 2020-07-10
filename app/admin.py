@@ -6,11 +6,11 @@ from app.models import *
 
 # admin.site.register(models.User)
 class PredictDataAdmin(admin.ModelAdmin):
-    list_display = ('date', 'tmin', 'tmax', 'tavg')
+    list_display = ('date', 'tmin', 'tmax', 'tavg','weather')
 
 
 class HistoryDateAdmin(admin.ModelAdmin):
-    list_display = ('date', 'tmin', 'tmax', 'tavg')
+    list_display = ('date', 'tmin', 'tmax', 'tavg','weather')
 
 
 admin.site.register(User)
@@ -20,3 +20,5 @@ admin.site.register(PredictData, PredictDataAdmin)
 admin.site.register(Weather)
 admin.site.register(Memorandum)
 
+admin.site.site_header = 'Six-Single-Dogs天气预测后台管理系统'
+admin.site.site_title = 'Six-Single-Dogs'

@@ -338,7 +338,7 @@ def send_email(email, code):
     text_content = """感谢注册！如果你看到这条消息，说明你的邮箱服务器不提供HTML链接功能，请联系管理员！"""
 
     html_content = """
-                    <p>感谢注册<a href="http://weather.sixsingledogs.tk/app/confirm/?code={0}" target=blank>点击完成注册</a>，\</p>
+                    <p>感谢注册<a href="http://127.0.0.1:8000/app/confirm/?code={0}" target=blank>点击完成注册</a>，\</p>
                     <p>请点击站点链接完成注册确认！</p>
                     <p>此链接有效期为{1}天！</p>
                     """.format(code, settings.CONFIRM_DAYS)
