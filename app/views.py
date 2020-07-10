@@ -44,6 +44,11 @@ class EventsForm(object):
 
 
 def selectcity(request):
+    print(request.session.get('is_login', None))
+    if request.session.get('is_login', None):
+        print('登录者姓名：')
+        print(request.session['user_name'])
+    print('嘿嘿嘿')
     city = request.GET.get('city')
     print(city)
 
@@ -208,6 +213,7 @@ def home(request):
 
 
 def index(request):
+    print('调用了一次index方法#######################################')
     datenow = timezone.now()
     queryset = models.HistoryData.objects.filter(date=datenow).values().order_by('date')
     print('queryset:')

@@ -1041,7 +1041,7 @@
 <!-- 日程表 -->
 <article style="background: url({% static 'img/pattern.png' %})">
     <p style="font-size: 40px;color: orange;text-align: center;"><b>日程表</b></p>
-    <div id="myId3" class="jalendar mid" style="width: 420px;" onload="getcalendar({{ login_user_name }})">
+    <div id="myId3" class="jalendar mid" style="width: 420px;" >
         {#        <div class="added-event" data-date="16/8/2013" data-time="20:45" data-title="Tarkan İstanbul Concert on Harbiye Açık Hava Tiyatrosu"></div>#}
         {#        <div class="added-event" data-date="17/8/2013" data-time="21:00"#}
         {#             data-title="CodeCanyon İstanbul Meeting on Starbucks, Kadıköy"></div>#}
@@ -1158,5 +1158,6 @@
     var obj = document.getElementById("choosecity");
     window.onload = showcity(obj.options[obj.selectedIndex].value);
     window.onload = changechart(obj.options[obj.selectedIndex].value);
+    window.onload = getcalendar('{{ login_user_name }}');
 </script>
 </html>

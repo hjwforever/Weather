@@ -78,10 +78,10 @@ class PredictData(models.Model):
         return str(self.date)
 
 class Memorandum(models.Model):
-    name = models.CharField(max_length=128, unique=True)
-    email = models.EmailField(unique=True)
+    name = models.CharField(max_length=128, unique=False)
+    email = models.EmailField(unique=False)
     time = models.DateTimeField(null=True)
     isAllDay = models.BooleanField(default=False)
-    eventContent = models.CharField(max_length=128)
+    eventContent = models.CharField(max_length=256,unique=False)
     def __str__(self):
         return str(self.eventContent)
