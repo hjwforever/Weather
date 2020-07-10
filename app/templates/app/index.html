@@ -58,6 +58,36 @@
 
 
     </script>
+    <script>
+        function transfercity(str) {
+            switch (str) {
+                case 'bejing':
+                    return '北京';
+                case 'zhengzhou':
+                    return '郑州';
+                case 'longyan':
+                    return '龙岩';
+                case 'tianjin':
+                    return '天津';
+                case 'xiangyang':
+                    return '襄阳';
+                case 'fengcheng':
+                    return '丰城';
+                case 'hailar':
+                    return '海拉尔';
+                default:
+                    return '北京';
+            }
+        }
+
+        function getcityname(object) {
+            return transfercity(object.city);
+        }
+
+        function getcityweather(object) {
+            return object.weather.toString();
+        }
+    </script>
     <script type="text/javascript">
         function showcity(str) {
             var xmlhttp;
@@ -86,33 +116,7 @@
                     var s;
                     s = xmlhttp.responseText;
                     var myobj = eval(s);
-                    city = '';
-                    switch (myobj[0].fields.city) {
-                        case 'bejing':
-                            city = '北京';
-                            break;
-                        case 'zhengzhou':
-                            city = '郑州';
-                            break;
-                        case 'longyan':
-                            city = '龙岩';
-                            break;
-                        case 'tianjin':
-                            city = '天津';
-                            break;
-                        case 'xiangyang':
-                            city = '襄阳';
-                            break;
-                        case 'fengcheng':
-                            city = '丰城';
-                            break;
-                        case 'hailar':
-                            city = '海拉尔';
-                            break;
-                        default:
-                            city = '北京';
-                    }
-
+                    city = getcityname(myobj[0].fields);
                     var today_weather_msg = myobj[0].fields.weather + "&nbsp&nbsp&nbsp&nbsp" + myobj[0].fields.tmin + " / " + myobj[0].fields.tmax + "℃";
                     var tomorrow_weather_msg = myobj[1].fields.weather;
                     var nexttomorrow_weather_msg = myobj[2].fields.weather;
@@ -415,29 +419,36 @@
 </div>
 <!-- hao123 section end -->
 <!-- Latest news section -->
+
 <div class="latest-news-section">
     <div class="ln-title" style="font-size: 30px;padding-top: 23px">当日天气</div>
     <div class="news-ticker">
-        <div class="news-ticker-contant">
-            <div class="nt-item" style="font-size: 20px"><span class="new" style="font-size: 20px"
-                                                               id="abeijing">北京</span>{{ queryset.values.0.tavg|floatformat:0 }}℃&nbsp;晴&nbsp;空气质量优
+        <div class="news-ticker-contant" onload="hh()">
+            <div class="nt-item" style="font-size: 20px"><span class="new" style="font-size: 20px">北京
+            </span>{{ queryset.values.0.tmin|floatformat:0 }} /  {{ queryset.values.0.tmax|floatformat:0 }}℃&nbsp;{{ queryset.values.0.weather }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
-            <div class="nt-item" style="font-size: 20px"><span class="strategy" style="font-size: 20px"
-                                                               id="atianjin">天津</span>{{ queryset.values.4.tavg|floatformat:0 }}℃&nbsp;晴&nbsp;空气质量优
+            <div class="nt-item" style="font-size: 20px"><span class="strategy" style="font-size: 20px">天津
+            </span>{{ queryset.values.4.tmin|floatformat:0 }} / {{ queryset.values.4.tmax|floatformat:0 }}℃&nbsp;{{ queryset.values.4.weather }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
-            <div class="nt-item" style="font-size: 20px"><span class="racing" style="font-size: 20px">湖北</span>35℃&nbsp;晴&nbsp;空气质量优
+            <div class="nt-item" style="font-size: 20px"><span class="strategy" style="font-size: 20px">丰城
+            </span>{{ queryset.values.1.tmin|floatformat:0 }} / {{ queryset.values.1.tmax|floatformat:0 }}℃&nbsp;{{ queryset.values.1.weather }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
-            <div class="nt-item" style="font-size: 20px"><span class="new" style="font-size: 20px">胡建</span>31℃&nbsp;晴&nbsp;空气质量优
+            <div class="nt-item" style="font-size: 20px"><span class="racing" style="font-size: 20px">襄阳
+            </span>{{ queryset.values.5.tmin|floatformat:0 }} / {{ queryset.values.5.tmax|floatformat:0 }}℃&nbsp;{{ queryset.values.5.weather }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
-            <div class="nt-item" style="font-size: 20px"><span class="strategy" style="font-size: 20px">河兰</span>22℃&nbsp;晴&nbsp;空气质量优
+            <div class="nt-item" style="font-size: 20px"><span class="new" style="font-size: 20px">龙岩
+            </span>{{ queryset.values.3.tmin|floatformat:0 }} / {{ queryset.values.3.tmax|floatformat:0 }}℃&nbsp;{{ queryset.values.3.weather }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
-            <div class="nt-item" style="font-size: 20px"><span class="racing" style="font-size: 20px">内蒙古</span>35℃&nbsp;晴&nbsp;空气质量优
+            <div class="nt-item" style="font-size: 20px"><span class="strategy" style="font-size: 20px">郑州
+            </span>{{ queryset.values.6.tmin|floatformat:0 }} / {{ queryset.values.6.tmax|floatformat:0 }}℃&nbsp;{{ queryset.values.0.weather }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
-            <div class="nt-item" style="font-size: 20px"><span class="strategy" style="font-size: 20px">江西</span>22℃&nbsp;晴&nbsp;空气质量优
+            <div class="nt-item" style="font-size: 20px"><span class="racing" style="font-size: 20px">海拉尔
+            </span>{{ queryset.values.2.tmin|floatformat:0 }} / {{ queryset.values.2.tmax|floatformat:0 }}℃&nbsp;{{ queryset.values.2.weather }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
         </div>
     </div>
 </div>
+
 <!-- Latest news section end -->
 <!-- ECharts图表 -->
 <!--为ECharts准备一个具备大小的Dom-->

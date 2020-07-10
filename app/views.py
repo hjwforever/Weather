@@ -215,9 +215,7 @@ def home(request):
 def index(request):
     print('调用了一次index方法#######################################')
     datenow = timezone.now()
-    queryset = models.HistoryData.objects.filter(date=datenow).values().order_by('date')
-    print('queryset:')
-    print(queryset)
+
     predict_queryset = models.PredictData.objects.all().order_by('date')
     print('predict_queryset:')
     print(predict_queryset)
@@ -333,12 +331,12 @@ def make_confirm_string(user):
 def send_email(email, code):
     from django.core.mail import EmailMultiAlternatives
 
-    subject = "来自Django的测试的注册确认邮件"
+    subject = "来自Six-Single-Dogs天气网站的注册确认邮件"
 
     text_content = """感谢注册！如果你看到这条消息，说明你的邮箱服务器不提供HTML链接功能，请联系管理员！"""
 
     html_content = """
-                    <p>感谢注册<a href="http://127.0.0.1:8000/app/confirm/?code={0}" target=blank>点击完成注册</a>，\</p>
+                    <p>感谢注册<a href="http://127.0.0.1:8000/app/confirm/?code={0}" target=blank>点击完成注册</a>，</p>
                     <p>请点击站点链接完成注册确认！</p>
                     <p>此链接有效期为{1}天！</p>
                     """.format(code, settings.CONFIRM_DAYS)
