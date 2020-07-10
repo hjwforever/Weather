@@ -113,20 +113,20 @@
                             city = '北京';
                     }
 
-                    var today_weather_msg = myobj[0].fields.weather + "&nbsp&nbsp&nbsp&nbsp" + myobj[0].fields.tmin + "~" + myobj[0].fields.tmax + "℃";
+                    var today_weather_msg = myobj[0].fields.weather + "&nbsp&nbsp&nbsp&nbsp" + myobj[0].fields.tmin + " / " + myobj[0].fields.tmax + "℃";
                     var tomorrow_weather_msg = myobj[1].fields.weather;
                     var nexttomorrow_weather_msg = myobj[2].fields.weather;
-                    var date_0_msg = myobj[3].fields.date + "&nbsp&nbsp&nbsp&nbsp" + myobj[3].fields.tmin + "~" + myobj[3].fields.tmax + "℃";
-                    var date_1_msg = myobj[4].fields.date + "&nbsp&nbsp&nbsp&nbsp" + myobj[4].fields.tmin + "~" + myobj[4].fields.tmax + "℃";
-                    var date_2_msg = myobj[5].fields.date + "&nbsp&nbsp&nbsp&nbsp" + myobj[5].fields.tmin + "~" + myobj[5].fields.tmax + "℃";
-                    var date_3_msg = myobj[6].fields.date + "&nbsp&nbsp&nbsp&nbsp" + myobj[6].fields.tmin + "~" + myobj[6].fields.tmax + "℃";
+                    var date_0_msg = myobj[3].fields.date + "&nbsp&nbsp&nbsp" + myobj[3].fields.tmin + " / " + myobj[3].fields.tmax + "℃";
+                    var date_1_msg = myobj[4].fields.date + "&nbsp&nbsp&nbsp" + myobj[4].fields.tmin + " / " + myobj[4].fields.tmax + "℃";
+                    var date_2_msg = myobj[5].fields.date + "&nbsp&nbsp&nbsp" + myobj[5].fields.tmin + " / " + myobj[5].fields.tmax + "℃";
+                    var date_3_msg = myobj[6].fields.date + "&nbsp&nbsp&nbsp" + myobj[6].fields.tmin + " / " + myobj[6].fields.tmax + "℃";
 
                     document.getElementById("selectcity").innerHTML = city;
                     document.getElementById("today").innerHTML = myobj[0].fields.tavg;
                     document.getElementById("today_weather").innerHTML = today_weather_msg;
-                    document.getElementById("tomorrow").innerHTML = myobj[1].fields.tmin + "~" + myobj[0].fields.tmax;
+                    document.getElementById("tomorrow").innerHTML = myobj[1].fields.tmin + " / " + myobj[0].fields.tmax;
                     document.getElementById("tomorrow_weather").innerHTML = tomorrow_weather_msg;
-                    document.getElementById("nexttomorrow").innerHTML = myobj[2].fields.tmin + "~" + myobj[0].fields.tmax;
+                    document.getElementById("nexttomorrow").innerHTML = myobj[2].fields.tmin + " / " + myobj[0].fields.tmax;
                     document.getElementById("nexttomorrow_weather").innerHTML = nexttomorrow_weather_msg;
                     document.getElementById("date_0").innerHTML = date_0_msg;
                     document.getElementById("date_1").innerHTML = date_1_msg;
@@ -136,6 +136,67 @@
                     document.getElementById("date_1_weather").innerHTML = myobj[4].fields.weather;
                     document.getElementById("date_2_weather").innerHTML = myobj[4].fields.weather;
                     document.getElementById("date_3_weather").innerHTML = myobj[5].fields.weather;
+                    {#$(".todayicon").removeClass("todayicon");#}
+                    {#$(".todayicon").attr("class","icon icon-w w-01")#}
+                    var icon = document.getElementById("todayicon");
+                    var icon1 = document.getElementById("tomorrowicon");
+                    var icon2 = document.getElementById("nexttomorrowicon");
+                    {#图标一#}
+                    if(myobj[0].fields.weather.indexOf("多")!=-1){
+                        icon.className="icon icon-w w-01";
+                    }else if(myobj[0].fields.weather.indexOf("晴")!=-1){
+                        icon.className="icon icon-w w-00";
+                    }else if(myobj[0].fields.weather.indexOf("雷")!=-1){
+                        icon.className="icon icon-w w-05";
+                    }else if(myobj[0].fields.weather.indexOf("暴")!=-1){
+                        icon.className="icon icon-w w-11";
+                    }else if(myobj[0].fields.weather.indexOf("大")!=-1){
+                        icon.className="icon icon-w w-10";
+                    }else if(myobj[0].fields.weather.indexOf("中")!=-1){
+                        icon.className="icon icon-w w-08";
+                    }else if(myobj[0].fields.weather.indexOf("小")!=-1){
+                        icon.className="icon icon-w w-07";
+                    }else if(myobj[0].fields.weather.indexOf("阴")!=-1){
+                        icon.className="icon icon-w w-02";
+                    }
+
+                    {#图标二#}
+                    if(myobj[1].fields.weather.indexOf("多")!=-1){
+                        icon1.className="icon icon-w w-01";
+                    }else if(myobj[1].fields.weather.indexOf("晴")!=-1){
+                        icon1.className="icon icon-w w-00";
+                    }else if(myobj[1].fields.weather.indexOf("雷")!=-1){
+                        icon1.className="icon icon-w w-05";
+                    }else if(myobj[1].fields.weather.indexOf("暴")!=-1){
+                        icon1.className="icon icon-w w-11";
+                    }else if(myobj[1].fields.weather.indexOf("大")!=-1){
+                        icon1.className="icon icon-w w-10";
+                    }else if(myobj[1].fields.weather.indexOf("中")!=-1){
+                        icon1.className="icon icon-w w-08";
+                    }else if(myobj[1].fields.weather.indexOf("小")!=-1){
+                        icon1.className="icon icon-w w-07";
+                    }else if(myobj[1].fields.weather.indexOf("阴")!=-1){
+                        icon1.className="icon icon-w w-02";
+                    }
+
+                    {#图标三#}
+                    if(myobj[2].fields.weather.indexOf("多")!=-1){
+                        icon2.className="icon icon-w w-01";
+                    }else if(myobj[2].fields.weather.indexOf("晴")!=-1){
+                        icon2.className="icon icon-w w-00";
+                    }else if(myobj[2].fields.weather.indexOf("雷")!=-1){
+                        icon2.className="icon icon-w w-05";
+                    }else if(myobj[2].fields.weather.indexOf("暴")!=-1){
+                        icon2.className="icon icon-w w-11";
+                    }else if(myobj[2].fields.weather.indexOf("大")!=-1){
+                        icon2.className="icon icon-w w-10";
+                    }else if(myobj[2].fields.weather.indexOf("中")!=-1){
+                        icon2.className="icon icon-w w-08";
+                    }else if(myobj[2].fields.weather.indexOf("小")!=-1){
+                        icon2.className="icon icon-w w-07";
+                    }else if(myobj[2].fields.weather.indexOf("阴")!=-1){
+                        icon2.className="icon icon-w w-02";
+                    }
                 }
             }
             xmlhttp.open("GET", "/app/selectcity?city=" + str, true);
@@ -263,7 +324,8 @@
             </form>
             <div class="weather-info-inner">
                 <div class="real-time-box">
-                    <div class="icon icon-w w-00"></div>
+{#                    图标一#}
+                    <div id="todayicon" ></div>
                     <div class="text"><span id="selectcity" style="font-size: 35px">北京</span><span class="label">&nbsp;今日天气</span>
                         <div class="temperature">
                             <span class="num" id="today"></span>
@@ -278,7 +340,8 @@
                 <div class="forecast-box">
                     <div class="forecast-item">
                         <div class="info">
-                            <div class="icon icon-w w-01"><i class="icon-date ming"></i></div>
+{#                            图标二#}
+                            <div id="tomorrowicon"><i class="icon-date ming"></i></div>
                             <div class="temp">
                                 <span class="num" id="tomorrow"></span>
                                 <span class="symbol">℃</span>
@@ -290,7 +353,8 @@
                     </div>
                     <div class="forecast-item last">
                         <div class="info">
-                            <div class="icon icon-w w-08"><i class="icon-date hou"></i></div>
+{#                            图标三#}
+                            <div id="nexttomorrowicon"><i class="icon-date hou"></i></div>
                             {#07 08 09 分别对应小雨中雨大雨#}
                             <div class="temp">
                                 <span class="num" id="nexttomorrow"></span>
@@ -305,83 +369,39 @@
                         <div class="slide-inner">
                             <div class="slide-item">
                                 <div class="temp">
-                                    <span id="date_0"></span>
-                                    {#                                    {% if predict_queryset.0.date|date:'m' < 10 %}#}
-                                    {#                                        0{{ predict_queryset.0.date|date:'m' }}月#}
-                                    {#                                    {% else %}#}
-                                    {#                                        {{ predict_queryset.0.date|date:'m' }}月#}
-                                    {#                                    {% endif %}#}
-                                    {#                                    {% if predict_queryset.0.date|date:'d' < 10 %}#}
-                                    {#                                        0{{ predict_queryset.0.date|date:'d' }}日#}
-                                    {#                                    {% else %}#}
-                                    {#                                        {{ predict_queryset.0.date|date:'d' }}日#}
-                                    {#                                    {% endif %}#}
-                                    {#                                    &nbsp&nbsp{{ predict_queryset.0.tavg | floatformat:0 }}℃#}
+                                    <span id="date_0" style="font-size: 18px"></span>
                                 </div>
-                                <div class="weather"><span class="text" id="date_0_weather"></span><i
+                                <div class="weather"><span class="text" id="date_0_weather" style="font-size: 18px"></span><i
                                         class="icon-air icon-air-1"></i>
                                 </div>
-                                <div class="wind">无持续风向&nbsp;微风</div>
+{#                                <div class="wind">无持续风向&nbsp;微风</div>#}
                             </div>
                             <div class="slide-item">
                                 <div class="temp">
-                                    <span id="date_1"></span>
-                                    {#                                    {% if predict_queryset.1.date|date:'m' < 10 %}#}
-                                    {#                                        0{{ predict_queryset.1.date|date:'m' }}月#}
-                                    {#                                    {% else %}#}
-                                    {#                                        {{ predict_queryset.1.date|date:'m' }}月#}
-                                    {#                                    {% endif %}#}
-                                    {#                                    {% if predict_queryset.1.date.day < 10 %}#}
-                                    {#                                        0{{ predict_queryset.1.date.day }}日#}
-                                    {#                                    {% else %}#}
-                                    {#                                        {{ predict_queryset.1.date.day }}日#}
-                                    {#                                    {% endif %}#}
-                                    {#                                    &nbsp&nbsp{{ predict_queryset.1.tavg | floatformat:0 }}℃#}
+                                    <span id="date_1" style="font-size: 18px"></span>
                                 </div>
-                                <div class="weather"><span class="text" id="date_1_weather">多云</span><i
+                                <div class="weather"><span class="text" id="date_1_weather" style="font-size: 18px">多云</span><i
                                         class="icon-air icon-air-1"></i>
                                 </div>
-                                <div class="wind">无持续风向&nbsp;微风</div>
+{#                                <div class="wind">无持续风向&nbsp;微风</div>#}
                             </div>
                             <div class="slide-item">
                                 <div class="temp">
-                                    <span id="date_2"></span>
-                                    {#                                    {% if predict_queryset.2.date|date:'m' < 10 %}#}
-                                    {#                                        0{{ predict_queryset.2.date|date:'m' }}月#}
-                                    {#                                    {% else %}#}
-                                    {#                                        {{ predict_queryset.2.date|date:'m' }}月#}
-                                    {#                                    {% endif %}#}
-                                    {#                                    {% if predict_queryset.2.date|date:'d' < 10 %}#}
-                                    {#                                        0{{ predict_queryset.2.date|date:'d' }}日#}
-                                    {#                                    {% else %}#}
-                                    {#                                        {{ predict_queryset.2.date|date:'d' }}日#}
-                                    {#                                    {% endif %}#}
-                                    {#                                    &nbsp&nbsp{{ predict_queryset.2.tavg | floatformat:0 }}℃#}
+                                    <span id="date_2" style="font-size: 18px"></span>
                                 </div>
-                                <div class="weather"><span class="text" id="date_2_weather">多云</span><i
+                                <div class="weather"><span class="text" id="date_2_weather" style="font-size: 18px">多云</span><i
                                         class="icon-air icon-air-1"></i>
                                 </div>
-                                <div class="wind">无持续风向&nbsp;微风</div>
+{#                                <div class="wind">无持续风向&nbsp;微风</div>#}
                             </div>
                             <div class="slide-item">
                                 <div class="temp">
-                                    <span id="date_3"></span>
-                                    {#                                    {% if predict_queryset.3.date|date:'m' < 10 %}#}
-                                    {#                                        0{{ predict_queryset.3.date|date:'m' }}月#}
-                                    {#                                    {% else %}#}
-                                    {#                                        {{ predict_queryset.3.date|date:'m' }}月#}
-                                    {#                                    {% endif %}#}
-                                    {#                                    {% if predict_queryset.3.date|date:'d' < 10 %}#}
-                                    {#                                        0{{ predict_queryset.3.date|date:'d' }}日#}
-                                    {#                                    {% else %}#}
-                                    {#                                        {{ predict_queryset.3.date|date:'d' }}日#}
-                                    {#                                    {% endif %}#}
-                                    {#                                    &nbsp&nbsp{{ predict_queryset.3.tavg | floatformat:0 }}℃#}
+                                    <span id="date_3" style="font-size: 18px"></span>
                                 </div>
-                                <div class="weather"><span class="text" id="date_3_weather">多云</span><i
+                                <div class="weather"><span class="text" id="date_3_weather" style="font-size: 18px">多云</span><i
                                         class="icon-air icon-air-2"></i>
                                 </div>
-                                <div class="wind">东北风&nbsp;3-4级</div>
+{#                                <div class="wind">东北风&nbsp;3-4级</div>#}
                             </div>
                         </div>
                         <a href="javascript:" class="prev"></a><a href="javascript:" class="next"></a></div>
