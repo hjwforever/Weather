@@ -123,7 +123,9 @@
                     var date_0_msg = myobj[3].fields.date + "&nbsp&nbsp&nbsp" + myobj[3].fields.tmin + " / " + myobj[3].fields.tmax + "℃";
                     var date_1_msg = myobj[4].fields.date + "&nbsp&nbsp&nbsp" + myobj[4].fields.tmin + " / " + myobj[4].fields.tmax + "℃";
                     var date_2_msg = myobj[5].fields.date + "&nbsp&nbsp&nbsp" + myobj[5].fields.tmin + " / " + myobj[5].fields.tmax + "℃";
-                    var date_3_msg = myobj[6].fields.date + "&nbsp&nbsp&nbsp" + myobj[6].fields.tmin + " / " + myobj[6].fields.tmax + "℃";
+                    if (myobj.length>6){
+                        var date_3_msg = myobj[6].fields.date + "&nbsp&nbsp&nbsp" + myobj[6].fields.tmin + " / " + myobj[6].fields.tmax + "℃";
+                    }
 
                     document.getElementById("selectcity").innerHTML = city;
                     document.getElementById("today").innerHTML = myobj[0].fields.tavg;
@@ -138,8 +140,11 @@
                     document.getElementById("date_3").innerHTML = date_3_msg;
                     document.getElementById("date_0_weather").innerHTML = myobj[3].fields.weather;
                     document.getElementById("date_1_weather").innerHTML = myobj[4].fields.weather;
-                    document.getElementById("date_2_weather").innerHTML = myobj[4].fields.weather;
-                    document.getElementById("date_3_weather").innerHTML = myobj[5].fields.weather;
+                    document.getElementById("date_2_weather").innerHTML = myobj[5].fields.weather;
+                    if (myobj.length>6){
+                        document.getElementById("date_3_weather").innerHTML = myobj[6].fields.weather;
+                    }
+
                     {#$(".todayicon").removeClass("todayicon");#}
                     {#$(".todayicon").attr("class","icon icon-w w-01")#}
                     var icon = document.getElementById("todayicon");
@@ -350,7 +355,7 @@
                             <span class="symbol">℃</span>
                         </div>
                         <div class="others">
-                            <div class="line-1"><span id="today_weather">晴</span></div>
+                            <div class="line-1"><span id="today_weather"></span></div>
                             {#                            <div class="line-2"><span>PM2.5 : 74</span><span>气压 : 991</span><span>湿度 : 46</span></div>#}
                         </div>
                     </div>
@@ -400,7 +405,7 @@
                                     <span id="date_1" style="font-size: 18px"></span>
                                 </div>
                                 <div class="weather"><span class="text" id="date_1_weather"
-                                                           style="font-size: 18px">多云</span><i
+                                                           style="font-size: 18px"></span><i
                                         class="icon-air icon-air-1"></i>
                                 </div>
                                 {#                                <div class="wind">无持续风向&nbsp;微风</div>#}
@@ -410,7 +415,7 @@
                                     <span id="date_2" style="font-size: 18px"></span>
                                 </div>
                                 <div class="weather"><span class="text" id="date_2_weather"
-                                                           style="font-size: 18px">多云</span><i
+                                                           style="font-size: 18px"></span><i
                                         class="icon-air icon-air-1"></i>
                                 </div>
                                 {#                                <div class="wind">无持续风向&nbsp;微风</div>#}
@@ -420,7 +425,7 @@
                                     <span id="date_3" style="font-size: 18px"></span>
                                 </div>
                                 <div class="weather"><span class="text" id="date_3_weather"
-                                                           style="font-size: 18px">多云</span><i
+                                                           style="font-size: 18px"></span><i
                                         class="icon-air icon-air-2"></i>
                                 </div>
                                 {#                                <div class="wind">东北风&nbsp;3-4级</div>#}
