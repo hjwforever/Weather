@@ -34,7 +34,7 @@ def task():
             print('send reminder email to  "'+i["name"]+'"  "'+i["email"]+'", ok!')
 
     print('AMD.YES!')
-    t = Timer(10, task)
+    t = Timer(100, task)
     t.start()
 
 if __name__ == '__main__':
