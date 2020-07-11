@@ -260,6 +260,10 @@
         function addcalendar(time, title, isallday) {
             var xmlhttp;
             var name = '{{ login_user_name }}';
+            if (name === "") {
+                alert("添加失败，请登录");
+                self.location="{% url 'login' %}";
+            }
             if (title === "") {
                 title = "一件事儿";
             }
@@ -284,6 +288,10 @@
         function deletecalendar(time, title, isallday) {
             var xmlhttp;
             var name = '{{ login_user_name }}';
+            if (name === "") {
+                alert("添加失败，请登录");
+                self.location="{% url 'login' %}";
+            }
             if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
                 xmlhttp = new XMLHttpRequest();
             } else {// code for IE6, IE5
@@ -461,25 +469,32 @@
     <div class="news-ticker">
         <div class="news-ticker-contant" onload="hh()">
             <div class="nt-item" style="font-size: 20px"><span class="new" style="font-size: 20px">北京
-            </span>{{ queryset.values.0.tmin|floatformat:0 }} /  {{ queryset.values.0.tmax|floatformat:0 }}℃&nbsp;{{ queryset.values.0.weather }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>{{ queryset.values.0.tmin|floatformat:0 }}
+                / {{ queryset.values.0.tmax|floatformat:0 }}℃&nbsp;{{ queryset.values.0.weather }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
             <div class="nt-item" style="font-size: 20px"><span class="strategy" style="font-size: 20px">天津
-            </span>{{ queryset.values.4.tmin|floatformat:0 }} / {{ queryset.values.4.tmax|floatformat:0 }}℃&nbsp;{{ queryset.values.4.weather }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>{{ queryset.values.4.tmin|floatformat:0 }}
+                / {{ queryset.values.4.tmax|floatformat:0 }}℃&nbsp;{{ queryset.values.4.weather }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
             <div class="nt-item" style="font-size: 20px"><span class="strategy" style="font-size: 20px">丰城
-            </span>{{ queryset.values.1.tmin|floatformat:0 }} / {{ queryset.values.1.tmax|floatformat:0 }}℃&nbsp;{{ queryset.values.1.weather }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>{{ queryset.values.1.tmin|floatformat:0 }}
+                / {{ queryset.values.1.tmax|floatformat:0 }}℃&nbsp;{{ queryset.values.1.weather }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
             <div class="nt-item" style="font-size: 20px"><span class="racing" style="font-size: 20px">襄阳
-            </span>{{ queryset.values.5.tmin|floatformat:0 }} / {{ queryset.values.5.tmax|floatformat:0 }}℃&nbsp;{{ queryset.values.5.weather }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>{{ queryset.values.5.tmin|floatformat:0 }}
+                / {{ queryset.values.5.tmax|floatformat:0 }}℃&nbsp;{{ queryset.values.5.weather }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
             <div class="nt-item" style="font-size: 20px"><span class="new" style="font-size: 20px">龙岩
-            </span>{{ queryset.values.3.tmin|floatformat:0 }} / {{ queryset.values.3.tmax|floatformat:0 }}℃&nbsp;{{ queryset.values.3.weather }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>{{ queryset.values.3.tmin|floatformat:0 }}
+                / {{ queryset.values.3.tmax|floatformat:0 }}℃&nbsp;{{ queryset.values.3.weather }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
             <div class="nt-item" style="font-size: 20px"><span class="strategy" style="font-size: 20px">郑州
-            </span>{{ queryset.values.6.tmin|floatformat:0 }} / {{ queryset.values.6.tmax|floatformat:0 }}℃&nbsp;{{ queryset.values.0.weather }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>{{ queryset.values.6.tmin|floatformat:0 }}
+                / {{ queryset.values.6.tmax|floatformat:0 }}℃&nbsp;{{ queryset.values.0.weather }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
             <div class="nt-item" style="font-size: 20px"><span class="racing" style="font-size: 20px">海拉尔
-            </span>{{ queryset.values.2.tmin|floatformat:0 }} / {{ queryset.values.2.tmax|floatformat:0 }}℃&nbsp;{{ queryset.values.2.weather }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>{{ queryset.values.2.tmin|floatformat:0 }}
+                / {{ queryset.values.2.tmax|floatformat:0 }}℃&nbsp;{{ queryset.values.2.weather }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
         </div>
     </div>
@@ -815,16 +830,11 @@
 <!-- 日程表 -->
 <article style="background: url({% static 'img/pattern.png' %})">
     <p style="font-size: 40px;color: orange;text-align: center;"><b>日程表</b></p>
-    <div id="myId3" class="jalendar mid" style="width: 420px;">
+    <div id="myId3" class="jalendar mid">
         {#        <div class="added-event" data-date="10/7/2020" data-time="All day"#}
         {#             data-title="事件1"></div>#}
         {#        <div class="added-event" data-date="10/7/2020" data-time="20:45"#}
         {#             data-title="事件2"></div>#}
-        {#        <div class="added-event" data-date="17/8/2013" data-time="21:00"#}
-        {#             data-title="CodeCanyon İstanbul Meeting on Starbucks, Kadıköy"></div>#}
-        {#        <div class="added-event" data-date="17/8/2013" data-time="22:00"#}
-        {#             data-title="Front-End Design and Javascript Conferance on Haliç Kongre Merkezi"></div>#}
-        {#        <div class="added-event" data-date="17/12/2017" data-time="22:00" data-title="Lorem ipsum dolor sit amet"></div>#}
     </div>
 </article>
 <!-- 日程表 end -->
