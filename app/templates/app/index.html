@@ -125,6 +125,8 @@
                     var date_2_msg = myobj[5].fields.date + "&nbsp&nbsp&nbsp" + myobj[5].fields.tmin + " / " + myobj[5].fields.tmax + "℃";
                     if (myobj.length>6){
                         var date_3_msg = myobj[6].fields.date + "&nbsp&nbsp&nbsp" + myobj[6].fields.tmin + " / " + myobj[6].fields.tmax + "℃";
+                    }else{
+                        var date_3_msg ='预测中...'
                     }
 
                     document.getElementById("selectcity").innerHTML = city;
@@ -143,6 +145,8 @@
                     document.getElementById("date_2_weather").innerHTML = myobj[5].fields.weather;
                     if (myobj.length>6){
                         document.getElementById("date_3_weather").innerHTML = myobj[6].fields.weather;
+                    }else{
+                        document.getElementById("date_3_weather").innerHTML = '预测中...';
                     }
 
                     {#$(".todayicon").removeClass("todayicon");#}
@@ -558,7 +562,7 @@
                             data: [
                                 '未来一周',
                                 {
-                                    value: '近十年同一天',
+                                    value: '往年今日',
                                     symbol: 'diamond',
                                     symbolSize: 20
                                 },
@@ -725,7 +729,7 @@
                                 },
                             },
                             title: {
-                                text: '近10年同一天',
+                                text: '往年今日',
                                 textStyle: {
                                     color: colors[1],
                                 },
