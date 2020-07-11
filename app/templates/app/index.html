@@ -210,6 +210,23 @@
                     } else if (myobj[2].fields.weather.indexOf("阴") != -1) {
                         icon2.className = "icon icon-w w-02";
                     }
+
+                    var wurl = document.getElementById("weather_url");
+                    if(myobj[0].fields.city=='beijing'){
+                        wurl.href = "http://www.weather.com.cn/weather1d/101010100.shtml#input";
+                    }else if(myobj[0].fields.city=='tianjin'){
+                        wurl.href = "http://www.weather.com.cn/weather1d/101030100.shtml#input";
+                    }else if(myobj[0].fields.city=='fengcheng'){
+                        wurl.href = "http://www.weather.com.cn/weather1d/101240510.shtml#input";
+                    }else if(myobj[0].fields.city=='hailar'){
+                        wurl.href = "http://www.weather.com.cn/weather1d/101081001.shtml#input";
+                    }else if(myobj[0].fields.city=='longyan'){
+                        wurl.href = "http://www.weather.com.cn/weather1d/101230701.shtml#input";
+                    }else if(myobj[0].fields.city=='zhengzhou'){
+                        wurl.href = "http://www.weather.com.cn/weather1d/101180101.shtml#input";
+                    }else if(myobj[0].fields.city=='xiangyang'){
+                        wurl.href = "http://www.weather.com.cn/weather1d/101200201.shtml#input";
+                    }
                 }
             }
             xmlhttp.open("GET", "/app/selectcity?city=" + str, true);
@@ -368,7 +385,6 @@
                         </div>
                         <div class="others">
                             <div class="line-1"><span id="today_weather"></span></div>
-                            {#                            <div class="line-2"><span>PM2.5 : 74</span><span>气压 : 991</span><span>湿度 : 46</span></div>#}
                         </div>
                     </div>
                 </div>
@@ -382,15 +398,12 @@
                                 <span class="symbol">℃</span>
                             </div>
                         </div>
-                        {#                        &nbsp;&nbsp;微风&nbsp;&nbsp;空气质量优#}
                         <div class="text"><span id="tomorrow_weather"></span></div>
-                        {#                        <div class="text"><span>&nbsp;&nbsp;2&nbsp;&nbsp;空气质量优</span></div>#}
                     </div>
                     <div class="forecast-item last">
                         <div class="info">
                             {#                            图标三#}
                             <div id="nexttomorrowicon"><i class="icon-date hou"></i></div>
-                            {#07 08 09 分别对应小雨中雨大雨#}
                             <div class="temp">
                                 <span class="num" id="nexttomorrow"></span>
                                 <span class="symbol">℃</span>
@@ -407,10 +420,9 @@
                                     <span id="date_0" style="font-size: 18px"></span>
                                 </div>
                                 <div class="weather"><span class="text" id="date_0_weather"
-                                                           style="font-size: 18px"></span><i
-                                        class="icon-air icon-air-1"></i>
+                                                           style="font-size: 18px "></span><i
+                                        class="icon-air icon-air-1" ></i>
                                 </div>
-                                {#                                <div class="wind">无持续风向&nbsp;微风</div>#}
                             </div>
                             <div class="slide-item">
                                 <div class="temp">
@@ -420,7 +432,6 @@
                                                            style="font-size: 18px"></span><i
                                         class="icon-air icon-air-1"></i>
                                 </div>
-                                {#                                <div class="wind">无持续风向&nbsp;微风</div>#}
                             </div>
                             <div class="slide-item">
                                 <div class="temp">
@@ -430,7 +441,6 @@
                                                            style="font-size: 18px"></span><i
                                         class="icon-air icon-air-1"></i>
                                 </div>
-                                {#                                <div class="wind">无持续风向&nbsp;微风</div>#}
                             </div>
                             <div class="slide-item">
                                 <div class="temp">
@@ -438,16 +448,15 @@
                                 </div>
                                 <div class="weather"><span class="text" id="date_3_weather"
                                                            style="font-size: 18px"></span><i
-                                        class="icon-air icon-air-2"></i>
+                                        class="icon-air icon-air-1"></i>
                                 </div>
-                                {#                                <div class="wind">东北风&nbsp;3-4级</div>#}
                             </div>
                         </div>
                         <a href="javascript:" class="prev"></a><a href="javascript:" class="next"></a></div>
-                    <a class="label" href="//www.weather.com.cn/weather15d/101010100.shtml" target="_blank">
+                    <a id="weather_url" class="label"  target="_blank">
                         <div class="text">15日天气</div>
                     </a></div>
-                <div class="data-source">数据来自中国天气网</div>
+                <div class="data-source">数据来自Six-Single-Dogs天气预测系统</div>
             </div>
         </div>
     </div>

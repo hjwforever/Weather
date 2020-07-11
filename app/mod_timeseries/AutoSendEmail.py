@@ -17,7 +17,7 @@ def sendEmail(email='',title='您的日程提示',msg='',username=''):
     mail_pass = 'gwkyiremkbqtbfdh'  # 口令
 
     sender = '1003964217@qq.com'
-    receivers = ['1003964217@qq.com']  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
+    receivers = [email]  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
 
     message = MIMEText(msg, 'plain', 'utf-8')
     message['From'] = Header("Six-Single-Dog天气网站", 'utf-8')
@@ -38,16 +38,16 @@ def sendEmail(email='',title='您的日程提示',msg='',username=''):
 
 def autoSendEmail():
     nowTime=datetime.datetime.now()
-    oneOurLater=nowTime+datetime.timedelta(hours=+1)
     twoOursLater=nowTime+datetime.timedelta(hours=+2)
-    print(models.Memorandum.objects.filter(time__range=(oneOurLater,twoOursLater),hasRemind=False).values())
-    for user in models.Memorandum.objects.filter(time__range=(oneOurLater,twoOursLater),hasRemind=False):
+    print(models.Memorandum.objects.filter(time__range=(nowTime,twoOursLater),hasRemind=False).values())
+    for user in models.Memorandum.objects.filter(time__range=(nowTime,twoOursLater),hasRemind=False):
         msg="Six-Single-Dog天气网日程表提醒您：\n"+user.time.strftime("%Y-%m-%d %H:%M:%S")+"\n"+"待办："+user.eventContent
         sendEmail(email=user.email,msg=msg,username=user.name)
         models.Memorandum.objects.filter(name=user.name,id=user.id).update(hasRemind=True)
 
 
 if __name__ == '__main__':
+    autoSendEmail()
     scheduler = BlockingScheduler()
     scheduler.add_job(autoSendEmail, 'interval', minutes=30)
     print('Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C    '))
