@@ -16,10 +16,11 @@
     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/animate.css' %}"/>
-
 </head>
 <body>
 <!-- Header section -->
+<script src="https://files.cnblogs.com/files/wkfvawl/mouse-click.js"></script>
+<canvas width="1777" height="841" style="position: fixed; left: 0px; top: 0px; z-index: 2147483647; pointer-events: none;"></canvas>
 <header class="header-section" style="padding-top: 10px;height: 80px">
     <div class="container">
         <!-- logo -->
@@ -77,7 +78,7 @@
                 {{ login_form.captcha }}
             </div>
             <div>
-                <a style="color:white;vertical-align: center" href="{% url 'register' %}" class="text-success " ><ins style="font-size: 16px;">新用户注册</ins></a>
+                <a  href="{% url 'register' %}" class="btn btn-primary float-left" >新用户注册</a><br>
                 <button type="submit" class="btn btn-primary float-right">登录</button>
             </div>
         </form>
