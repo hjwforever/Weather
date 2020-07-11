@@ -16,18 +16,18 @@
     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/animate.css' %}"/>
+    <script src={% static 'js/mouse_click.js' %}></script>
 </head>
 <body>
 <!-- Header section -->
-<script src="https://files.cnblogs.com/files/wkfvawl/mouse-click.js"></script>
-<canvas width="1777" height="841" style="position: fixed; left: 0px; top: 0px; z-index: 2147483647; pointer-events: none;"></canvas>
 <header class="header-section" style="padding-top: 10px;height: 80px">
     <div class="container">
         <!-- logo -->
         <a class="site-logo" href="{% url 'index' %}" style="padding-top: 10px" title="返回首页">
             <img src="{% static 'img/favicon.ico' %}" alt="返回首页" height="40" width="40">
         </a>
-        <a style="font-size: 40px;color: orange;padding-left: 20px;padding-top: 9px" href="{% url 'index' %}" title="返回首页">Six-Single-Dogs</a>
+        <a style="font-size: 40px;color: orange;padding-left: 20px;padding-top: 9px" href="{% url 'index' %}"
+           title="返回首页">Six-Single-Dogs</a>
         <div class="user-panel" style="margin-top: 7px">
             {% if has_login %}
                 <a href="{% url 'logout' %}" style="font-size: 20px;color: white">
@@ -67,7 +67,7 @@
             <br/><br/><br/>
             <div style="color:white;" class="form-group">
                 {{ login_form.username.label_tag }}
-                {{ login_form.username}}
+                {{ login_form.username }}
             </div>
             <div style="color:white;" class="form-group">
                 {{ login_form.password.label_tag }}
@@ -78,7 +78,7 @@
                 {{ login_form.captcha }}
             </div>
             <div>
-                <a  href="{% url 'register' %}" class="btn btn-primary float-left" >新用户注册</a><br>
+                <a href="{% url 'register' %}" class="btn btn-primary float-left">新用户注册</a><br>
                 <button type="submit" class="btn btn-primary float-right">登录</button>
             </div>
         </form>

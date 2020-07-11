@@ -9,11 +9,13 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="{% static 'html/css/registe.css' %}" rel="stylesheet"/>
+    <script src={% static 'js/mouse_click.js' %}></script>
     <title>注册</title>
 </head>
 <body>
 <script src="https://files.cnblogs.com/files/wkfvawl/mouse-click.js"></script>
-<canvas width="1777" height="841" style="position: fixed; left: 0px; top: 0px; z-index: 2147483647; pointer-events: none;"></canvas>
+<canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 2147483647; pointer-events: none;"></canvas>
 <div class="container">
     <div class="col">
         <form class="form-register" action="/app/register/" method="post">
@@ -55,7 +57,7 @@
             </div>
 
             <div>
-                <a  href="/app/login/" class="btn btn-primary float-left" >直接登录</a><br>
+                <a href="/app/login/" class="btn btn-primary float-left">直接登录</a><br>
                 <button type="submit" class="btn btn-primary float-right">注册</button>
             </div>
         </form>

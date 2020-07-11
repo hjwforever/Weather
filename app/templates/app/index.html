@@ -23,10 +23,6 @@
     <![endif]-->
     <!-- 图表echarts资源包 -->
     <script src="{% static 'echarts.min.js' %}"></script>
-    <script>
-
-    </script>
-
     <!-- hao123资源包 -->
     <noscript>
         <meta http-equiv="refresh" content="0; URL='/tianqi/?__noscript__-=1'"/>
@@ -55,8 +51,6 @@
             });
             $('#myId3').jalendar();
         });
-
-
     </script>
     <script>
         function transfercity(str) {
@@ -123,10 +117,10 @@
                     var date_0_msg = myobj[3].fields.date + "&nbsp&nbsp&nbsp" + myobj[3].fields.tmin + " / " + myobj[3].fields.tmax + "℃";
                     var date_1_msg = myobj[4].fields.date + "&nbsp&nbsp&nbsp" + myobj[4].fields.tmin + " / " + myobj[4].fields.tmax + "℃";
                     var date_2_msg = myobj[5].fields.date + "&nbsp&nbsp&nbsp" + myobj[5].fields.tmin + " / " + myobj[5].fields.tmax + "℃";
-                    if (myobj.length>6){
+                    if (myobj.length > 6) {
                         var date_3_msg = myobj[6].fields.date + "&nbsp&nbsp&nbsp" + myobj[6].fields.tmin + " / " + myobj[6].fields.tmax + "℃";
-                    }else{
-                        var date_3_msg ='预测中...'
+                    } else {
+                        var date_3_msg = '预测中...'
                     }
 
                     document.getElementById("selectcity").innerHTML = city;
@@ -143,9 +137,9 @@
                     document.getElementById("date_0_weather").innerHTML = myobj[3].fields.weather;
                     document.getElementById("date_1_weather").innerHTML = myobj[4].fields.weather;
                     document.getElementById("date_2_weather").innerHTML = myobj[5].fields.weather;
-                    if (myobj.length>6){
+                    if (myobj.length > 6) {
                         document.getElementById("date_3_weather").innerHTML = myobj[6].fields.weather;
-                    }else{
+                    } else {
                         document.getElementById("date_3_weather").innerHTML = '预测中...';
                     }
 
@@ -212,19 +206,19 @@
                     }
 
                     var wurl = document.getElementById("weather_url");
-                    if(myobj[0].fields.city=='beijing'){
+                    if (myobj[0].fields.city == 'beijing') {
                         wurl.href = "http://www.weather.com.cn/weather1d/101010100.shtml#input";
-                    }else if(myobj[0].fields.city=='tianjin'){
+                    } else if (myobj[0].fields.city == 'tianjin') {
                         wurl.href = "http://www.weather.com.cn/weather1d/101030100.shtml#input";
-                    }else if(myobj[0].fields.city=='fengcheng'){
+                    } else if (myobj[0].fields.city == 'fengcheng') {
                         wurl.href = "http://www.weather.com.cn/weather1d/101240510.shtml#input";
-                    }else if(myobj[0].fields.city=='hailar'){
+                    } else if (myobj[0].fields.city == 'hailar') {
                         wurl.href = "http://www.weather.com.cn/weather1d/101081001.shtml#input";
-                    }else if(myobj[0].fields.city=='longyan'){
+                    } else if (myobj[0].fields.city == 'longyan') {
                         wurl.href = "http://www.weather.com.cn/weather1d/101230701.shtml#input";
-                    }else if(myobj[0].fields.city=='zhengzhou'){
+                    } else if (myobj[0].fields.city == 'zhengzhou') {
                         wurl.href = "http://www.weather.com.cn/weather1d/101180101.shtml#input";
-                    }else if(myobj[0].fields.city=='xiangyang'){
+                    } else if (myobj[0].fields.city == 'xiangyang') {
                         wurl.href = "http://www.weather.com.cn/weather1d/101200201.shtml#input";
                     }
                 }
@@ -257,13 +251,14 @@
             xmlhttp.send();
         }
     </script>
+    <script src={% static 'js/mouse_click.js' %}></script>
     <script>
         function addcalendar(time, title, isallday) {
             var xmlhttp;
             var name = '{{ login_user_name }}';
             if (name === "") {
                 alert("添加失败，请登录");
-                self.location="{% url 'login' %}";
+                self.location = "{% url 'login' %}";
             }
             if (title === "") {
                 title = "一件事儿";
@@ -291,7 +286,7 @@
             var name = '{{ login_user_name }}';
             if (name === "") {
                 alert("添加失败，请登录");
-                self.location="{% url 'login' %}";
+                self.location = "{% url 'login' %}";
             }
             if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
                 xmlhttp = new XMLHttpRequest();
@@ -422,7 +417,7 @@
                                 </div>
                                 <div class="weather"><span class="text" id="date_0_weather"
                                                            style="font-size: 18px "></span><i
-                                        class="icon-air icon-air-1" ></i>
+                                        class="icon-air icon-air-1"></i>
                                 </div>
                             </div>
                             <div class="slide-item">
@@ -454,7 +449,7 @@
                             </div>
                         </div>
                         <a href="javascript:" class="prev"></a><a href="javascript:" class="next"></a></div>
-                    <a id="weather_url" class="label"  target="_blank">
+                    <a id="weather_url" class="label" target="_blank">
                         <div class="text">15日天气</div>
                     </a></div>
                 <div class="data-source">数据来自Six-Single-Dogs天气预测系统</div>
@@ -852,7 +847,8 @@
                         <div class="tc-item">
                             <div class="tc-thumb set-bg" data-setbg="{% static 'img/authors/1.jpg' %}"></div>
                             <div class="tc-content">
-                                <p><a href="#" style="font-size: 15px;color: white;">胡江浩</a> <span style="font-size: 15px">单身待嫁</span>
+                                <p><a href="#" style="font-size: 15px;color: white;">胡江浩</a> <span
+                                        style="font-size: 15px">单身待嫁</span>
                                 </p>
                                 <div class="tc-date">May&nbsp;3&nbsp;,2000</div>
                             </div>
@@ -860,7 +856,8 @@
                         <div class="tc-item">
                             <div class="tc-thumb set-bg" data-setbg="{% static 'img/authors/2.jpg' %}"></div>
                             <div class="tc-content">
-                                <p><a href="#" style="font-size: 15px;color: white;">陈付鑫</a> <span style="font-size: 15px">游戏狂魔</span>
+                                <p><a href="#" style="font-size: 15px;color: white;">陈付鑫</a> <span
+                                        style="font-size: 15px">游戏狂魔</span>
                                 </p>
                                 <div class="tc-date">February&nbsp;29&nbsp;,2000</div>
                             </div>
@@ -875,7 +872,8 @@
                         <div class="tc-item">
                             <div class="tc-thumb set-bg" data-setbg="{% static 'img/authors/3.jpg' %}"></div>
                             <div class="tc-content">
-                                <p><a href="#" style="font-size: 15px;color: white;">陈庆洋</a> <span style="font-size: 15px">天才少年</span>
+                                <p><a href="#" style="font-size: 15px;color: white;">陈庆洋</a> <span
+                                        style="font-size: 15px">天才少年</span>
                                 </p>
                                 <div class="tc-date">May&nbsp;14&nbsp;,1999</div>
                             </div>
@@ -883,7 +881,8 @@
                         <div class="tc-item">
                             <div class="tc-thumb set-bg" data-setbg="{% static 'img/authors/4.jpg' %}"></div>
                             <div class="tc-content">
-                                <p><a href="#" style="font-size: 15px;color: white;">邓硕</a> <span style="font-size: 15px">内蒙大汉</span>
+                                <p><a href="#" style="font-size: 15px;color: white;">邓硕</a> <span
+                                        style="font-size: 15px">内蒙大汉</span>
                                 </p>
                                 <div class="tc-date">July&nbsp;18&nbsp;,2000</div>
                             </div>
@@ -898,7 +897,8 @@
                         <div class="tc-item">
                             <div class="tc-thumb set-bg" data-setbg="{% static 'img/authors/5.jpg' %}"></div>
                             <div class="tc-content">
-                                <p><a href="#" style="font-size: 15px;color: white;">黄俊雯</a> <span style="font-size: 15px">快乐小伙</span>
+                                <p><a href="#" style="font-size: 15px;color: white;">黄俊雯</a> <span
+                                        style="font-size: 15px">快乐小伙</span>
                                 </p>
                                 <div class="tc-date">October&nbsp;29&nbsp;,2000</div>
                             </div>
@@ -906,7 +906,8 @@
                         <div class="tc-item">
                             <div class="tc-thumb set-bg" data-setbg="{% static 'img/authors/6.jpg' %}"></div>
                             <div class="tc-content">
-                                <p><a href="#" style="font-size: 15px;color: white;">黄琳棠</a> <span style="font-size: 15px">大龄剩男</span>
+                                <p><a href="#" style="font-size: 15px;color: white;">黄琳棠</a> <span
+                                        style="font-size: 15px">大龄剩男</span>
                                 </p>
                                 <div class="tc-date">May&nbsp;18&nbsp;,2000</div>
                             </div>
@@ -942,7 +943,15 @@
 <script src="https://unpkg.com/meting@1.2/dist/Meting.min.js"></script>
 <div id="aplayer"></div>
 <script>
-    const ap = new APlayer({container: document.getElementById('aplayer'),fixed: true,volume: 0.3, mutex: true, order: 'random', preload: 'none', listFolded: false, theme: '#ee8243',
+    const ap = new APlayer({
+        container: document.getElementById('aplayer'),
+        fixed: true,
+        volume: 0.3,
+        mutex: true,
+        order: 'random',
+        preload: 'none',
+        listFolded: false,
+        theme: '#ee8243',
         audio: [{
             name: '想说',           //歌曲名称
             artist: '颜人中',       //歌曲作者
@@ -950,25 +959,25 @@
             cover: 'http://p2.music.126.net/_P62J8rc2wRIzoqIJGu2LA==/109951165120360797.jpg',     //歌曲封面地址
             lrc: 'http://music.163.com/api/song/media?id=1461142410',
             theme: '#eeeeee',        //主题颜色（优先）
-        },{
+        }, {
             name: 'Come and Get Your Love',
             artist: 'Redbone',
             url: 'http://music.163.com/song/media/outer/url?id=28864241.mp3',
             cover: 'http://p2.music.126.net/5i5SKVW_F1ub2BgDeyjI5A==/3225967119049341.jpg',
             theme: '#eeeeee'
-        },{
+        }, {
             name: '大自然的空气(钢琴曲)',
             artist: '张宇桦 ',
             url: 'http://music.163.com/song/media/outer/url?id=33715186.mp3',
             cover: 'http://p1.music.126.net/hHUh5x19WtlcDLM8PAvLTA==/109951164274022050.jpg',
             theme: '#eeeeee'
-        },{
+        }, {
             name: '我爱你北京交大',
             artist: ' 高歌  ',
             url: 'http://music.163.com/song/media/outer/url?id=484635685.mp3',
             cover: 'http://p2.music.126.net/Jco3u7spW8YHBT6r8sfhng==/109951162950253373.jpg',
             theme: '#eeeeee'
-        },{
+        }, {
             name: '大田後生仔（欢乐加速版）',
             artist: ' 1610877109 ',
             url: 'http://music.163.com/song/media/outer/url?id=1396973729.mp3',
@@ -979,8 +988,6 @@
     });
 </script>
 <!-- MUSIC end -->
-<script src="https://files.cnblogs.com/files/wkfvawl/mouse-click.js"></script>
-<canvas width="1777" height="841" style="position: fixed; left: 0px; top: 0px; z-index: 2147483647; pointer-events: none;"></canvas>
 <!--====== Javascripts & Jquery ======-->
 <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
