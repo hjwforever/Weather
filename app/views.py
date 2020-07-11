@@ -162,6 +162,12 @@ def delete_calendar(request):
     title = request.GET.get('title')
     email = models.User.objects.filter(name=name).values()
     isAllDay = request.GET.get('isAllDay')
+    print('delete::::::::::::')
+    print(name)
+    print(time)
+    print(title)
+    print(email)
+    print(isAllDay)
     if isAllDay == 'true':
         if models.Memorandum.objects.filter(name=name, email=email[0]['email'], eventContent=title, isAllDay=True,
                                             time=time).exists():
@@ -379,21 +385,7 @@ def send_email(email, code):
 def login(request):
     print('进入login视图函数')
     if request.session.get('is_login', None):
-        datenow = timezone.now()
-        queryset = models.HistoryData.objects.filter(date=datenow).values()
-        print('queryset:')
-        print(queryset)
-        predict_queryset = models.PredictData.objects.all()
-        print('predict_queryset:')
-        print(predict_queryset)
-        everyyeartodaystart = datetime(datenow.year - 10, 1, 1)
-        everyyeartodayhistory = models.HistoryData.objects.filter(date__range=[everyyeartodaystart, datenow],
-                                                                  date__month=datenow.month, date__day=datenow.day)
-        print('everyyeartodayhistory:')
-        print(everyyeartodayhistory)
-        return render(request, 'app/index.html',
-                      {'has_login': True, 'queryset': queryset, 'predict_queryset': predict_queryset,
-                       'everyyeartodayhistory': everyyeartodayhistory, 'login_user_name': request.session['user_name']})
+        return redirect('/index/')
     if request.method == "POST":
         login_form = forms.UserForm(request.POST)
         message = '请检查填写内容!'
@@ -415,24 +407,21 @@ def login(request):
                 request.session['is_login'] = True
                 request.session['user_id'] = user.id
                 request.session['user_name'] = user.name
+
                 datenow = timezone.now()
-                queryset = models.HistoryData.objects.filter(date=datenow).values()
-                print('queryset:')
-                print(queryset)
-                predict_queryset = models.PredictData.objects.all()
-                print('predict_queryset:')
-                print(predict_queryset)
+
+                predict_queryset = models.PredictData.objects.all().order_by('date')
                 everyyeartodaystart = datetime(datenow.year - 10, 1, 1)
                 everyyeartodayhistory = models.HistoryData.objects.filter(date__range=[everyyeartodaystart, datenow],
                                                                           date__month=datenow.month,
-                                                                          date__day=datenow.day)
-                print('everyyeartodayhistory:')
-                print(everyyeartodayhistory)
-                return render(request, 'app/index.html',
-                              {'has_login': True, 'login_user_name': user.name,
-                               'queryset': queryset,
-                               'predict_queryset': predict_queryset,
-                               'everyyeartodayhistory': everyyeartodayhistory})
+                                                                          date__day=datenow.day).order_by('date')
+
+                queryset = predict_queryset.filter(date__day=datenow.day).values().order_by('city')
+                print(queryset)
+                return render(request, 'app/index.html', {'queryset': queryset, 'predict_queryset': predict_queryset,
+                                                          'everyyeartodayhistory': everyyeartodayhistory,
+                                                          'has_login': True,
+                                                          'login_user_name': request.session['user_name']})
             else:
                 message = '密码不正确!'
                 return render(request, 'app/login.html', locals())

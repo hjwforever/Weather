@@ -298,7 +298,7 @@ $(function () {
                 var isAllDayText = $(this).parents('.add-new').find('.all-day fieldset label').text();
                 var thisDay = $this.find('.day.this-month.selected').attr('data-date');
                 var time;
-                if (isAllDay === 'disabled') {
+                if (isAllDay == 'disabled') {
                     time = hour + ':' + min;
                 } else {
                     time = isAllDayText;
@@ -334,7 +334,7 @@ $(function () {
                 thisDay = thisDay.split('/');
                 if (parseInt(thisDay[0]) < 10) thisDay[0] = '0' + thisDay[0];
                 if (parseInt(thisDay[1]) < 10) thisDay[1] = '0' + thisDay[1];
-                if (isAllDay === 'disabled') {
+                if (isAllDay == 'disabled') {
                     if (parseInt(hour) > 0 && parseInt(hour) < 10) hour = '0' + hour;
                     if (parseInt(min) > 0 && parseInt(min) < 10) min = '0' + min;
                     time = thisDay[2] + '-' + thisDay[1] + '-' + thisDay[0] + ' ' + hour + ':' + min + ':00';
@@ -356,14 +356,14 @@ $(function () {
                     var addedEvents = $("#myId3").children(".added-event");
                     var addedEvent;
                     for (var i = 0; i < dataId; i++) {
-                        if (addedEvents.eq(i).data("id") === addedEventId) addedEvent = addedEvents.eq(i);
+                        if (addedEvents.eq(i).data("id") == addedEventId) addedEvent = addedEvents.eq(i);
                     }
                     var title = addedEvent.data("title");
                     var date = addedEvent.data("date");
                     date = date.split("/");
                     date = date[2] + "-" + date[1] + "-" + date[0];
                     var time = addedEvent.data("time");
-                    if (time === "All day") {
+                    if (time == "All Day") {
                         time = date + " " + "00:00:00";
                         deletecalendar(time, title, true);
                     } else {
@@ -385,7 +385,7 @@ $(function () {
                     var thisDay = parseInt(date[2]) + '/' + parseInt(date[1]) + '/' + parseInt(date[0]);
                     var isAllDay = JSON.parse(myobj[i].fields.isAllDay);
                     if (isAllDay) {
-                        time = 'All day';
+                        time = 'All Day';
                     } else {
                         time = myobj[i].fields.time.substring(11, 16);
                     }
