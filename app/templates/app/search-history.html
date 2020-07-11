@@ -423,6 +423,10 @@
         var n = MonHead[MMvalue - 1];
         if (MMvalue == 2 && IsPinYear(str)) n++;
         datelist = n;
+        var e = document.reg_testdate.MM;
+        optionsClear(e);
+        for (var i = 1; i < 13; i++)
+            document.reg_testdate.MM.options.add(new Option(i, i));
         writeDay(n)
     }
 
